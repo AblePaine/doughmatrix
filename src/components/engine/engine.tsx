@@ -1,4 +1,5 @@
 import { useMemo, useState, type ReactNode } from "react";
+import { Link } from "@tanstack/react-router";
 import {
   ChefHat,
   Copy,
@@ -78,6 +79,14 @@ export function Engine() {
               <TimelineCard formula={formula} />
             </div>
           </div>
+          <p className="pt-4 text-sm text-faint">
+            <Link
+              to="/guides/flour-hydration-ceiling"
+              className="text-muted hover:text-accent"
+            >
+              Guide: The flour hydration ceiling
+            </Link>
+          </p>
         </main>
       </div>
       <KitchenMode open={kitchen} onClose={() => setKitchen(false)} />

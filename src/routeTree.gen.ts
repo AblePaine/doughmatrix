@@ -10,33 +10,44 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GuidesFlourHydrationCeilingRouteImport } from './routes/guides/flour-hydration-ceiling'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesFlourHydrationCeilingRoute =
+  GuidesFlourHydrationCeilingRouteImport.update({
+    id: '/guides/flour-hydration-ceiling',
+    path: '/guides/flour-hydration-ceiling',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/guides/flour-hydration-ceiling'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/guides/flour-hydration-ceiling'
+  id: '__root__' | '/' | '/guides/flour-hydration-ceiling'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GuidesFlourHydrationCeilingRoute: typeof GuidesFlourHydrationCeilingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +59,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/flour-hydration-ceiling': {
+      id: '/guides/flour-hydration-ceiling'
+      path: '/guides/flour-hydration-ceiling'
+      fullPath: '/guides/flour-hydration-ceiling'
+      preLoaderRoute: typeof GuidesFlourHydrationCeilingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GuidesFlourHydrationCeilingRoute: GuidesFlourHydrationCeilingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
