@@ -99,19 +99,19 @@ function Header({
 }) {
   const reset = useBaker((s) => s.reset);
   return (
-    <header className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 pt-6 pb-4">
-      <div className="flex items-center gap-3">
+    <header className="mx-auto flex max-w-6xl flex-col gap-3 px-4 pt-6 pb-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex min-w-0 items-center gap-3">
         <Logo />
-        <div>
+        <div className="min-w-0">
           <h1 className="font-display text-2xl leading-none tracking-tight text-fg">
             DoughMatrix
           </h1>
-          <p className="mt-1 max-w-[16rem] text-xs leading-snug tracking-wide text-faint sm:max-w-none">
+          <p className="mt-1 text-xs leading-snug text-faint">
             Precision Hydration & Fermentation Engine
           </p>
         </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex shrink-0 items-center gap-2">
         <Button variant="ghost" size="icon" onClick={onCopy} aria-label="Copy formula">
           <Copy className="size-4" />
           <span className="sr-only">{copied ? "Copied" : "Copy"}</span>
