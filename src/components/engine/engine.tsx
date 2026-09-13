@@ -79,12 +79,18 @@ export function Engine() {
               <TimelineCard formula={formula} />
             </div>
           </div>
-          <p className="pt-4 text-sm text-faint">
+          <p className="flex flex-wrap gap-x-5 gap-y-2 pt-4 text-sm text-faint">
             <Link
               to="/guides/flour-hydration-ceiling"
               className="text-muted hover:text-accent"
             >
               Guide: The flour hydration ceiling
+            </Link>
+            <Link
+              to="/guides/temperature-fermentation-matrix"
+              className="text-muted hover:text-accent"
+            >
+              Guide: Ambient temp vs. starter %
             </Link>
           </p>
         </main>
