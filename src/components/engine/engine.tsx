@@ -1,5 +1,4 @@
 import { useMemo, useState, type ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
 import {
   ChefHat,
   Copy,
@@ -22,6 +21,7 @@ import { PRESETS } from "@/lib/sourdough/presets";
 import { useBaker, useBakerInput } from "@/lib/sourdough/store";
 import type { FormulaResult, Maturity, MixMode } from "@/lib/sourdough/types";
 import { Button } from "@/components/ui/button";
+import { GuidesFooter } from "@/components/guides-footer";
 import { cn } from "@/lib/utils";
 import { HydrationDial } from "./dial";
 import { KitchenMode } from "./kitchen";
@@ -79,20 +79,7 @@ export function Engine() {
               <TimelineCard formula={formula} />
             </div>
           </div>
-          <p className="flex flex-wrap gap-x-5 gap-y-2 pt-4 text-sm text-faint">
-            <Link
-              to="/guides/flour-hydration-ceiling"
-              className="text-muted hover:text-accent"
-            >
-              Guide: The flour hydration ceiling
-            </Link>
-            <Link
-              to="/guides/temperature-fermentation-matrix"
-              className="text-muted hover:text-accent"
-            >
-              Guide: Ambient temp vs. starter %
-            </Link>
-          </p>
+          <GuidesFooter className="pt-4" />
         </main>
       </div>
       <KitchenMode open={kitchen} onClose={() => setKitchen(false)} />

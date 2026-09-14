@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GuidesFlourHydrationCeilingRouteImport } from './routes/guides/flour-hydration-ceiling'
+import { Route as GuidesSourdoughCrumbTroubleshootingRouteImport } from './routes/guides/sourdough-crumb-troubleshooting'
 import { Route as GuidesTemperatureFermentationMatrixRouteImport } from './routes/guides/temperature-fermentation-matrix'
 
 const IndexRoute = IndexRouteImport.update({
@@ -24,6 +25,12 @@ const GuidesFlourHydrationCeilingRoute =
     path: '/guides/flour-hydration-ceiling',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GuidesSourdoughCrumbTroubleshootingRoute =
+  GuidesSourdoughCrumbTroubleshootingRouteImport.update({
+    id: '/guides/sourdough-crumb-troubleshooting',
+    path: '/guides/sourdough-crumb-troubleshooting',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GuidesTemperatureFermentationMatrixRoute =
   GuidesTemperatureFermentationMatrixRouteImport.update({
     id: '/guides/temperature-fermentation-matrix',
@@ -34,17 +41,20 @@ const GuidesTemperatureFermentationMatrixRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
+  '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
+  '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
+  '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
 }
 export interface FileRouteTypes {
@@ -52,22 +62,26 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/guides/flour-hydration-ceiling'
+    | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/temperature-fermentation-matrix'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/guides/flour-hydration-ceiling'
+    | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/temperature-fermentation-matrix'
   id:
     | '__root__'
     | '/'
     | '/guides/flour-hydration-ceiling'
+    | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/temperature-fermentation-matrix'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GuidesFlourHydrationCeilingRoute: typeof GuidesFlourHydrationCeilingRoute
+  GuidesSourdoughCrumbTroubleshootingRoute: typeof GuidesSourdoughCrumbTroubleshootingRoute
   GuidesTemperatureFermentationMatrixRoute: typeof GuidesTemperatureFermentationMatrixRoute
 }
 
@@ -87,6 +101,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesFlourHydrationCeilingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/sourdough-crumb-troubleshooting': {
+      id: '/guides/sourdough-crumb-troubleshooting'
+      path: '/guides/sourdough-crumb-troubleshooting'
+      fullPath: '/guides/sourdough-crumb-troubleshooting'
+      preLoaderRoute: typeof GuidesSourdoughCrumbTroubleshootingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guides/temperature-fermentation-matrix': {
       id: '/guides/temperature-fermentation-matrix'
       path: '/guides/temperature-fermentation-matrix'
@@ -100,6 +121,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GuidesFlourHydrationCeilingRoute: GuidesFlourHydrationCeilingRoute,
+  GuidesSourdoughCrumbTroubleshootingRoute:
+    GuidesSourdoughCrumbTroubleshootingRoute,
   GuidesTemperatureFermentationMatrixRoute:
     GuidesTemperatureFermentationMatrixRoute,
 }

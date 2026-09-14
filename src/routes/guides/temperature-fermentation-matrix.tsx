@@ -9,6 +9,7 @@ import {
   formatHours,
 } from "@/lib/sourdough/math";
 import { cn } from "@/lib/utils";
+import { GuidesFooter } from "@/components/guides-footer";
 
 const TITLE =
   "The Ambient Temp vs. Starter % Matrix: How to Predict Bulk Fermentation to the Hour";
@@ -320,6 +321,9 @@ function TempMatrixGuide() {
           </Link>
         </aside>
       </article>
+      <div className="mx-auto max-w-3xl px-4 pb-16">
+        <GuidesFooter />
+      </div>
     </div>
   );
 }

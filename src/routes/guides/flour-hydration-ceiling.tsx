@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { FLOURS } from "@/lib/sourdough/flours";
 import type { FlourFamily } from "@/lib/sourdough/types";
 import { cn } from "@/lib/utils";
+import { GuidesFooter } from "@/components/guides-footer";
 
 const TITLE =
   "The Flour Hydration Ceiling: Why Your High-Hydration Sourdough Is a Sticky Puddle (And How to Fix It)";
@@ -300,6 +301,9 @@ function FlourCeilingGuide() {
           </Link>
         </aside>
       </article>
+      <div className="mx-auto max-w-3xl px-4 pb-16">
+        <GuidesFooter />
+      </div>
     </div>
   );
 }
