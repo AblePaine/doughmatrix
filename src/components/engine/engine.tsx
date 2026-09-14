@@ -22,6 +22,7 @@ import { useBaker, useBakerInput } from "@/lib/sourdough/store";
 import type { FormulaResult, Maturity, MixMode } from "@/lib/sourdough/types";
 import { Button } from "@/components/ui/button";
 import { GuidesFooter } from "@/components/guides-footer";
+import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import { HydrationDial } from "./dial";
 import { KitchenMode } from "./kitchen";
@@ -39,6 +40,7 @@ export function Engine() {
     try {
       await navigator.clipboard.writeText(formulaPlaintext(formula, input));
       setCopied(true);
+      track("copy_formula");
       window.setTimeout(() => setCopied(false), 1600);
     } catch {
       /* ignore */
@@ -54,8 +56,12 @@ export function Engine() {
               void navigator.wakeLock.request("screen").catch(() => undefined);
             }
             setKitchen(true);
+            track("kitchen");
           }}
-          onRescue={() => setRescue(true)}
+          onRescue={() => {
+            setRescue(true);
+            track("rescue");
+          }}
           onCopy={() => void copy()}
           copied={copied}
         />
@@ -180,7 +186,10 @@ function PresetsRow() {
         <button
           key={p.id}
           type="button"
-          onClick={() => applyPreset(p)}
+          onClick={() => {
+            applyPreset(p);
+            track("preset", { id: p.id });
+          }}
           className="shrink-0 rounded-full bg-transparent px-3.5 py-2 text-sm text-muted shadow-[0_0_0_1px_var(--color-border)] transition-colors duration-150 hover:bg-card hover:text-fg"
         >
           {p.name}

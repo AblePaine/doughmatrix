@@ -29,6 +29,11 @@ export const Route = createRootRoute({
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <head>
         <HeadContent />
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="c35cc373-407f-495d-a827-bf3164f1713d"
+        />
       </head>
       <body className="bg-bg text-fg">
         <PreviewHostBridge />
