@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FloursRouteImport } from './routes/flours'
+import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as GuidesFlourHydrationCeilingRouteImport } from './routes/guides/flour-hydration-ceiling'
 import { Route as GuidesSourdoughCrumbTroubleshootingRouteImport } from './routes/guides/sourdough-crumb-troubleshooting'
 import { Route as GuidesTemperatureFermentationMatrixRouteImport } from './routes/guides/temperature-fermentation-matrix'
@@ -17,6 +19,16 @@ import { Route as GuidesTemperatureFermentationMatrixRouteImport } from './route
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FloursRoute = FloursRouteImport.update({
+  id: '/flours',
+  path: '/flours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesIndexRoute = GuidesIndexRouteImport.update({
+  id: '/guides/',
+  path: '/guides/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuidesFlourHydrationCeilingRoute =
@@ -40,49 +52,63 @@ const GuidesTemperatureFermentationMatrixRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/flours': typeof FloursRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
+  '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/flours': typeof FloursRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
+  '/guides': typeof GuidesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/flours': typeof FloursRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
+  '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/flours'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/temperature-fermentation-matrix'
+    | '/guides/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/flours'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/temperature-fermentation-matrix'
+    | '/guides'
   id:
     | '__root__'
     | '/'
+    | '/flours'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/temperature-fermentation-matrix'
+    | '/guides/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FloursRoute: typeof FloursRoute
   GuidesFlourHydrationCeilingRoute: typeof GuidesFlourHydrationCeilingRoute
   GuidesSourdoughCrumbTroubleshootingRoute: typeof GuidesSourdoughCrumbTroubleshootingRoute
   GuidesTemperatureFermentationMatrixRoute: typeof GuidesTemperatureFermentationMatrixRoute
+  GuidesIndexRoute: typeof GuidesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,6 +118,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/flours': {
+      id: '/flours'
+      path: '/flours'
+      fullPath: '/flours'
+      preLoaderRoute: typeof FloursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/': {
+      id: '/guides/'
+      path: '/guides'
+      fullPath: '/guides/'
+      preLoaderRoute: typeof GuidesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/flour-hydration-ceiling': {
@@ -120,11 +160,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FloursRoute: FloursRoute,
   GuidesFlourHydrationCeilingRoute: GuidesFlourHydrationCeilingRoute,
   GuidesSourdoughCrumbTroubleshootingRoute:
     GuidesSourdoughCrumbTroubleshootingRoute,
   GuidesTemperatureFermentationMatrixRoute:
     GuidesTemperatureFermentationMatrixRoute,
+  GuidesIndexRoute: GuidesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { GuidesFooter } from "@/components/guides-footer";
+import { ArrowRight } from "lucide-react";
+import { GuideShell } from "@/components/guide-shell";
 
 const TITLE =
   "Sourdough Crumb Forensics: How to Diagnose and Fix Under-Fermented, Over-Fermented, and Fool's Crumb Loaves";
@@ -8,36 +8,56 @@ const TITLE =
 const DESCRIPTION =
   "Read the loaf: dense under-fermented crumb, weak over-fermented crumb, and fool’s crumb that looks open but isn’t. Diagnose the cut, then set bulk and hydration in DoughMatrix.";
 
-const ROWS: { name: string; hallmark: string; next: string }[] = [
+const ROWS: {
+  defect: string;
+  symptoms: string;
+  cause: string;
+  fix: string;
+}[] = [
   {
-    name: "Under-fermented",
-    hallmark: "Tight even crumb, heavy loaf, thick pale crust, floury smell.",
-    next: "Give bulk the DoughMatrix window — warmer DDT or more starter, not more water.",
+    defect: "Under-fermented",
+    symptoms:
+      "Tight even crumb, heavy loaf, thick pale crust, little ear, floury smell.",
+    cause:
+      "Bulk ended early for that dough temp and inoculation. Cold kitchen, young levain, or a 20% starter treated like a 5-hour mix at 18°C.",
+    fix: "Give bulk the DoughMatrix window. Raise DDT or starter % — do not add water to “open it up.”",
   },
   {
-    name: "Over-fermented",
-    hallmark: "Shiny thin walls, spread in the oven, weak ear, vinegar or alcohol.",
-    next: "Shorten bulk, cool the dough, or drop inoculation. Use a peak levain.",
+    defect: "Over-fermented",
+    symptoms:
+      "Shiny thin walls, greasy look, loaf spread, weak or no ear, vinegar or alcohol.",
+    cause:
+      "Past the bulk window: too warm, too much starter, late levain, or a long bulk that ignored the decay curve.",
+    fix: "Shorten bulk toward the matrix center. Cooler DDT, less inoculation, peak levain. Fridge proof if the kitchen runs hot.",
   },
   {
-    name: "Fool’s crumb",
-    hallmark: "Caves under the crust, dense tight floor. Looks open, eats dense.",
-    next: "Finish bulk so gas is throughout. Gentle folds. Proof to a slow spring-back.",
+    defect: "Fool’s crumb",
+    symptoms:
+      "Caves clustered under the crust, dense tight floor. Looks open in a photo, eats like sandwich bread with holes.",
+    cause:
+      "Gas never distributed. Short or uneven bulk, then aggressive shaping parked a few bubbles at the top. Under-proofed core, wild oven spring.",
+    fix: "Finish bulk so the mass is aerated throughout. Gentle coil folds. Proof to a slow spring-back. Then score.",
   },
   {
-    name: "Tight even crumb",
-    hallmark: "Uniform small holes, light loaf, decent ear. Sandwich crumb.",
-    next: "If you want more open: raise true hydration toward the sweet spot, keep bulk on time.",
+    defect: "Tight even crumb",
+    symptoms: "Uniform small holes, light loaf, decent ear. Sandwich crumb.",
+    cause:
+      "Hydration below the flour’s sweet spot, or a thorough degas at shape. Not under-fermentation if the loaf is light.",
+    fix: "If you want more open crumb, raise true hydration toward the sweet spot without crossing the ceiling. Keep bulk on time.",
   },
   {
-    name: "Gummy / wet",
-    hallmark: "Knife smears hours after cooling. Shiny collapsed walls.",
-    next: "Cool fully; bake longer. If the mix was a puddle, drop hydration or Rescue.",
+    defect: "Gummy / wet",
+    symptoms: "Knife smears hours after cooling. Shiny collapsed walls.",
+    cause:
+      "Sliced hot; underbaked (core under 206°F); or true hydration at/over the flour ceiling so the net never set.",
+    fix: "Cool 2 hours. Bake to 206–210°F in the center. If the mix was a puddle, drop hydration or use Rescue.",
   },
   {
-    name: "Pancake / spread",
-    hallmark: "Melted on the stone, no height, ragged skin.",
-    next: "Check the ceiling first, then the bulk window. Shape only after a skin exists.",
+    defect: "Pancake / spread",
+    symptoms: "Melted on the stone, no height, ragged skin, maybe a burst side.",
+    cause:
+      "No gluten skin: ceiling crossed, bulk run long, or both. Weak flour (AP, 00, einkorn) at country-loaf water.",
+    fix: "Check the danger light first, then the bulk window. Shape only after the mix can hold a skin.",
   },
 ];
 
@@ -59,28 +79,7 @@ export const Route = createFileRoute("/guides/sourdough-crumb-troubleshooting")(
 
 function CrumbGuide() {
   return (
-    <div className="min-h-dvh">
-      <header className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 pt-6 pb-4">
-        <Link to="/" className="flex min-w-0 items-center gap-3 text-fg">
-          <Logo />
-          <div className="min-w-0">
-            <p className="font-display text-2xl leading-none tracking-tight">
-              DoughMatrix
-            </p>
-            <p className="mt-1 text-xs leading-snug text-faint">
-              Precision Hydration & Fermentation Engine
-            </p>
-          </div>
-        </Link>
-        <Link
-          to="/"
-          className="inline-flex h-9 shrink-0 items-center gap-1 rounded-sm px-3 text-sm text-muted hover:bg-card hover:text-fg"
-        >
-          <ArrowLeft className="size-4" />
-          Calculator
-        </Link>
-      </header>
-
+    <GuideShell>
       <article className="mx-auto max-w-3xl px-4 pb-10">
         <p className="text-xs font-medium tracking-wide text-accent uppercase">
           Guide
@@ -138,40 +137,82 @@ function CrumbGuide() {
 
         <section className="mt-12">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            Diagnostic table
+            Diagnostic matrix
           </h2>
           <p className="mt-4 leading-relaxed text-fg/90">
-            Match what you see to one row. Change the cause, not the scoring
-            pattern, on the next bake.
+            Match symptoms to a primary defect. Change the root cause on the
+            next bake — not the scoring pattern.
           </p>
           <div className="mt-6 overflow-x-auto">
             <table className="w-full border-collapse text-left text-sm">
               <caption className="sr-only">
-                Sourdough crumb diagnosis by hallmark and next bake
+                Sourdough crumb diagnostic matrix of symptoms, primary defect,
+                root cause, and recipe fix
               </caption>
               <thead>
                 <tr className="border-b border-border text-xs tracking-wide text-faint uppercase">
-                  <th className="py-3 pr-3 font-medium">Diagnosis</th>
-                  <th className="py-3 pr-3 font-medium">Hallmark</th>
-                  <th className="py-3 font-medium">Next bake</th>
+                  <th className="py-3 pr-3 font-medium">Symptoms</th>
+                  <th className="py-3 pr-3 font-medium">Primary defect</th>
+                  <th className="py-3 pr-3 font-medium">Root cause</th>
+                  <th className="py-3 font-medium">Recipe fix</th>
                 </tr>
               </thead>
               <tbody>
                 {ROWS.map((row) => (
                   <tr
-                    key={row.name}
+                    key={row.defect}
                     className="border-b border-border/70 align-top last:border-0"
                   >
+                    <td className="py-3 pr-3 text-fg/90">{row.symptoms}</td>
                     <th className="py-3 pr-3 font-medium text-accent">
-                      {row.name}
+                      {row.defect}
                     </th>
-                    <td className="py-3 pr-3 text-fg/90">{row.hallmark}</td>
-                    <td className="py-3 text-muted">{row.next}</td>
+                    <td className="py-3 pr-3 text-muted">{row.cause}</td>
+                    <td className="py-3 text-fg/90">{row.fix}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+        </section>
+
+        <section className="mt-12">
+          <h2 className="font-display text-2xl tracking-tight text-fg">
+            Gelatinization is not fermentation
+          </h2>
+          <p className="mt-4 leading-relaxed text-fg/90">
+            A gummy crumb is often blamed on bulk when the starch never set.
+            Wheat starch gelatinizes in the loaf’s core around{" "}
+            <strong className="font-medium text-fg">206–210°F</strong>{" "}
+            (96–99°C). Probe the center, not the crust. If you pull at 200°F,
+            the walls look baked and the middle stays paste.
+          </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-lg bg-card p-4 shadow-[0_0_0_1px_var(--color-border)]">
+              <p className="text-xs tracking-wide text-faint uppercase">
+                Core temperature
+              </p>
+              <p className="mt-2 font-display text-2xl text-fg">206–210°F</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                Hold until the probe in the thickest part reads this band. Lid
+                off if the crust is already dark.
+              </p>
+            </div>
+            <div className="rounded-lg bg-card p-4 shadow-[0_0_0_1px_var(--color-border)]">
+              <p className="text-xs tracking-wide text-faint uppercase">
+                Cooling rule
+              </p>
+              <p className="mt-2 font-display text-2xl text-fg">2 hours</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                Steam is still migrating. Slice sooner and the knife smears —
+                that is unset crumb, not a recipe failure.
+              </p>
+            </div>
+          </div>
+          <p className="mt-4 leading-relaxed text-fg/90">
+            If the loaf hit 208°F and cooled two hours and still smears, look
+            at hydration and bulk — the ceiling and the window — not the oven.
+          </p>
         </section>
 
         <section className="mt-12">
@@ -236,25 +277,20 @@ function CrumbGuide() {
             photo.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            DoughMatrix on the homepage is the bench tool behind this table:
-            true hydration against the flour ceiling, temperature-decay bulk,
-            and DDT water — so the next crumb matches the diagnosis you just
-            made.
+            The sourdough calculator is the bench tool behind this table: true
+            hydration against the flour ceiling, temperature-decay bulk, and
+            DDT water — so the next crumb matches the diagnosis you just made.
           </p>
           <Link
             to="/"
             className="mt-5 inline-flex h-12 items-center gap-2 rounded-md bg-accent px-5 text-base font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
           >
-            Open the hydration calculator
+            Open the sourdough calculator
             <ArrowRight className="size-4" />
           </Link>
         </aside>
       </article>
-
-      <div className="mx-auto max-w-3xl px-4 pb-16">
-        <GuidesFooter />
-      </div>
-    </div>
+    </GuideShell>
   );
 }
 
@@ -264,34 +300,5 @@ function Band({ title, body }: { title: string; body: string }) {
       <p className="text-sm font-medium text-fg">{title}</p>
       <p className="mt-2 text-sm leading-relaxed text-muted">{body}</p>
     </div>
-  );
-}
-
-function Logo() {
-  return (
-    <svg viewBox="0 0 40 40" className="size-10 shrink-0 text-accent" aria-hidden>
-      <circle
-        cx="20"
-        cy="21"
-        r="13"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
-      <path
-        d="M12.5 18c3.5-6 8-9 14-8"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-      <path
-        d="M18 11.5c1.2 4.5.2 9-1.5 13.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-      />
-    </svg>
   );
 }

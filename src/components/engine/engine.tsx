@@ -22,6 +22,7 @@ import { useBaker, useBakerInput } from "@/lib/sourdough/store";
 import type { FormulaResult, Maturity, MixMode } from "@/lib/sourdough/types";
 import { Button } from "@/components/ui/button";
 import { GuidesFooter } from "@/components/guides-footer";
+import { SiteHeader } from "@/components/site-header";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import { HydrationDial } from "./dial";
@@ -32,6 +33,7 @@ import { Stepper } from "./stepper";
 export function Engine() {
   const input = useBakerInput();
   const formula = useMemo(() => computeFormula(input), [input]);
+  const reset = useBaker((s) => s.reset);
   const [kitchen, setKitchen] = useState(false);
   const [rescue, setRescue] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -50,20 +52,48 @@ export function Engine() {
   return (
     <>
       <div className="min-h-dvh" {...(kitchen ? { inert: true, "aria-hidden": true } : {})}>
-        <Header
-          onKitchen={() => {
-            if (typeof navigator !== "undefined" && "wakeLock" in navigator) {
-              void navigator.wakeLock.request("screen").catch(() => undefined);
-            }
-            setKitchen(true);
-            track("kitchen");
-          }}
-          onRescue={() => {
-            setRescue(true);
-            track("rescue");
-          }}
-          onCopy={() => void copy()}
-          copied={copied}
+        <SiteHeader
+          home
+          actions={
+            <>
+              <Button variant="ghost" size="icon" onClick={() => void copy()} aria-label="Copy formula">
+                <Copy className="size-4" />
+                <span className="sr-only">{copied ? "Copied" : "Copy"}</span>
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={reset}
+                aria-label="Reset formula"
+              >
+                <RotateCcw className="size-4" />
+              </Button>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => {
+                  setRescue(true);
+                  track("rescue");
+                }}
+              >
+                Rescue
+              </Button>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => {
+                  if (typeof navigator !== "undefined" && "wakeLock" in navigator) {
+                    void navigator.wakeLock.request("screen").catch(() => undefined);
+                  }
+                  setKitchen(true);
+                  track("kitchen");
+                }}
+              >
+                <ChefHat className="size-4" />
+                <span className="hidden sm:inline">Kitchen</span>
+              </Button>
+            </>
+          }
         />
         <main className="mx-auto flex max-w-6xl flex-col gap-5 px-4 pb-16">
           <PresetsRow />
@@ -91,89 +121,6 @@ export function Engine() {
       <KitchenMode open={kitchen} onClose={() => setKitchen(false)} />
       <OverPourRescue open={rescue} onOpenChange={setRescue} formula={formula} />
     </>
-  );
-}
-
-function Header({
-  onKitchen,
-  onRescue,
-  onCopy,
-  copied,
-}: {
-  onKitchen: () => void;
-  onRescue: () => void;
-  onCopy: () => void;
-  copied: boolean;
-}) {
-  const reset = useBaker((s) => s.reset);
-  return (
-    <header className="mx-auto flex max-w-6xl flex-col gap-3 px-4 pt-6 pb-4 sm:flex-row sm:items-center sm:justify-between">
-      <div className="flex min-w-0 items-center gap-3">
-        <Logo />
-        <div className="min-w-0">
-          <h1 className="font-display text-2xl leading-none tracking-tight text-fg">
-            DoughMatrix
-          </h1>
-          <p className="mt-1 text-xs leading-snug text-faint">
-            Precision Hydration & Fermentation Engine
-          </p>
-        </div>
-      </div>
-      <div className="flex shrink-0 items-center gap-2">
-        <Button variant="ghost" size="icon" onClick={onCopy} aria-label="Copy formula">
-          <Copy className="size-4" />
-          <span className="sr-only">{copied ? "Copied" : "Copy"}</span>
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={reset}
-          aria-label="Reset formula"
-        >
-          <RotateCcw className="size-4" />
-        </Button>
-        <Button variant="secondary" size="sm" onClick={onRescue}>
-          Rescue
-        </Button>
-        <Button variant="primary" size="sm" onClick={onKitchen}>
-          <ChefHat className="size-4" />
-          <span className="hidden sm:inline">Kitchen</span>
-        </Button>
-      </div>
-    </header>
-  );
-}
-
-function Logo() {
-  return (
-    <svg
-      viewBox="0 0 40 40"
-      className="size-10 text-accent"
-      aria-hidden
-    >
-      <circle
-        cx="20"
-        cy="21"
-        r="13"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
-      <path
-        d="M12.5 18c3.5-6 8-9 14-8"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-      <path
-        d="M18 11.5c1.2 4.5.2 9-1.5 13.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-      />
-    </svg>
   );
 }
 

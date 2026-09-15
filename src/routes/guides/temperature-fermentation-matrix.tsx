@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import {
   BULK_INOC_REF,
   BULK_T_REF_C,
@@ -9,7 +9,7 @@ import {
   formatHours,
 } from "@/lib/sourdough/math";
 import { cn } from "@/lib/utils";
-import { GuidesFooter } from "@/components/guides-footer";
+import { GuideShell } from "@/components/guide-shell";
 
 const TITLE =
   "The Ambient Temp vs. Starter % Matrix: How to Predict Bulk Fermentation to the Hour";
@@ -38,29 +38,8 @@ export const Route = createFileRoute("/guides/temperature-fermentation-matrix")(
 
 function TempMatrixGuide() {
   return (
-    <div className="min-h-dvh">
-      <header className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 pt-6 pb-4">
-        <Link to="/" className="flex min-w-0 items-center gap-3 text-fg">
-          <Logo />
-          <div className="min-w-0">
-            <p className="font-display text-2xl leading-none tracking-tight">
-              DoughMatrix
-            </p>
-            <p className="mt-1 text-xs leading-snug text-faint">
-              Precision Hydration & Fermentation Engine
-            </p>
-          </div>
-        </Link>
-        <Link
-          to="/"
-          className="inline-flex h-9 shrink-0 items-center gap-1 rounded-sm px-3 text-sm text-muted hover:bg-card hover:text-fg"
-        >
-          <ArrowLeft className="size-4" />
-          Calculator
-        </Link>
-      </header>
-
-      <article className="mx-auto max-w-3xl px-4 pb-20">
+    <GuideShell>
+      <article className="mx-auto max-w-3xl px-4 pb-10">
         <p className="text-xs font-medium tracking-wide text-accent uppercase">
           Guide
         </p>
@@ -321,10 +300,7 @@ function TempMatrixGuide() {
           </Link>
         </aside>
       </article>
-      <div className="mx-auto max-w-3xl px-4 pb-16">
-        <GuidesFooter />
-      </div>
-    </div>
+    </GuideShell>
   );
 }
 
@@ -352,34 +328,5 @@ function Band({ title, body }: { title: string; body: string }) {
       <p className="text-sm font-medium text-fg">{title}</p>
       <p className="mt-2 text-sm leading-relaxed text-muted">{body}</p>
     </li>
-  );
-}
-
-function Logo() {
-  return (
-    <svg viewBox="0 0 40 40" className="size-10 shrink-0 text-accent" aria-hidden>
-      <circle
-        cx="20"
-        cy="21"
-        r="13"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
-      <path
-        d="M12.5 18c3.5-6 8-9 14-8"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-      <path
-        d="M18 11.5c1.2 4.5.2 9-1.5 13.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-      />
-    </svg>
   );
 }
