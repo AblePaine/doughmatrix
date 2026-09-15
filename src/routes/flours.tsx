@@ -1,37 +1,26 @@
+import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { GuidesFooter } from "@/components/guides-footer";
-import { FLOURS } from "@/lib/sourdough/flours";
-import type { FlourFamily } from "@/lib/sourdough/types";
-
-const FAMILY_LABEL: Record<FlourFamily, string> = {
-  white: "White",
-  whole: "Whole grain",
-  rye: "Rye",
-  ancient: "Ancient",
-  specialty: "Specialty",
-};
-
-const FAMILY_ORDER: FlourFamily[] = [
-  "white",
-  "whole",
-  "rye",
-  "ancient",
-  "specialty",
-];
-
-const INDEX = FLOURS.filter((f) => f.id !== "custom");
+import {
+  ARTISAN_FLOURS,
+  FLOUR_CATEGORIES,
+  filterArtisanFlours,
+  type ArtisanFlour,
+  type FlourCategory,
+} from "@/lib/flour-catalog";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/flours")({
   component: FlourIndex,
   head: () => ({
     meta: [
-      { title: "Flour Index — DoughMatrix" },
+      { title: "Artisan Flour Absorption Index & Specs — DoughMatrix" },
       {
         name: "description",
         content:
-          "Protein, sweet-spot hydration, and ceiling index for bread, whole wheat, rye, ancient, and specialty flours — the DoughMatrix absorption table.",
+          "Protein, ash, malt, and true-hydration ceilings for 16 baseline artisan flours — King Arthur, Central Milling, Bob’s Red Mill, Caputo, General Mills, and Giusto’s. Load any bag into the sourdough engine.",
       },
     ],
     links: [{ rel: "canonical", href: "https://doughmatrix.com/flours" }],
@@ -39,92 +28,168 @@ export const Route = createFileRoute("/flours")({
 });
 
 function FlourIndex() {
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<FlourCategory | "all">("all");
+  const rows = useMemo(
+    () => filterArtisanFlours(query, category),
+    [query, category],
+  );
+
   return (
     <div className="min-h-dvh">
       <SiteHeader />
-      <main className="mx-auto max-w-3xl px-4 pb-10">
+      <main className="mx-auto max-w-6xl px-4 pb-10">
         <p className="text-xs font-medium tracking-wide text-accent uppercase">
           Reference
         </p>
         <h1 className="mt-3 font-display text-3xl leading-tight tracking-tight text-fg sm:text-4xl">
-          Flour Index
+          Artisan Flour Absorption Index & Specs
         </h1>
-        <p className="mt-4 text-lg leading-relaxed text-muted">
-          Sweet spot is where the loaf usually wants to live. Ceiling is where
-          the mix stops being a loaf. Both are true-hydration numbers, starter
-          included.
+        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted">
+          Sixteen mill bags. Protein and ash from typical sheets; safe and max
+          hydration are DoughMatrix true-hydration — starter included. Load a
+          flour and the engine’s ceiling and danger light follow the bag.
         </p>
 
-        {FAMILY_ORDER.map((family) => {
-          const rows = INDEX.filter((f) => f.family === family);
-          if (rows.length === 0) return null;
-          return (
-            <section key={family} className="mt-10">
-              <h2 className="font-display text-2xl tracking-tight text-fg">
-                {FAMILY_LABEL[family]}
-              </h2>
-              <div className="mt-4 overflow-x-auto">
-                <table className="w-full border-collapse text-left text-sm">
-                  <thead>
-                    <tr className="border-b border-border text-xs tracking-wide text-faint uppercase">
-                      <th className="py-3 pr-3 font-medium">Flour</th>
-                      <th className="py-3 pr-3 text-right font-medium">
-                        Protein
-                      </th>
-                      <th className="py-3 pr-3 text-right font-medium">
-                        Sweet spot
-                      </th>
-                      <th className="py-3 text-right font-medium">Ceiling</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {rows.map((f) => (
-                      <tr
-                        key={f.id}
-                        className="border-b border-border/70 align-top last:border-0"
-                      >
-                        <td className="py-3 pr-3">
-                          <div className="font-medium text-fg">{f.name}</div>
-                          <div className="mt-0.5 text-xs text-faint">
-                            {f.notes}
-                          </div>
-                        </td>
-                        <td className="py-3 pr-3 text-right tabular-nums text-muted">
-                          {f.protein.toFixed(1)}%
-                        </td>
-                        <td className="py-3 pr-3 text-right tabular-nums text-fg">
-                          {f.sweetSpot}%
-                        </td>
-                        <td className="py-3 text-right tabular-nums text-accent">
-                          {f.ceiling}%
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          );
-        })}
-
-        <aside className="mt-12 rounded-lg bg-accent-dim p-5 shadow-[0_0_0_1px_rgb(229_169_98_/_0.35)] sm:p-6">
-          <p className="text-xs font-medium tracking-wide text-accent uppercase">
-            Open the engine
-          </p>
-          <p className="mt-2 font-display text-2xl tracking-tight text-fg">
-            Pick the flour. Watch the ceiling as you mix.
-          </p>
-          <Link
-            to="/"
-            className="mt-5 inline-flex h-12 items-center gap-2 rounded-md bg-accent px-5 text-base font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <label className="relative min-w-0 flex-1">
+            <span className="sr-only">Search by brand or flour name</span>
+            <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-faint" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search brand or flour…"
+              className="h-11 w-full rounded-md bg-card pr-3 pl-10 text-sm text-fg shadow-[0_0_0_1px_var(--color-border)] outline-none placeholder:text-faint focus:shadow-[0_0_0_2px_var(--color-accent)]"
+            />
+          </label>
+          <div
+            role="tablist"
+            aria-label="Flour category"
+            className="flex flex-wrap gap-1"
           >
-            Open the sourdough calculator
-            <ArrowRight className="size-4" />
-          </Link>
-        </aside>
+            {FLOUR_CATEGORIES.map((c) => {
+              const active = category === c.id;
+              return (
+                <button
+                  key={c.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setCategory(c.id)}
+                  className={cn(
+                    "h-9 rounded-sm px-3 text-sm",
+                    active
+                      ? "bg-accent-dim text-accent shadow-[0_0_0_1px_rgb(229_169_98_/_0.35)]"
+                      : "text-muted hover:bg-card hover:text-fg",
+                  )}
+                >
+                  {c.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <p className="mt-4 text-xs text-faint">
+          {rows.length} of {ARTISAN_FLOURS.length} flours
+        </p>
+
+        {rows.length === 0 ? (
+          <p className="mt-10 text-muted">
+            No bags match. Clear the search or pick All.
+          </p>
+        ) : (
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {rows.map((f) => (
+              <li key={f.id}>
+                <FlourCard flour={f} />
+              </li>
+            ))}
+          </ul>
+        )}
       </main>
-      <div className="mx-auto max-w-3xl px-4 pb-16">
+      <div className="mx-auto max-w-6xl px-4 pb-16">
         <GuidesFooter />
+      </div>
+    </div>
+  );
+}
+
+function FlourCard({ flour: f }: { flour: ArtisanFlour }) {
+  return (
+    <article className="flex h-full flex-col rounded-lg bg-card p-5 shadow-[0_0_0_1px_var(--color-border)]">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-xs font-medium tracking-wide text-accent uppercase">
+            {f.brand}
+          </p>
+          <h2 className="mt-1 font-display text-xl leading-tight tracking-tight text-fg">
+            {f.name}
+          </h2>
+        </div>
+        <span
+          className={cn(
+            "shrink-0 rounded-sm px-2 py-1 text-[11px] tracking-wide uppercase",
+            f.malted
+              ? "bg-accent-dim text-accent"
+              : "bg-inset text-faint shadow-[0_0_0_1px_var(--color-border)]",
+          )}
+        >
+          {f.malted ? "Malted" : "Unmalted"}
+        </span>
+      </div>
+
+      <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
+        <Spec label="Protein" value={`${f.protein.toFixed(1)}%`} />
+        <Spec label="Ash" value={`${f.ash.toFixed(2)}%`} />
+      </dl>
+
+      <HydrationGauge safe={f.safeHydration} max={f.maxHydration} />
+
+      <p className="mt-4 text-sm leading-relaxed text-muted">{f.description}</p>
+      <p className="mt-2 text-xs text-faint">Use: {f.recommendedUse}</p>
+
+      <Link
+        to="/"
+        search={{ flour: f.id }}
+        className="mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-md bg-accent px-4 text-sm font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
+      >
+        Load into Sourdough Engine
+        <ArrowRight className="size-4" />
+      </Link>
+    </article>
+  );
+}
+
+function Spec({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-md bg-inset px-3 py-2.5 shadow-[0_0_0_1px_var(--color-border)]">
+      <dt className="text-[11px] tracking-wide text-faint uppercase">{label}</dt>
+      <dd className="mt-0.5 font-display text-xl tabular-nums text-fg">{value}</dd>
+    </div>
+  );
+}
+
+function HydrationGauge({ safe, max }: { safe: number; max: number }) {
+  const lo = 50;
+  const hi = 110;
+  const pct = (n: number) => Math.min(100, Math.max(0, ((n - lo) / (hi - lo)) * 100));
+
+  return (
+    <div className="mt-4">
+      <div className="flex items-baseline justify-between gap-2 text-xs">
+        <span className="text-safe">Safe {safe}%</span>
+        <span className="text-caution">Max {max}%</span>
+      </div>
+      <div className="relative mt-2 h-1.5 overflow-hidden rounded-full bg-inset">
+        <div
+          className="absolute inset-y-0 left-0 rounded-full bg-caution/50"
+          style={{ width: `${pct(max)}%` }}
+        />
+        <div
+          className="absolute inset-y-0 left-0 rounded-full bg-safe"
+          style={{ width: `${pct(safe)}%` }}
+        />
       </div>
     </div>
   );

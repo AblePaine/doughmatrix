@@ -1,3 +1,4 @@
+import { ARTISAN_BY_ID, type ArtisanFlour } from "@/lib/flour-catalog";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { useShallow } from "zustand/react/shallow";
@@ -32,6 +33,7 @@ type BakerStore = BakerInput & {
   set: (patch: Partial<BakerInput>) => void;
   bump: (key: NumericKey, delta: number) => void;
   applyPreset: (preset: Preset) => void;
+  loadCatalogFlour: (id: string) => boolean;
   reset: () => void;
   startBulk: () => void;
   clearBulk: () => void;
@@ -93,6 +95,12 @@ export const useBaker = create<BakerStore>()(
         const flour = get().flourWeight;
         set(applyPresetTo(preset, flour));
       },
+      loadCatalogFlour: (id) => {
+        const f = ARTISAN_BY_ID[id];
+        if (!f) return false;
+        set(catalogPatch(f));
+        return true;
+      },
       reset: () => set({ ...DEFAULT_INPUT, bulkStartedAt: null }),
       startBulk: () => set({ bulkStartedAt: Date.now() }),
       clearBulk: () => set({ bulkStartedAt: null }),
@@ -104,6 +112,7 @@ export const useBaker = create<BakerStore>()(
           set: _set,
           bump: _bump,
           applyPreset: _ap,
+          loadCatalogFlour: _lf,
           reset: _r,
           startBulk: _sb,
           clearBulk: _cb,
@@ -117,6 +126,18 @@ export const useBaker = create<BakerStore>()(
 
 function clampNum(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n));
+}
+
+export function catalogPatch(f: ArtisanFlour): Partial<BakerInput> {
+  return {
+    flourId: "custom",
+    customName: `${f.brand} ${f.name}`,
+    customProtein: f.protein,
+    customCeiling: f.maxHydration,
+    targetTrueHydration: f.safeHydration,
+    blendId: null,
+    blendPercent: 0,
+  };
 }
 
 export function useBakerInput(): BakerInput {
