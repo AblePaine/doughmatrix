@@ -1,4 +1,4 @@
-import { ARTISAN_BY_ID, type ArtisanFlour } from "@/lib/flour-catalog";
+import { resolveArtisanFlour, type ArtisanFlour } from "@/lib/flour-catalog";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { useShallow } from "zustand/react/shallow";
@@ -96,7 +96,7 @@ export const useBaker = create<BakerStore>()(
         set(applyPresetTo(preset, flour));
       },
       loadCatalogFlour: (id) => {
-        const f = ARTISAN_BY_ID[id];
+        const f = resolveArtisanFlour(id);
         if (!f) return false;
         set(catalogPatch(f));
         return true;

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FloursRouteImport } from './routes/flours'
 import { Route as EnginesSourdoughRouteImport } from './routes/engines/sourdough'
+import { Route as FloursSlugRouteImport } from './routes/flours_.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as GuidesFlourHydrationCeilingRouteImport } from './routes/guides/flour-hydration-ceiling'
 import { Route as GuidesSourdoughCrumbTroubleshootingRouteImport } from './routes/guides/sourdough-crumb-troubleshooting'
@@ -31,6 +32,11 @@ const FloursRoute = FloursRouteImport.update({
 const EnginesSourdoughRoute = EnginesSourdoughRouteImport.update({
   id: '/engines/sourdough',
   path: '/engines/sourdough',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FloursSlugRoute = FloursSlugRouteImport.update({
+  id: '/flours_/$slug',
+  path: '/flours/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuidesIndexRoute = GuidesIndexRouteImport.update({
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
+  '/flours/$slug': typeof FloursSlugRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
+  '/flours/$slug': typeof FloursSlugRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
+  '/flours_/$slug': typeof FloursSlugRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/'
     | '/flours'
     | '/engines/sourdough'
+    | '/flours/$slug'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/starter-feeding-ratios-kinetics'
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/'
     | '/flours'
     | '/engines/sourdough'
+    | '/flours/$slug'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/starter-feeding-ratios-kinetics'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/'
     | '/flours'
     | '/engines/sourdough'
+    | '/flours_/$slug'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/starter-feeding-ratios-kinetics'
@@ -131,6 +143,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FloursRoute: typeof FloursRoute
   EnginesSourdoughRoute: typeof EnginesSourdoughRoute
+  FloursSlugRoute: typeof FloursSlugRoute
   GuidesFlourHydrationCeilingRoute: typeof GuidesFlourHydrationCeilingRoute
   GuidesSourdoughCrumbTroubleshootingRoute: typeof GuidesSourdoughCrumbTroubleshootingRoute
   GuidesStarterFeedingRatiosKineticsRoute: typeof GuidesStarterFeedingRatiosKineticsRoute
@@ -159,6 +172,13 @@ declare module '@tanstack/react-router' {
       path: '/engines/sourdough'
       fullPath: '/engines/sourdough'
       preLoaderRoute: typeof EnginesSourdoughRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/flours_/$slug': {
+      id: '/flours_/$slug'
+      path: '/flours/$slug'
+      fullPath: '/flours/$slug'
+      preLoaderRoute: typeof FloursSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/': {
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FloursRoute: FloursRoute,
   EnginesSourdoughRoute: EnginesSourdoughRoute,
+  FloursSlugRoute: FloursSlugRoute,
   GuidesFlourHydrationCeilingRoute: GuidesFlourHydrationCeilingRoute,
   GuidesSourdoughCrumbTroubleshootingRoute:
     GuidesSourdoughCrumbTroubleshootingRoute,

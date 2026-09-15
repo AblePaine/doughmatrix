@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Search } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { GuidesFooter } from "@/components/guides-footer";
+import { HydrationGauge } from "@/components/hydration-gauge";
 import {
   ARTISAN_FLOURS,
   FLOUR_CATEGORIES,
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/flours")({
           "Protein, ash, malt, and true-hydration ceilings for 16 baseline artisan flours — King Arthur, Central Milling, Bob’s Red Mill, Caputo, General Mills, and Giusto’s. Load any bag into the sourdough engine.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://doughmatrix.com/flours" }],
+    links: [{ rel: "canonical", href: "https://www.doughmatrix.com/flours" }],
   }),
 });
 
@@ -47,8 +48,8 @@ function FlourIndex() {
         </h1>
         <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted">
           Sixteen mill bags. Protein and ash from typical sheets; safe and max
-          hydration are DoughMatrix true-hydration — starter included. Load a
-          flour and the engine’s ceiling and danger light follow the bag.
+          hydration are DoughMatrix true-hydration — starter included. Open a
+          spec sheet or load the bag into the engine.
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -124,7 +125,13 @@ function FlourCard({ flour: f }: { flour: ArtisanFlour }) {
             {f.brand}
           </p>
           <h2 className="mt-1 font-display text-xl leading-tight tracking-tight text-fg">
-            {f.name}
+            <Link
+              to="/flours/$slug"
+              params={{ slug: f.id }}
+              className="hover:text-accent"
+            >
+              {f.name}
+            </Link>
           </h2>
         </div>
         <span
@@ -149,14 +156,23 @@ function FlourCard({ flour: f }: { flour: ArtisanFlour }) {
       <p className="mt-4 text-sm leading-relaxed text-muted">{f.description}</p>
       <p className="mt-2 text-xs text-faint">Use: {f.recommendedUse}</p>
 
-      <Link
-        to="/engines/sourdough"
-        search={{ flour: f.id }}
-        className="mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-md bg-accent px-4 text-sm font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
-      >
-        Load into Sourdough Engine
-        <ArrowRight className="size-4" />
-      </Link>
+      <div className="mt-5 grid gap-2">
+        <Link
+          to="/engines/sourdough"
+          search={{ flour: f.id }}
+          className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-accent px-4 text-sm font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
+        >
+          Load into Sourdough Engine
+          <ArrowRight className="size-4" />
+        </Link>
+        <Link
+          to="/flours/$slug"
+          params={{ slug: f.id }}
+          className="inline-flex h-11 items-center justify-center rounded-md bg-inset px-4 text-sm font-medium text-fg shadow-[0_0_0_1px_var(--color-border)] hover:shadow-[0_0_0_1px_var(--color-border-strong)]"
+        >
+          View Full Specs
+        </Link>
+      </div>
     </article>
   );
 }
@@ -166,31 +182,6 @@ function Spec({ label, value }: { label: string; value: string }) {
     <div className="rounded-md bg-inset px-3 py-2.5 shadow-[0_0_0_1px_var(--color-border)]">
       <dt className="text-[11px] tracking-wide text-faint uppercase">{label}</dt>
       <dd className="mt-0.5 font-display text-xl tabular-nums text-fg">{value}</dd>
-    </div>
-  );
-}
-
-function HydrationGauge({ safe, max }: { safe: number; max: number }) {
-  const lo = 50;
-  const hi = 110;
-  const pct = (n: number) => Math.min(100, Math.max(0, ((n - lo) / (hi - lo)) * 100));
-
-  return (
-    <div className="mt-4">
-      <div className="flex items-baseline justify-between gap-2 text-xs">
-        <span className="text-safe">Safe {safe}%</span>
-        <span className="text-caution">Max {max}%</span>
-      </div>
-      <div className="relative mt-2 h-1.5 overflow-hidden rounded-full bg-inset">
-        <div
-          className="absolute inset-y-0 left-0 rounded-full bg-caution/50"
-          style={{ width: `${pct(max)}%` }}
-        />
-        <div
-          className="absolute inset-y-0 left-0 rounded-full bg-safe"
-          style={{ width: `${pct(safe)}%` }}
-        />
-      </div>
     </div>
   );
 }
