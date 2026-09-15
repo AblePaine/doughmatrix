@@ -11,7 +11,7 @@ export const Route = createFileRoute("/guides/")({
       {
         name: "description",
         content:
-          "DoughMatrix guides: flour hydration ceilings, bulk fermentation by temperature and starter, and sourdough crumb forensics.",
+          "DoughMatrix guides: flour hydration ceilings, bulk by temperature and starter, levain peak timing, and sourdough crumb forensics.",
       },
     ],
     links: [{ rel: "canonical", href: "https://doughmatrix.com/guides" }],
@@ -29,8 +29,8 @@ function GuidesHub() {
           Guides
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">
-          Bench notes behind the engine. Hydration first, then the clock, then
-          the cut.
+          Bench notes behind the engine. Hydration first, then the jar, then
+          the bulk clock, then the cut.
         </p>
         <ul className="mt-10 grid gap-4">
           {PUBLISHED_GUIDES.map((g) => (

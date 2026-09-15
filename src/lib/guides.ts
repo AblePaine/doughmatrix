@@ -23,4 +23,12 @@ export const PUBLISHED_GUIDES = [
     blurb:
       "Under-fermented, over-fermented, and fool’s crumb. Read the cut, then change one number.",
   },
+  {
+    to: "/guides/starter-feeding-ratios-kinetics" as const,
+    kicker: "Levain",
+    title: "Starter Feeding Kinetics & Levain Scaling",
+    short: "Starter feeding kinetics",
+    blurb:
+      "Time the peak to the hour. Temperature vs. feeding ratio, then scale seed, flour, and water to the mix.",
+  },
 ];

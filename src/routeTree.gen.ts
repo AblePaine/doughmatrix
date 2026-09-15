@@ -14,6 +14,7 @@ import { Route as FloursRouteImport } from './routes/flours'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as GuidesFlourHydrationCeilingRouteImport } from './routes/guides/flour-hydration-ceiling'
 import { Route as GuidesSourdoughCrumbTroubleshootingRouteImport } from './routes/guides/sourdough-crumb-troubleshooting'
+import { Route as GuidesStarterFeedingRatiosKineticsRouteImport } from './routes/guides/starter-feeding-ratios-kinetics'
 import { Route as GuidesTemperatureFermentationMatrixRouteImport } from './routes/guides/temperature-fermentation-matrix'
 
 const IndexRoute = IndexRouteImport.update({
@@ -43,6 +44,12 @@ const GuidesSourdoughCrumbTroubleshootingRoute =
     path: '/guides/sourdough-crumb-troubleshooting',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GuidesStarterFeedingRatiosKineticsRoute =
+  GuidesStarterFeedingRatiosKineticsRouteImport.update({
+    id: '/guides/starter-feeding-ratios-kinetics',
+    path: '/guides/starter-feeding-ratios-kinetics',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GuidesTemperatureFermentationMatrixRoute =
   GuidesTemperatureFermentationMatrixRouteImport.update({
     id: '/guides/temperature-fermentation-matrix',
@@ -55,6 +62,7 @@ export interface FileRoutesByFullPath {
   '/flours': typeof FloursRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
+  '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
   '/guides/': typeof GuidesIndexRoute
 }
@@ -63,6 +71,7 @@ export interface FileRoutesByTo {
   '/flours': typeof FloursRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
+  '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
   '/guides': typeof GuidesIndexRoute
 }
@@ -72,6 +81,7 @@ export interface FileRoutesById {
   '/flours': typeof FloursRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
+  '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
   '/guides/': typeof GuidesIndexRoute
 }
@@ -82,6 +92,7 @@ export interface FileRouteTypes {
     | '/flours'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
+    | '/guides/starter-feeding-ratios-kinetics'
     | '/guides/temperature-fermentation-matrix'
     | '/guides/'
   fileRoutesByTo: FileRoutesByTo
@@ -90,6 +101,7 @@ export interface FileRouteTypes {
     | '/flours'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
+    | '/guides/starter-feeding-ratios-kinetics'
     | '/guides/temperature-fermentation-matrix'
     | '/guides'
   id:
@@ -98,6 +110,7 @@ export interface FileRouteTypes {
     | '/flours'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
+    | '/guides/starter-feeding-ratios-kinetics'
     | '/guides/temperature-fermentation-matrix'
     | '/guides/'
   fileRoutesById: FileRoutesById
@@ -107,6 +120,7 @@ export interface RootRouteChildren {
   FloursRoute: typeof FloursRoute
   GuidesFlourHydrationCeilingRoute: typeof GuidesFlourHydrationCeilingRoute
   GuidesSourdoughCrumbTroubleshootingRoute: typeof GuidesSourdoughCrumbTroubleshootingRoute
+  GuidesStarterFeedingRatiosKineticsRoute: typeof GuidesStarterFeedingRatiosKineticsRoute
   GuidesTemperatureFermentationMatrixRoute: typeof GuidesTemperatureFermentationMatrixRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
 }
@@ -148,6 +162,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesSourdoughCrumbTroubleshootingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/starter-feeding-ratios-kinetics': {
+      id: '/guides/starter-feeding-ratios-kinetics'
+      path: '/guides/starter-feeding-ratios-kinetics'
+      fullPath: '/guides/starter-feeding-ratios-kinetics'
+      preLoaderRoute: typeof GuidesStarterFeedingRatiosKineticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guides/temperature-fermentation-matrix': {
       id: '/guides/temperature-fermentation-matrix'
       path: '/guides/temperature-fermentation-matrix'
@@ -164,6 +185,8 @@ const rootRouteChildren: RootRouteChildren = {
   GuidesFlourHydrationCeilingRoute: GuidesFlourHydrationCeilingRoute,
   GuidesSourdoughCrumbTroubleshootingRoute:
     GuidesSourdoughCrumbTroubleshootingRoute,
+  GuidesStarterFeedingRatiosKineticsRoute:
+    GuidesStarterFeedingRatiosKineticsRoute,
   GuidesTemperatureFermentationMatrixRoute:
     GuidesTemperatureFermentationMatrixRoute,
   GuidesIndexRoute: GuidesIndexRoute,
