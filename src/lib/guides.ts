@@ -31,4 +31,12 @@ export const PUBLISHED_GUIDES = [
     blurb:
       "Time the peak to the hour. Temperature vs. feeding ratio, then scale seed, flour, and water to the mix.",
   },
+  {
+    to: "/guides/autolyse-vs-fermentolyse" as const,
+    kicker: "Mix",
+    title: "Autolyse vs. Fermentolyse",
+    short: "Autolyse vs. fermentolyse",
+    blurb:
+      "Protease, pH, and when to skip the rest. Autolyse vs. fermentolyse by flour — not by blog.",
+  },
 ];

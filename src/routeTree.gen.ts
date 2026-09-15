@@ -14,6 +14,7 @@ import { Route as FloursRouteImport } from './routes/flours'
 import { Route as EnginesSourdoughRouteImport } from './routes/engines/sourdough'
 import { Route as FloursSlugRouteImport } from './routes/flours_.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
+import { Route as GuidesAutolyseVsFermentolyseRouteImport } from './routes/guides/autolyse-vs-fermentolyse'
 import { Route as GuidesFlourHydrationCeilingRouteImport } from './routes/guides/flour-hydration-ceiling'
 import { Route as GuidesSourdoughCrumbTroubleshootingRouteImport } from './routes/guides/sourdough-crumb-troubleshooting'
 import { Route as GuidesStarterFeedingRatiosKineticsRouteImport } from './routes/guides/starter-feeding-ratios-kinetics'
@@ -44,6 +45,12 @@ const GuidesIndexRoute = GuidesIndexRouteImport.update({
   path: '/guides/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesAutolyseVsFermentolyseRoute =
+  GuidesAutolyseVsFermentolyseRouteImport.update({
+    id: '/guides/autolyse-vs-fermentolyse',
+    path: '/guides/autolyse-vs-fermentolyse',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GuidesFlourHydrationCeilingRoute =
   GuidesFlourHydrationCeilingRouteImport.update({
     id: '/guides/flour-hydration-ceiling',
@@ -74,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/flours': typeof FloursRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
   '/flours/$slug': typeof FloursSlugRoute
+  '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
@@ -85,6 +93,7 @@ export interface FileRoutesByTo {
   '/flours': typeof FloursRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
   '/flours/$slug': typeof FloursSlugRoute
+  '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
@@ -97,6 +106,7 @@ export interface FileRoutesById {
   '/flours': typeof FloursRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
   '/flours_/$slug': typeof FloursSlugRoute
+  '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/flours'
     | '/engines/sourdough'
     | '/flours/$slug'
+    | '/guides/autolyse-vs-fermentolyse'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/starter-feeding-ratios-kinetics'
@@ -121,6 +132,7 @@ export interface FileRouteTypes {
     | '/flours'
     | '/engines/sourdough'
     | '/flours/$slug'
+    | '/guides/autolyse-vs-fermentolyse'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/starter-feeding-ratios-kinetics'
@@ -132,6 +144,7 @@ export interface FileRouteTypes {
     | '/flours'
     | '/engines/sourdough'
     | '/flours_/$slug'
+    | '/guides/autolyse-vs-fermentolyse'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/starter-feeding-ratios-kinetics'
@@ -144,6 +157,7 @@ export interface RootRouteChildren {
   FloursRoute: typeof FloursRoute
   EnginesSourdoughRoute: typeof EnginesSourdoughRoute
   FloursSlugRoute: typeof FloursSlugRoute
+  GuidesAutolyseVsFermentolyseRoute: typeof GuidesAutolyseVsFermentolyseRoute
   GuidesFlourHydrationCeilingRoute: typeof GuidesFlourHydrationCeilingRoute
   GuidesSourdoughCrumbTroubleshootingRoute: typeof GuidesSourdoughCrumbTroubleshootingRoute
   GuidesStarterFeedingRatiosKineticsRoute: typeof GuidesStarterFeedingRatiosKineticsRoute
@@ -188,6 +202,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/autolyse-vs-fermentolyse': {
+      id: '/guides/autolyse-vs-fermentolyse'
+      path: '/guides/autolyse-vs-fermentolyse'
+      fullPath: '/guides/autolyse-vs-fermentolyse'
+      preLoaderRoute: typeof GuidesAutolyseVsFermentolyseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guides/flour-hydration-ceiling': {
       id: '/guides/flour-hydration-ceiling'
       path: '/guides/flour-hydration-ceiling'
@@ -224,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   FloursRoute: FloursRoute,
   EnginesSourdoughRoute: EnginesSourdoughRoute,
   FloursSlugRoute: FloursSlugRoute,
+  GuidesAutolyseVsFermentolyseRoute: GuidesAutolyseVsFermentolyseRoute,
   GuidesFlourHydrationCeilingRoute: GuidesFlourHydrationCeilingRoute,
   GuidesSourdoughCrumbTroubleshootingRoute:
     GuidesSourdoughCrumbTroubleshootingRoute,

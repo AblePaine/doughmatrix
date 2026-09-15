@@ -126,7 +126,8 @@ export function HubHome() {
             Featured field guides
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
-            The papers behind the paddles. Hydration, bulk, crumb, and the jar.
+            The papers behind the paddles. Hydration, bulk, the rest, crumb,
+            and the jar.
           </p>
           <ul className="mt-6 grid gap-4 md:grid-cols-2">
             {PUBLISHED_GUIDES.map((g) => (
