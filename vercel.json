@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "query", "key": "flour" }],
+      "destination": "/engines/sourdough",
+      "permanent": true
+    }
+  ]
+}

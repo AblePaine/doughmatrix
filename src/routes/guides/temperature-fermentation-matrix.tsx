@@ -287,12 +287,12 @@ function TempMatrixGuide() {
             Set dough temp and starter. Read the bulk window to the hour.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            The DoughMatrix calculator on the homepage is this matrix, live:
+            The DoughMatrix sourdough engine is this matrix, live:
             temperature-decay bulk, maturity, fold spacing, and DDT water —
             updated as you bump the paddles.
           </p>
           <Link
-            to="/"
+            to="/engines/sourdough"
             className="mt-5 inline-flex h-12 items-center gap-2 rounded-md bg-accent px-5 text-base font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
           >
             Open the hydration calculator

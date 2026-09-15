@@ -10,11 +10,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { title: `${APP_NAME} — Precision Hydration & Fermentation Engine` },
+      { title: `${APP_NAME} — Computational Tools for Modern Bakers` },
       {
         name: "description",
         content:
-          "True hydration, flour-ceiling danger light, temperature-decay bulk windows, and over-pour rescue — a precision bench tool for home sourdough.",
+          "The precision grain craft suite: true hydration, flour ceilings, fermentation kinetics, and thermal targets — starting with the live sourdough engine.",
       },
       { name: "theme-color", content: "#121316" },
     ],

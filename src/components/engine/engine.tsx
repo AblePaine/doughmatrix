@@ -53,7 +53,6 @@ export function Engine() {
     <>
       <div className="min-h-dvh" {...(kitchen ? { inert: true, "aria-hidden": true } : {})}>
         <SiteHeader
-          home
           actions={
             <>
               <Button variant="ghost" size="icon" onClick={() => void copy()} aria-label="Copy formula">

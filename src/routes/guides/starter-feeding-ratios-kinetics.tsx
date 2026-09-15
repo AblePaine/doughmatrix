@@ -261,12 +261,12 @@ function StarterKineticsGuide() {
             Size the levain to the mix. Feed so it peaks at mix, not at 2 a.m.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            The sourdough calculator already scales a 1:2:2 build to your
+            The sourdough engine already scales a 1:2:2 build to your
             starter weight and estimates ready time from dough temperature —
             then runs bulk from that peak.
           </p>
           <Link
-            to="/"
+            to="/engines/sourdough"
             className="mt-5 inline-flex h-12 items-center gap-2 rounded-md bg-accent px-5 text-base font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
           >
             Open the sourdough calculator

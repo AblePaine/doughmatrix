@@ -11,6 +11,9 @@ export function GuidesFooter({ className }: { className?: string }) {
         className,
       )}
     >
+      <Link to="/engines/sourdough" className="text-muted hover:text-accent">
+        Sourdough Engine
+      </Link>
       <Link to="/guides" className="text-muted hover:text-accent">
         All guides
       </Link>

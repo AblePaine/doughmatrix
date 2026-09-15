@@ -2,9 +2,8 @@ import type { ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { BrandMark } from "@/components/brand-mark";
+import { LIVE_ENGINE, UPCOMING_ENGINES } from "@/lib/engines";
 import { cn } from "@/lib/utils";
-
-const COMING_SOON = ["Pizza", "Bagels", "Enriched"] as const;
 
 export function SiteHeader({
   home = false,
@@ -25,7 +24,7 @@ export function SiteHeader({
               DoughMatrix
             </Title>
             <p className="mt-1 text-xs leading-snug text-faint">
-              Precision Hydration & Fermentation Engine
+              The Precision Grain Craft Suite
             </p>
           </div>
         </Link>
@@ -66,7 +65,7 @@ function NavLink({
 
 function EnginesMenu() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const sourdoughActive = pathname === "/";
+  const sourdoughActive = pathname.startsWith("/engines/sourdough");
 
   return (
     <details className="relative">
@@ -79,24 +78,24 @@ function EnginesMenu() {
         Engines
         <ChevronDown className="size-3.5" />
       </summary>
-      <div className="absolute top-full left-0 z-30 mt-1 min-w-52 rounded-md bg-card py-1 shadow-[0_0_0_1px_var(--color-border)]">
+      <div className="absolute top-full left-0 z-30 mt-1 min-w-56 rounded-md bg-card py-1 shadow-[0_0_0_1px_var(--color-border)]">
         <Link
-          to="/"
+          to={LIVE_ENGINE.to}
           className={cn(
-            "flex items-center justify-between px-3 py-2 text-sm hover:bg-inset",
+            "flex items-center justify-between gap-3 px-3 py-2 text-sm hover:bg-inset",
             sourdoughActive ? "text-accent" : "text-fg",
           )}
         >
-          Sourdough
-          <span className="text-xs text-faint">Live</span>
+          {LIVE_ENGINE.short}
+          <span className="text-xs text-faint">{LIVE_ENGINE.badge}</span>
         </Link>
-        {COMING_SOON.map((name) => (
+        {UPCOMING_ENGINES.map((engine) => (
           <p
-            key={name}
-            className="flex items-center justify-between px-3 py-2 text-sm text-faint"
+            key={engine.id}
+            className="flex items-center justify-between gap-3 px-3 py-2 text-sm text-faint"
           >
-            {name}
-            <span className="text-xs">Coming soon</span>
+            {engine.short}
+            <span className="text-xs">{engine.badge}</span>
           </p>
         ))}
       </div>

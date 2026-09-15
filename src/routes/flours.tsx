@@ -150,7 +150,7 @@ function FlourCard({ flour: f }: { flour: ArtisanFlour }) {
       <p className="mt-2 text-xs text-faint">Use: {f.recommendedUse}</p>
 
       <Link
-        to="/"
+        to="/engines/sourdough"
         search={{ flour: f.id }}
         className="mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-md bg-accent px-4 text-sm font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
       >

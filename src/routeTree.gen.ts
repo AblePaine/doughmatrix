@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FloursRouteImport } from './routes/flours'
+import { Route as EnginesSourdoughRouteImport } from './routes/engines/sourdough'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as GuidesFlourHydrationCeilingRouteImport } from './routes/guides/flour-hydration-ceiling'
 import { Route as GuidesSourdoughCrumbTroubleshootingRouteImport } from './routes/guides/sourdough-crumb-troubleshooting'
@@ -25,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const FloursRoute = FloursRouteImport.update({
   id: '/flours',
   path: '/flours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnginesSourdoughRoute = EnginesSourdoughRouteImport.update({
+  id: '/engines/sourdough',
+  path: '/engines/sourdough',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuidesIndexRoute = GuidesIndexRouteImport.update({
@@ -60,6 +66,7 @@ const GuidesTemperatureFermentationMatrixRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
+  '/engines/sourdough': typeof EnginesSourdoughRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
@@ -69,6 +76,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
+  '/engines/sourdough': typeof EnginesSourdoughRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
+  '/engines/sourdough': typeof EnginesSourdoughRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/flours'
+    | '/engines/sourdough'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/starter-feeding-ratios-kinetics'
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/flours'
+    | '/engines/sourdough'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/starter-feeding-ratios-kinetics'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/flours'
+    | '/engines/sourdough'
     | '/guides/flour-hydration-ceiling'
     | '/guides/sourdough-crumb-troubleshooting'
     | '/guides/starter-feeding-ratios-kinetics'
@@ -118,6 +130,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FloursRoute: typeof FloursRoute
+  EnginesSourdoughRoute: typeof EnginesSourdoughRoute
   GuidesFlourHydrationCeilingRoute: typeof GuidesFlourHydrationCeilingRoute
   GuidesSourdoughCrumbTroubleshootingRoute: typeof GuidesSourdoughCrumbTroubleshootingRoute
   GuidesStarterFeedingRatiosKineticsRoute: typeof GuidesStarterFeedingRatiosKineticsRoute
@@ -139,6 +152,13 @@ declare module '@tanstack/react-router' {
       path: '/flours'
       fullPath: '/flours'
       preLoaderRoute: typeof FloursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/engines/sourdough': {
+      id: '/engines/sourdough'
+      path: '/engines/sourdough'
+      fullPath: '/engines/sourdough'
+      preLoaderRoute: typeof EnginesSourdoughRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/': {
@@ -182,6 +202,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FloursRoute: FloursRoute,
+  EnginesSourdoughRoute: EnginesSourdoughRoute,
   GuidesFlourHydrationCeilingRoute: GuidesFlourHydrationCeilingRoute,
   GuidesSourdoughCrumbTroubleshootingRoute:
     GuidesSourdoughCrumbTroubleshootingRoute,

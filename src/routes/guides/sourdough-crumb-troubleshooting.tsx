@@ -277,12 +277,12 @@ function CrumbGuide() {
             photo.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            The sourdough calculator is the bench tool behind this table: true
+            The sourdough engine is the bench tool behind this table: true
             hydration against the flour ceiling, temperature-decay bulk, and
             DDT water — so the next crumb matches the diagnosis you just made.
           </p>
           <Link
-            to="/"
+            to="/engines/sourdough"
             className="mt-5 inline-flex h-12 items-center gap-2 rounded-md bg-accent px-5 text-base font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
           >
             Open the sourdough calculator

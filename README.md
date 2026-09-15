@@ -1,10 +1,10 @@
 # DoughMatrix
 
-**DoughMatrix — Precision Hydration & Fermentation Engine**
+**DoughMatrix — Computational Tools & Science for Modern Bakers**
 
-Production: [doughmatrix.com](https://doughmatrix.com)
+Production: [www.doughmatrix.com](https://www.doughmatrix.com)
 
-A bench calculator for home sourdough: true total hydration (including 1:1 starter flour and water), flour-ceiling danger light, temperature-decay bulk windows, over-pour rescue, and kitchen mode with screen wake lock.
+A precision grain-craft suite. The live **Sourdough Engine** (`/engines/sourdough`) calculates true total hydration (including starter flour and water), flour-ceiling danger light, temperature-decay bulk windows, over-pour rescue, and kitchen mode with screen wake lock.
 
 ## Local
 

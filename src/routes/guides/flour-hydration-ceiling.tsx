@@ -267,12 +267,12 @@ function FlourCeilingGuide() {
             Set the flour. Watch the ceiling. Mix the number the bag can hold.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            The DoughMatrix calculator on the homepage is the same math in this
+            The DoughMatrix sourdough engine is the same math in this
             guide: true hydration, flour-ceiling danger light, and over-pour
             rescue — live as you bump grams.
           </p>
           <Link
-            to="/"
+            to="/engines/sourdough"
             className="mt-5 inline-flex h-12 items-center gap-2 rounded-md bg-accent px-5 text-base font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
           >
             Open the hydration calculator
