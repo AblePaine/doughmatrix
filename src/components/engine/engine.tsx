@@ -95,6 +95,16 @@ export function Engine() {
           }
         />
         <main className="mx-auto flex max-w-6xl flex-col gap-5 px-4 pb-16">
+          <div>
+            <h1 className="font-display text-3xl leading-tight tracking-tight text-fg sm:text-4xl">
+              Sourdough Hydration & Fermentation Calculator
+            </h1>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
+              Calculate true hydration with hidden starter water, find your
+              exact water mix temperature, and dial in your bulk fermentation
+              window.
+            </p>
+          </div>
           <PresetsRow />
           <div className="grid items-start gap-5 lg:grid-cols-12">
             <div className="order-1 lg:order-2 lg:col-span-7 lg:col-start-6">

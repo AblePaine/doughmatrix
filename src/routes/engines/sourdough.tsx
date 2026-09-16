@@ -11,12 +11,12 @@ export const Route = createFileRoute("/engines/sourdough")({
   component: SourdoughEnginePage,
   head: () =>
     socialHead({
-      title: "Sourdough Hydration & Fermentation Matrix | DoughMatrix",
+      title: "Sourdough Hydration & Fermentation Calculator | DoughMatrix",
       description:
-        "Precision sourdough engine calculating true baker's percentages, hidden starter water dilution, DDT water temperature, and bulk fermentation timelines.",
+        "Calculate true hydration with hidden starter water, find your exact water mix temperature, and dial in your bulk fermentation window.",
       path: "/engines/sourdough",
-      cardTitle: "Sourdough Hydration & Fermentation Matrix",
-      category: "CALCULATION ENGINE",
+      cardTitle: "Sourdough Hydration & Fermentation Calculator",
+      category: "BAKING TOOL",
       detail: "True Hydration • Starter Dilution • DDT",
     }),
 });

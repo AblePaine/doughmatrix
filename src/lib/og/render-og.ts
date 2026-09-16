@@ -144,7 +144,7 @@ export function renderOgPng(input: OgCardInput): Buffer {
 export function parseOgQuery(url: URL): OgCardInput {
   return {
     title: url.searchParams.get("title") || "DoughMatrix",
-    category: url.searchParams.get("category") || "SUITE",
+    category: url.searchParams.get("category") || "BAKING SUITE",
     detail: url.searchParams.get("detail") || undefined,
   };
 }

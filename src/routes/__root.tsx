@@ -10,11 +10,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { title: `${APP_NAME} — Computational Tools for Modern Bakers` },
+      { title: `${APP_NAME} — Baking science, minus the guesswork` },
       {
         name: "description",
         content:
-          "The precision grain craft suite: true hydration, flour ceilings, fermentation kinetics, and thermal targets — starting with the live sourdough engine.",
+          "Dial in water absorption, hit your proofing windows, and stop ending up with flat, sticky dough. Real flour data and fermentation math for home and micro-bakers.",
       },
       { name: "theme-color", content: "#121316" },
     ],

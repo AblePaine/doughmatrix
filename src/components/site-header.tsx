@@ -24,7 +24,7 @@ export function SiteHeader({
               DoughMatrix
             </Title>
             <p className="mt-1 text-xs leading-snug text-faint">
-              The Precision Grain Craft Suite
+              Smarter Baking Tools
             </p>
           </div>
         </Link>

@@ -23,7 +23,7 @@ export const Route = createFileRoute("/flours")({
         "Protein, ash, malt, and true-hydration ceilings for 16 baseline artisan flours — King Arthur, Central Milling, Bob’s Red Mill, Caputo, General Mills, and Giusto’s. Load any bag into the sourdough engine.",
       path: "/flours",
       cardTitle: "Artisan Flour Absorption Index",
-      category: "GRAIN CATALOG",
+      category: "FLOUR INDEX",
       detail: "16+ Verified Commercial & Artisan Flours",
     }),
 });

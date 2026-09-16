@@ -12,29 +12,29 @@ export function HubHome() {
       <main className="mx-auto max-w-6xl px-4 pb-10">
         <section className="pt-6 pb-10 sm:pt-10 sm:pb-14">
           <p className="text-xs font-medium tracking-wide text-accent uppercase">
-            The Precision Grain Craft Suite
+            Smarter Baking Tools
           </p>
           <h1 className="mt-4 max-w-3xl font-display text-4xl leading-tight tracking-tight text-fg sm:text-5xl">
-            Computational Tools & Science for Modern Bakers
+            Baking science, minus the guesswork.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
-            Eliminate guesswork across every style of dough. Calibrate true
-            absorption ceilings, microbial fermentation kinetics, and thermal
-            targets down to the gram.
+            Dial in your water absorption, hit your proofing windows, and stop
+            ending up with flat, sticky dough. Real flour data and fermentation
+            math—built for home and micro-bakers.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               to="/engines/sourdough"
               className="inline-flex h-12 items-center gap-2 rounded-md bg-accent px-5 text-base font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
             >
-              Launch Sourdough Engine
+              Open Sourdough Calculator
               <ArrowRight className="size-4" />
             </Link>
             <Link
               to="/flours"
               className="inline-flex h-12 items-center gap-2 rounded-md bg-card px-5 text-base font-medium text-fg shadow-[0_0_0_1px_var(--color-border)] hover:shadow-[0_0_0_1px_var(--color-border-strong)]"
             >
-              Explore Flour Index
+              Browse Flour Index
             </Link>
           </div>
         </section>
@@ -64,7 +64,7 @@ export function HubHome() {
                   {LIVE_ENGINE.blurb}
                 </p>
                 <p className="mt-5 inline-flex items-center gap-1 text-sm text-accent">
-                  Open engine
+                  Open Calculator
                   <ArrowRight className="size-4" />
                 </p>
               </Link>
@@ -95,12 +95,11 @@ export function HubHome() {
             Flour Index
           </p>
           <p className="mt-2 font-display text-2xl tracking-tight text-fg sm:text-3xl">
-            Search 16+ verified commercial & artisan flours
+            Know what your flour can actually handle.
           </p>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
-            King Arthur, Central Milling, Caputo, Giusto’s, and more. Each bag
-            carries protein, ash, and a true-hydration ceiling you can load
-            straight into the sourdough engine.
+            Every flour has a limit before turning into soup. Check verified
+            protein, ash, and absorption ceilings for 16 popular artisan flours.
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
             {["Protein %", "Ash %", "Hydration ceiling"].map((label) => (
@@ -116,18 +115,18 @@ export function HubHome() {
             to="/flours"
             className="mt-6 inline-flex h-12 items-center gap-2 rounded-md bg-accent px-5 text-base font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
           >
-            Open the Flour Index
+            Search Flour Directory
             <ArrowRight className="size-4" />
           </Link>
         </aside>
 
         <section className="mt-14">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            Featured field guides
+            Field Guides & Kitchen Troubleshooting
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
-            The papers behind the paddles. Hydration, bulk, the rest, crumb,
-            and the jar.
+            Clear explanations for sticky dough, gummy crumb, and tricky
+            fermentation timing.
           </p>
           <ul className="mt-6 grid gap-4 md:grid-cols-2">
             {PUBLISHED_GUIDES.map((g) => (

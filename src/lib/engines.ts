@@ -5,7 +5,7 @@ export const LIVE_ENGINE = {
   short: "Sourdough",
   badge: "Live",
   blurb:
-    "True hydration with starter dilution, flour-ceiling danger light, DDT water, and a temperature-decay bulk timeline.",
+    "Calculate true hydration (including starter water), find the exact water temp to hit your target, and predict your bulk rise time.",
 } as const;
 
 export const UPCOMING_ENGINES = [
@@ -15,22 +15,22 @@ export const UPCOMING_ENGINES = [
     short: "Pizza",
     badge: "Phase 2",
     blurb:
-      "Neapolitan, NY, Detroit, and Roman formulation. 24–72h cold-retard decay, micro-gram yeast scaling, and pan surface-area logic.",
+      "Formulate dough for Neapolitan, NY, Detroit, or pan styles with cold-ferment schedules and pan size math.",
   },
   {
     id: "bagel",
-    name: "Bagel & Stiff Dough",
+    name: "Bagels & Stiff Doughs",
     short: "Bagels",
     badge: "Phase 3",
     blurb:
-      "Low-hydration motor-strain warnings, diastatic malt dosing, and alkaline boiling-bath pH kinetics.",
+      "Nail low-hydration chewy doughs, barley malt dosing, and boiling bath times without burning out your mixer.",
   },
   {
     id: "enriched",
-    name: "Laminated & Enriched",
+    name: "Enriched & Pastry",
     short: "Enriched",
     badge: "Phase 4",
     blurb:
-      "Brioche and croissant butter-block ratios, egg/fat hydration dilution, and thermal proofing ceilings.",
+      "Balance butter, eggs, and sugar without stalling your yeast or tearing delicate gluten structures.",
   },
 ] as const;

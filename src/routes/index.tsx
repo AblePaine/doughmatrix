@@ -17,11 +17,11 @@ export const Route = createFileRoute("/")({
   component: HubHome,
   head: () =>
     socialHead({
-      title: "DoughMatrix — Computational Tools & Science for Modern Bakers",
+      title: "DoughMatrix — Baking science, minus the guesswork",
       description:
-        "The precision grain craft suite. Calibrate true absorption ceilings, fermentation kinetics, and thermal targets — starting with the live sourdough engine.",
+        "Dial in water absorption, hit your proofing windows, and stop ending up with flat, sticky dough. Real flour data and fermentation math for home and micro-bakers.",
       path: "/",
-      cardTitle: "Precision Grain Craft & Baking Engines",
-      category: "MISSION CONTROL",
+      cardTitle: "Baking science, minus the guesswork",
+      category: "BAKING SUITE",
     }),
 });

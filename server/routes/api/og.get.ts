@@ -5,7 +5,7 @@ export default defineEventHandler((event) => {
   const q = getQuery(event) as Record<string, string | undefined>;
   const png = renderOgPng({
     title: q.title || "DoughMatrix",
-    category: q.category || "SUITE",
+    category: q.category || "BAKING SUITE",
     detail: q.detail,
   });
   setHeader(event, "content-type", "image/png");
