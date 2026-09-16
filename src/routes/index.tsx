@@ -1,6 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { HubHome } from "@/components/hub-home";
 import { hasEngineQuery, parseEngineSearch } from "@/lib/engine-search";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 export const Route = createFileRoute("/")({
   validateSearch: parseEngineSearch,
@@ -14,17 +15,12 @@ export const Route = createFileRoute("/")({
     });
   },
   component: HubHome,
-  head: () => ({
-    meta: [
-      {
-        title: "DoughMatrix — Computational Tools & Science for Modern Bakers",
-      },
-      {
-        name: "description",
-        content:
-          "The precision grain craft suite. Calibrate true absorption ceilings, fermentation kinetics, and thermal targets — starting with the live sourdough engine.",
-      },
-    ],
-    links: [{ rel: "canonical", href: "https://www.doughmatrix.com/" }],
-  }),
+  head: () =>
+    socialHead({
+      title: "DoughMatrix — Computational Tools & Science for Modern Bakers",
+      description:
+        "The precision grain craft suite. Calibrate true absorption ceilings, fermentation kinetics, and thermal targets — starting with the live sourdough engine.",
+      path: "/",
+      image: OG_IMAGES.hub,
+    }),
 });

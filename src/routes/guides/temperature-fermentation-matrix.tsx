@@ -10,6 +10,7 @@ import {
 } from "@/lib/sourdough/math";
 import { cn } from "@/lib/utils";
 import { GuideShell } from "@/components/guide-shell";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE =
   "The Ambient Temp vs. Starter % Matrix: How to Predict Bulk Fermentation to the Hour";
@@ -22,18 +23,13 @@ const INOCS = [0.1, 0.15, 0.2, 0.25, 0.3] as const;
 
 export const Route = createFileRoute("/guides/temperature-fermentation-matrix")({
   component: TempMatrixGuide,
-  head: () => ({
-    meta: [
-      { title: `${TITLE} — DoughMatrix` },
-      { name: "description", content: DESCRIPTION },
-    ],
-    links: [
-      {
-        rel: "canonical",
-        href: "https://doughmatrix.com/guides/temperature-fermentation-matrix",
-      },
-    ],
-  }),
+  head: () =>
+    socialHead({
+      title: `${TITLE} — DoughMatrix`,
+      description: DESCRIPTION,
+      path: "/guides/temperature-fermentation-matrix",
+      image: OG_IMAGES.temp,
+    }),
 });
 
 function TempMatrixGuide() {

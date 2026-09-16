@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { BULK_T_REF_C, BULK_TAU_C, formatGrams, formatHours } from "@/lib/sourdough/math";
 import { cn } from "@/lib/utils";
 import { GuideShell } from "@/components/guide-shell";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE =
   "Starter Feeding Kinetics & Levain Scaling: How to Time Your Peak to the Exact Hour";
@@ -35,18 +36,13 @@ const SCALE_1_5_5 = scaleLevain(150, 5, 5);
 
 export const Route = createFileRoute("/guides/starter-feeding-ratios-kinetics")({
   component: StarterKineticsGuide,
-  head: () => ({
-    meta: [
-      { title: `${TITLE} — DoughMatrix` },
-      { name: "description", content: DESCRIPTION },
-    ],
-    links: [
-      {
-        rel: "canonical",
-        href: "https://doughmatrix.com/guides/starter-feeding-ratios-kinetics",
-      },
-    ],
-  }),
+  head: () =>
+    socialHead({
+      title: `${TITLE} — DoughMatrix`,
+      description: DESCRIPTION,
+      path: "/guides/starter-feeding-ratios-kinetics",
+      image: OG_IMAGES.starter,
+    }),
 });
 
 function StarterKineticsGuide() {

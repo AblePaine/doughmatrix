@@ -115,6 +115,25 @@ test("platform chrome overwrites share-card metas and always sets og:title", () 
   assert.doesNotMatch(out, /property="og:image"/);
 });
 
+test("preserves a page-authored og:image on a public host", () => {
+  const html =
+    '<html><head><title>Engine</title><meta property="og:image" content="https://www.doughmatrix.com/images/og/engine-sourdough.jpg"></head></html>';
+  const out = injectGrokPwaHead(html, {
+    host: "www.doughmatrix.com",
+    cwd: mkdtempSync(join(tmpdir(), "grok-og-preserve-")),
+    site: { title: "DoughMatrix", card: "custom", image: "/og.jpg" },
+  });
+  assert.match(
+    out,
+    /property="og:image" content="https:\/\/www\.doughmatrix\.com\/images\/og\/engine-sourdough\.jpg"/,
+  );
+  assert.match(
+    out,
+    /name="twitter:image" content="https:\/\/www\.doughmatrix\.com\/images\/og\/engine-sourdough\.jpg"/,
+  );
+  assert.doesNotMatch(out, /content="https:\/\/www\.doughmatrix\.com\/og\.jpg"/);
+});
+
 test("does not duplicate twitter:card or og:title", () => {
   const once = injectGrokPwaHead("<html><head><title>Hello World</title></head></html>");
   const twice = injectGrokPwaHead(once);

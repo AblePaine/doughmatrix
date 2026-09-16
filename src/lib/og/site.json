@@ -2,5 +2,6 @@
   "title": "DoughMatrix — Computational Tools for Modern Bakers",
   "card": "custom",
   "description": "The precision grain craft suite: true hydration, flour ceilings, fermentation kinetics, and thermal targets.",
-  "color": "121316"
+  "color": "121316",
+  "image": "/images/og/hub.jpg"
 }

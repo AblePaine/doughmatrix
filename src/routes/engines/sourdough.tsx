@@ -3,27 +3,20 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Engine } from "@/components/engine/engine";
 import { track } from "@/lib/analytics";
 import { parseEngineSearch } from "@/lib/engine-search";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 import { useBaker } from "@/lib/sourdough/store";
 
 export const Route = createFileRoute("/engines/sourdough")({
   validateSearch: parseEngineSearch,
   component: SourdoughEnginePage,
-  head: () => ({
-    meta: [
-      { title: "Sourdough Hydration & Fermentation Matrix | DoughMatrix" },
-      {
-        name: "description",
-        content:
-          "Precision sourdough engine calculating true baker's percentages, hidden starter water dilution, DDT water temperature, and bulk fermentation timelines.",
-      },
-    ],
-    links: [
-      {
-        rel: "canonical",
-        href: "https://www.doughmatrix.com/engines/sourdough",
-      },
-    ],
-  }),
+  head: () =>
+    socialHead({
+      title: "Sourdough Hydration & Fermentation Matrix | DoughMatrix",
+      description:
+        "Precision sourdough engine calculating true baker's percentages, hidden starter water dilution, DDT water temperature, and bulk fermentation timelines.",
+      path: "/engines/sourdough",
+      image: OG_IMAGES.engine,
+    }),
 });
 
 function SourdoughEnginePage() {

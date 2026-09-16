@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { GuideShell } from "@/components/guide-shell";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE =
   "Sourdough Crumb Forensics: How to Diagnose and Fix Under-Fermented, Over-Fermented, and Fool's Crumb Loaves";
@@ -63,18 +64,13 @@ const ROWS: {
 
 export const Route = createFileRoute("/guides/sourdough-crumb-troubleshooting")({
   component: CrumbGuide,
-  head: () => ({
-    meta: [
-      { title: `${TITLE} — DoughMatrix` },
-      { name: "description", content: DESCRIPTION },
-    ],
-    links: [
-      {
-        rel: "canonical",
-        href: "https://doughmatrix.com/guides/sourdough-crumb-troubleshooting",
-      },
-    ],
-  }),
+  head: () =>
+    socialHead({
+      title: `${TITLE} — DoughMatrix`,
+      description: DESCRIPTION,
+      path: "/guides/sourdough-crumb-troubleshooting",
+      image: OG_IMAGES.crumb,
+    }),
 });
 
 function CrumbGuide() {

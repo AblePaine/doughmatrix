@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { GuideShell } from "@/components/guide-shell";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const H1 =
   "Autolyse vs. Fermentolyse: Enzymatic Kinetics, Extensibility, and When to Skip It";
@@ -51,18 +52,13 @@ const ROWS = [
 
 export const Route = createFileRoute("/guides/autolyse-vs-fermentolyse")({
   component: AutolyseGuide,
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-    ],
-    links: [
-      {
-        rel: "canonical",
-        href: "https://www.doughmatrix.com/guides/autolyse-vs-fermentolyse",
-      },
-    ],
-  }),
+  head: () =>
+    socialHead({
+      title: TITLE,
+      description: DESCRIPTION,
+      path: "/guides/autolyse-vs-fermentolyse",
+      image: OG_IMAGES.autolyse,
+    }),
 });
 
 function AutolyseGuide() {

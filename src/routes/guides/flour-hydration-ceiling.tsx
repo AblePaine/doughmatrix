@@ -4,6 +4,7 @@ import { FLOURS } from "@/lib/sourdough/flours";
 import type { FlourFamily } from "@/lib/sourdough/types";
 import { cn } from "@/lib/utils";
 import { GuideShell } from "@/components/guide-shell";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE =
   "The Flour Hydration Ceiling: Why Your High-Hydration Sourdough Is a Sticky Puddle (And How to Fix It)";
@@ -13,18 +14,13 @@ const DESCRIPTION =
 
 export const Route = createFileRoute("/guides/flour-hydration-ceiling")({
   component: FlourCeilingGuide,
-  head: () => ({
-    meta: [
-      { title: `${TITLE} — DoughMatrix` },
-      { name: "description", content: DESCRIPTION },
-    ],
-    links: [
-      {
-        rel: "canonical",
-        href: "https://doughmatrix.com/guides/flour-hydration-ceiling",
-      },
-    ],
-  }),
+  head: () =>
+    socialHead({
+      title: `${TITLE} — DoughMatrix`,
+      description: DESCRIPTION,
+      path: "/guides/flour-hydration-ceiling",
+      image: OG_IMAGES.hydration,
+    }),
 });
 
 const FAMILY_LABEL: Record<FlourFamily, string> = {

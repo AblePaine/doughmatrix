@@ -47,7 +47,19 @@ function unescapeHtml(value) {
     .replaceAll("&amp;", "&");
 }
 
-/** 6-digit hex for the og.grok.me placeholder, or "" if site.color is missing/invalid. */
+/** First content= for a property/name meta, or "". */
+export function extractMetaContent(html, key) {
+  const needle = String(key).toLowerCase();
+  const tags = String(html).match(/<meta\b[^>]*>/gi) ?? [];
+  for (const tag of tags) {
+    const attrs = [...tag.matchAll(/\b(?:property|name)\s*=\s*["']([^"']+)["']/gi)];
+    if (!attrs.some((m) => String(m[1]).toLowerCase() === needle)) continue;
+    const content = tag.match(/\bcontent\s*=\s*["']([^"']*)["']/i);
+    return content ? unescapeHtml(content[1]) : "";
+  }
+  return "";
+}
+
 function placeholderCardColor(site = {}) {
   const raw = String(site.color ?? "").trim();
   const hex = raw.startsWith("#") ? raw.slice(1) : raw;
@@ -339,6 +351,7 @@ export function grokOgHeadTags({
   site = {},
   documentTitle = "",
   cwd = process.cwd(),
+  imageOverride = "",
 } = {}) {
   const title = resolveOgTitle(site, appName, host, documentTitle);
   const publicHost = resolvePublicHost(host);
@@ -361,9 +374,16 @@ export function grokOgHeadTags({
       : `${ogServiceUrl()}/v1/card.png?host=${encodeURIComponent(publicHost)}&title=${encodeURIComponent(title)}`;
     const color = !custom ? placeholderCardColor(site) : "";
     if (color) image += `&color=${encodeURIComponent(color)}`;
+    const override = String(imageOverride ?? "").trim();
+    if (override) {
+      image = override.startsWith("http://") || override.startsWith("https://")
+        ? override
+        : `https://${publicHost}${override.startsWith("/") ? override : `/${override}`}`;
+    }
     tags.push(`<meta property="og:image" content="${escapeHtml(image)}">`);
     tags.push(`<meta property="og:image:width" content="1200">`);
     tags.push(`<meta property="og:image:height" content="630">`);
+    tags.push(`<meta name="twitter:image" content="${escapeHtml(image)}">`);
     const banner = String(site.banner ?? "").trim();
     if (banner) {
       const bannerUrl = `https://${publicHost}${banner.startsWith("/") ? banner : `/${banner}`}`;
@@ -432,6 +452,8 @@ export function injectGrokPwaHead(html, ctx = {}) {
     host,
     documentTitle,
   );
+  const pageImage =
+    extractMetaContent(html, "og:image") || extractMetaContent(html, "twitter:image");
   let next = stripShareMetaTags(html);
 
   const missing = grokPwaHeadTags(appName)
@@ -444,7 +466,7 @@ export function injectGrokPwaHead(html, ctx = {}) {
 
   next = insertAfterHeadOpen(
     next,
-    grokOgHeadTags({ host, appName, site, documentTitle, cwd }).join(""),
+    grokOgHeadTags({ host, appName, site, documentTitle, cwd, imageOverride: pageImage }).join(""),
   );
 
   if (!next.includes("/grok-app-builder/extensions.js")) {

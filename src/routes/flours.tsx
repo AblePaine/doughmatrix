@@ -12,20 +12,18 @@ import {
   type FlourCategory,
 } from "@/lib/flour-catalog";
 import { cn } from "@/lib/utils";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 export const Route = createFileRoute("/flours")({
   component: FlourIndex,
-  head: () => ({
-    meta: [
-      { title: "Artisan Flour Absorption Index & Specs — DoughMatrix" },
-      {
-        name: "description",
-        content:
-          "Protein, ash, malt, and true-hydration ceilings for 16 baseline artisan flours — King Arthur, Central Milling, Bob’s Red Mill, Caputo, General Mills, and Giusto’s. Load any bag into the sourdough engine.",
-      },
-    ],
-    links: [{ rel: "canonical", href: "https://www.doughmatrix.com/flours" }],
-  }),
+  head: () =>
+    socialHead({
+      title: "Artisan Flour Absorption Index & Specs — DoughMatrix",
+      description:
+        "Protein, ash, malt, and true-hydration ceilings for 16 baseline artisan flours — King Arthur, Central Milling, Bob’s Red Mill, Caputo, General Mills, and Giusto’s. Load any bag into the sourdough engine.",
+      path: "/flours",
+      image: OG_IMAGES.flours,
+    }),
 });
 
 function FlourIndex() {

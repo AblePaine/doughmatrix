@@ -8,6 +8,7 @@ import {
   resolveArtisanFlour,
 } from "@/lib/flour-catalog";
 import { cn } from "@/lib/utils";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 export const Route = createFileRoute("/flours_/$slug")({
   loader: ({ params }) => {
@@ -26,23 +27,12 @@ export const Route = createFileRoute("/flours_/$slug")({
   head: ({ loaderData }) => {
     const flour = loaderData;
     if (!flour) return {};
-    return {
-      meta: [
-        {
-          title: `${flour.name} Hydration Ceiling & Flour Specs | DoughMatrix`,
-        },
-        {
-          name: "description",
-          content: `Technical specs, protein content, ash rate, and water absorption ceiling for ${flour.brand} ${flour.name}. Calibrate your recipe with precision.`,
-        },
-      ],
-      links: [
-        {
-          rel: "canonical",
-          href: `https://www.doughmatrix.com/flours/${flour.id}`,
-        },
-      ],
-    };
+    return socialHead({
+      title: `${flour.name} Hydration Ceiling & Flour Specs | DoughMatrix`,
+      description: `Technical specs, protein content, ash rate, and water absorption ceiling for ${flour.brand} ${flour.name}. Calibrate your recipe with precision.`,
+      path: `/flours/${flour.id}`,
+      image: OG_IMAGES.flours,
+    });
   },
   component: FlourProfile,
   notFoundComponent: FlourNotFound,
