@@ -8,7 +8,7 @@ import {
   resolveArtisanFlour,
 } from "@/lib/flour-catalog";
 import { cn } from "@/lib/utils";
-import { OG_IMAGES, socialHead } from "@/lib/og/meta";
+import { socialHead } from "@/lib/og/meta";
 
 export const Route = createFileRoute("/flours_/$slug")({
   loader: ({ params }) => {
@@ -31,7 +31,9 @@ export const Route = createFileRoute("/flours_/$slug")({
       title: `${flour.name} Hydration Ceiling & Flour Specs | DoughMatrix`,
       description: `Technical specs, protein content, ash rate, and water absorption ceiling for ${flour.brand} ${flour.name}. Calibrate your recipe with precision.`,
       path: `/flours/${flour.id}`,
-      image: OG_IMAGES.flours,
+      cardTitle: `${flour.brand} ${flour.name}`,
+      category: "FLOUR SPECIFICATION",
+      detail: `Protein: ${flour.protein}% | Max Ceiling: ${flour.maxHydration}%`,
     });
   },
   component: FlourProfile,

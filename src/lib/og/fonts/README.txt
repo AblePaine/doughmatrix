@@ -1,0 +1,1 @@
+Liberation fonts: SIL Open Font License 1.1. https://github.com/liberationfonts/liberation-fonts

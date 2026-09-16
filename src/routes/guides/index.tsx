@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { GuideShell } from "@/components/guide-shell";
 import { PUBLISHED_GUIDES } from "@/lib/guides";
-import { OG_IMAGES, socialHead } from "@/lib/og/meta";
+import { socialHead } from "@/lib/og/meta";
 
 export const Route = createFileRoute("/guides/")({
   component: GuidesHub,
@@ -12,7 +12,9 @@ export const Route = createFileRoute("/guides/")({
       description:
         "DoughMatrix guides: flour hydration ceilings, bulk by temperature, levain peak timing, autolyse vs. fermentolyse, and sourdough crumb forensics.",
       path: "/guides",
-      image: OG_IMAGES.guides,
+      cardTitle: "Field Guides",
+      category: "FIELD GUIDE",
+      detail: "Hydration, fermentation, levain, mix, and crumb",
     }),
 });
 

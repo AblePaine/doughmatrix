@@ -142,6 +142,62 @@ function authPopupPlugin(): Plugin {
   };
 }
 
+/** Live /api/og PNG cards in Vite dev — Nitro serves the same path in production. */
+function ogApiPlugin(): Plugin {
+  return {
+    name: "doughmatrix-og-api",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        try {
+          const rawUrl = req.url ?? "";
+          const pathOnly = rawUrl.split("?", 1)[0] ?? "";
+          if (pathOnly !== "/api/og") {
+            next();
+            return;
+          }
+          const method = (req.method ?? "GET").toUpperCase();
+          if (method !== "GET" && method !== "HEAD") {
+            res.statusCode = 405;
+            res.setHeader("content-type", "text/plain; charset=utf-8");
+            res.end("Method Not Allowed");
+            return;
+          }
+          const url = new URL(rawUrl, "http://127.0.0.1:8080");
+          const mod = (await server.ssrLoadModule("/src/lib/og/render-og.ts")) as {
+            ogPngResponse: (input: {
+              title: string;
+              category: string;
+              detail?: string;
+            }) => Response;
+            parseOgQuery: (url: URL) => {
+              title: string;
+              category: string;
+              detail?: string;
+            };
+          };
+          const response = mod.ogPngResponse(mod.parseOgQuery(url));
+          const buf = Buffer.from(await response.arrayBuffer());
+          res.statusCode = response.status;
+          response.headers.forEach((value, key) => {
+            res.setHeader(key, value);
+          });
+          if (method === "HEAD") {
+            res.end();
+            return;
+          }
+          res.end(buf);
+        } catch (err) {
+          console.error("[og] /api/og failed:", err);
+          res.statusCode = 500;
+          res.setHeader("content-type", "text/plain; charset=utf-8");
+          res.end("OG render failed");
+        }
+      });
+    },
+  };
+}
+
 // `0.0.0.0:8080` is the live-preview contract — don't change host/port.
 // The dev server starts once `src/router.tsx` and `src/routes/` exist — see
 // AGENTS.md § "First scaffold".
@@ -161,6 +217,7 @@ export default defineConfig(({ command, isPreview }) => ({
     pgliteBootstrapPlugin(),
     // Before tanstackStart so /auth/popup never falls through to the SPA.
     authPopupPlugin(),
+    ogApiPlugin(),
     // Dev-only /__app-env, read by scripts/check-auth-invariant.mjs.
     appEnvPlugin(),
     // PWA head + ?install=1 tutorial page; runs before Start/Nitro.

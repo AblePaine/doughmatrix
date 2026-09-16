@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Engine } from "@/components/engine/engine";
 import { track } from "@/lib/analytics";
 import { parseEngineSearch } from "@/lib/engine-search";
-import { OG_IMAGES, socialHead } from "@/lib/og/meta";
+import { socialHead } from "@/lib/og/meta";
 import { useBaker } from "@/lib/sourdough/store";
 
 export const Route = createFileRoute("/engines/sourdough")({
@@ -15,7 +15,9 @@ export const Route = createFileRoute("/engines/sourdough")({
       description:
         "Precision sourdough engine calculating true baker's percentages, hidden starter water dilution, DDT water temperature, and bulk fermentation timelines.",
       path: "/engines/sourdough",
-      image: OG_IMAGES.engine,
+      cardTitle: "Sourdough Hydration & Fermentation Matrix",
+      category: "CALCULATION ENGINE",
+      detail: "True Hydration • Starter Dilution • DDT",
     }),
 });
 

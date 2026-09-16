@@ -1,7 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { HubHome } from "@/components/hub-home";
 import { hasEngineQuery, parseEngineSearch } from "@/lib/engine-search";
-import { OG_IMAGES, socialHead } from "@/lib/og/meta";
+import { socialHead } from "@/lib/og/meta";
 
 export const Route = createFileRoute("/")({
   validateSearch: parseEngineSearch,
@@ -21,6 +21,7 @@ export const Route = createFileRoute("/")({
       description:
         "The precision grain craft suite. Calibrate true absorption ceilings, fermentation kinetics, and thermal targets — starting with the live sourdough engine.",
       path: "/",
-      image: OG_IMAGES.hub,
+      cardTitle: "Precision Grain Craft & Baking Engines",
+      category: "MISSION CONTROL",
     }),
 });
