@@ -10,7 +10,7 @@ import {
 } from "@/lib/sourdough/math";
 import { cn } from "@/lib/utils";
 import { GuideShell } from "@/components/guide-shell";
-import { socialHead } from "@/lib/og/meta";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE =
   "The Ambient Temp vs. Starter % Matrix: How to Predict Bulk Fermentation to the Hour";
@@ -28,6 +28,7 @@ export const Route = createFileRoute("/guides/temperature-fermentation-matrix")(
       title: `${TITLE} — DoughMatrix`,
       description: DESCRIPTION,
       path: "/guides/temperature-fermentation-matrix",
+      image: OG_IMAGES.temp,
       cardTitle: TITLE,
       category: "FIELD GUIDE",
     }),

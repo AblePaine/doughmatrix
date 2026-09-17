@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { BULK_T_REF_C, BULK_TAU_C, formatGrams, formatHours } from "@/lib/sourdough/math";
 import { cn } from "@/lib/utils";
 import { GuideShell } from "@/components/guide-shell";
-import { socialHead } from "@/lib/og/meta";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE =
   "Starter Feeding Kinetics & Levain Scaling: How to Time Your Peak to the Exact Hour";
@@ -41,6 +41,7 @@ export const Route = createFileRoute("/guides/starter-feeding-ratios-kinetics")(
       title: `${TITLE} — DoughMatrix`,
       description: DESCRIPTION,
       path: "/guides/starter-feeding-ratios-kinetics",
+      image: OG_IMAGES.starter,
       cardTitle: TITLE,
       category: "FIELD GUIDE",
     }),

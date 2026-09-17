@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Engine } from "@/components/engine/engine";
 import { track } from "@/lib/analytics";
 import { parseEngineSearch } from "@/lib/engine-search";
-import { socialHead } from "@/lib/og/meta";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 import { useBaker } from "@/lib/sourdough/store";
 
 export const Route = createFileRoute("/engines/sourdough")({
@@ -15,6 +15,7 @@ export const Route = createFileRoute("/engines/sourdough")({
       description:
         "Calculate true hydration with hidden starter water, find your exact water mix temperature, and dial in your bulk fermentation window.",
       path: "/engines/sourdough",
+      image: OG_IMAGES.engine,
       cardTitle: "Sourdough Hydration & Fermentation Calculator",
       category: "BAKING TOOL",
       detail: "True Hydration • Starter Dilution • DDT",

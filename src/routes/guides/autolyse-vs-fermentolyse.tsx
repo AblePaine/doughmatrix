@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { GuideShell } from "@/components/guide-shell";
-import { socialHead } from "@/lib/og/meta";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const H1 =
   "Autolyse vs. Fermentolyse: Enzymatic Kinetics, Extensibility, and When to Skip It";
@@ -57,6 +57,7 @@ export const Route = createFileRoute("/guides/autolyse-vs-fermentolyse")({
       title: TITLE,
       description: DESCRIPTION,
       path: "/guides/autolyse-vs-fermentolyse",
+      image: OG_IMAGES.autolyse,
       cardTitle: H1,
       category: "FIELD GUIDE",
     }),
