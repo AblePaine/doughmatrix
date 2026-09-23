@@ -74,6 +74,7 @@ export function KitchenMode({
 }) {
   const input = useBakerInput();
   const bump = useBaker((s) => s.bump);
+  const set = useBaker((s) => s.set);
   const startBulk = useBaker((s) => s.startBulk);
   const clearBulk = useBaker((s) => s.clearBulk);
   const bulkStartedAt = useBaker((s) => s.bulkStartedAt);
@@ -91,6 +92,21 @@ export function KitchenMode({
       );
     } else {
       bump("flourWeight", delta);
+    }
+  };
+  // Water paddle: one click must change total water by exactly `grams`.
+  // Use set (not bump) to avoid the 0.1% hydration-step quantization.
+  // In dough mode, also raise the dough target by `grams` so the water
+  // comes on top instead of being pulled from flour.
+  const bumpWater = (grams: number) => {
+    const nextHydration = formula.trueHydration + waterDelta(formula, grams);
+    if (mixMode === "dough") {
+      set({
+        targetTrueHydration: nextHydration,
+        doughWeightTarget: input.doughWeightTarget + grams,
+      });
+    } else {
+      set({ targetTrueHydration: nextHydration });
     }
   };
   const wake = useWakeLock(open);
@@ -192,8 +208,8 @@ export function KitchenMode({
         <Paddle
           label="Water"
           unit="5 g"
-          onDec={() => bump("targetTrueHydration", waterDelta(formula, -5))}
-          onInc={() => bump("targetTrueHydration", waterDelta(formula, 5))}
+          onDec={() => bumpWater(-5)}
+          onInc={() => bumpWater(5)}
         />
         <Paddle
           label="Flour"

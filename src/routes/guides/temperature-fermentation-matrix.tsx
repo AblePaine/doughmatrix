@@ -191,7 +191,7 @@ function TempMatrixGuide() {
             <p>
               <strong className="font-medium text-fg">Cold kitchen, big starter.</strong>{" "}
               30% at 18°C lands near 5h 30m. That is how you keep a weekday bake
-              when the house sits at 68°F.
+              when the house sits at 64°F.
             </p>
           </div>
         </section>

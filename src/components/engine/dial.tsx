@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 const START = 180;
 const SWEEP = 180;
 const MIN_H = 50;
-const MAX_H = 100;
+const MAX_H = 120;
 
 function polar(cx: number, cy: number, r: number, deg: number) {
   const rad = (deg * Math.PI) / 180;
@@ -137,7 +137,7 @@ export function HydrationDial({ formula }: { formula: FormulaResult }) {
           fontSize="11"
           textAnchor="middle"
         >
-          100
+          120
         </text>
         <text
           x={polar(cx, cy, r + 26, cAngle).x}

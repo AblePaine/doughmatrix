@@ -259,7 +259,7 @@ function FormulaCard({ formula }: { formula: FormulaResult }) {
         <Stepper
           label="Starter"
           hint={`${formatGrams(formula.starterFlour)} g flour`}
-          value={formatGrams(starterWeight)}
+          value={formatGrams(formula.starterWeight)}
           unit="g"
           onDec={() => bump("starterWeight", -5)}
           onInc={() => bump("starterWeight", 5)}
@@ -534,6 +534,7 @@ function LevainCard({ formula }: { formula: FormulaResult }) {
   // The build ratio only equals 1:2:2 at 100% starter hydration — derive it
   // from the actual split so the label stays honest at other hydrations.
   const ratioPart = (v: number) => {
+    if (!seed || seed <= 0) return "0";
     const r = v / seed;
     return Number.isInteger(r) ? String(r) : r.toFixed(1);
   };

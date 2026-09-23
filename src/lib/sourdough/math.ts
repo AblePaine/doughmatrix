@@ -81,7 +81,7 @@ function dangerFor(trueH: number, ceiling: number): DangerLevel {
 export function flourFromDoughWeight(input: BakerInput): number {
   const H = input.targetTrueHydration / 100;
   const S = input.saltPercent / 100;
-  const I = input.starterWeight > 0 && input.flourWeight > 0
+  const I = input.flourWeight > 0
     ? input.starterWeight / input.flourWeight
     : 0.2;
   const starterHyd = input.starterHydration;
@@ -128,7 +128,13 @@ export function computeFormula(input: BakerInput): FormulaResult {
 
   const starter = splitStarter(starterWeight, input.starterHydration);
   const totalFlour = flourWeight + starter.flour;
-  const totalWater = totalFlour * (input.targetTrueHydration / 100);
+  // If the starter brings more water than the target calls for, the bowl
+  // water clamps to 0 but the dough is wetter than target — report the real
+  // hydration instead of hiding it (danger light must not read safe).
+  const totalWater = Math.max(
+    totalFlour * (input.targetTrueHydration / 100),
+    starter.water,
+  );
   const waterWeight = Math.max(0, totalWater - starter.water);
   const saltWeight = totalFlour * (input.saltPercent / 100);
   const doughWeight = totalFlour + totalWater + saltWeight;
@@ -279,7 +285,11 @@ export function formatGrams(n: number, digits = 0) {
 export function formatHours(h: number) {
   if (!Number.isFinite(h) || h < 0) return "—";
   if (h === 0) return "0m";
-  if (h < 1) return `${Math.max(1, Math.round(h * 60))}m`;
+  if (h < 1) {
+    const mins = Math.round(h * 60);
+    if (mins >= 60) return "1h";
+    return `${Math.max(1, mins)}m`;
+  }
   const hours = Math.floor(h + 1e-9);
   const mins = Math.round((h - hours) * 60);
   if (mins <= 0) return `${hours}h`;

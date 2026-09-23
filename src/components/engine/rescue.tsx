@@ -31,8 +31,14 @@ export function OverPourRescue({
   const apply = () => {
     if (mixMode === "dough") {
       // In dough mode flourWeight is derived from doughWeightTarget, so
-      // apply the rescue through the target (setting flourWeight is a dead click).
-      set({ doughWeightTarget: Math.round(rescue.newDoughWeight) });
+      // apply the rescue through the target — but also pin the stored
+      // flour/starter so the derived starter stays fixed (rescue adds
+      // flour + salt only, starter stays as-is).
+      set({
+        doughWeightTarget: Math.round(rescue.newDoughWeight),
+        flourWeight: Number((formula.flourWeight + rescue.extraFlour).toFixed(1)),
+        starterWeight: Math.round(formula.starterWeight),
+      });
     } else {
       set({
         flourWeight: Number((flourWeight + rescue.extraFlour).toFixed(1)),
