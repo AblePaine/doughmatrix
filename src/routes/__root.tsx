@@ -14,7 +14,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Dial in water absorption, hit your proofing windows, and stop ending up with flat, sticky dough. Real flour data and fermentation math for home and micro-bakers.",
+          "Stop guessing your water, dough temp, and bulk time. Real numbers from real flour — for home and micro-bakers who would rather bake than do math.",
       },
       { name: "theme-color", content: "#121316" },
     ],

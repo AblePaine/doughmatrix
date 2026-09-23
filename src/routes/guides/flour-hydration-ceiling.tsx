@@ -7,10 +7,10 @@ import { GuideShell } from "@/components/guide-shell";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE =
-  "The Flour Hydration Ceiling: Why Your High-Hydration Sourdough Is a Sticky Puddle (And How to Fix It)";
+  "The Flour Hydration Ceiling: Why Your Sourdough Turned Into a Sticky Puddle (and How to Fix It)";
 
 const DESCRIPTION =
-  "High-hydration sourdough fails when true water exceeds the flour’s ceiling — not because 80% is fashionable. Use absorption benchmarks, the danger light, and DoughMatrix to fix a slack mix.";
+  "High-hydration sourdough fails when the flour can't hold the water — not because 80% looks cool. Here's how to find your flour's limit and fix a slack mix.";
 
 export const Route = createFileRoute("/guides/flour-hydration-ceiling")({
   component: FlourCeilingGuide,
@@ -43,48 +43,49 @@ function FlourCeilingGuide() {
           Guide
         </p>
         <h1 className="mt-3 font-display text-3xl leading-tight tracking-tight text-fg sm:text-4xl">
-          The Flour Hydration Ceiling: Why Your High-Hydration Sourdough Is a
-          Sticky Puddle (And How to Fix It)
+          The Flour Hydration Ceiling: Why Your Sourdough Turned Into a
+          Sticky Puddle (and How to Fix It)
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">
-          Eighty percent hydration is not a personality. It is a load on a
-          specific gluten net. Cross that flour’s ceiling and the dough stops
-          being dough — it is a puddle with ambition.
+          Eighty percent hydration is not a personality trait. It's a load on a
+          particular gluten net. Push past what your flour can hold and the
+          dough stops being dough — it's a puddle with ambition.
         </p>
 
         <div className="mt-8 space-y-5 text-base leading-relaxed text-fg/90">
           <p>
-            The internet sold a single number. Bake like Tartine, hold the dough
-            like a cloud, score a ear. What it did not sell is that Chad
+            The internet sold a single number. Bake like Tartine, open crumb
+            like a cloud, score an ear. What it did not sell is that Chad
             Robertson’s country loaf sits on a strong bread-flour blend with a
             ceiling near 78%, while the bag of all-purpose in a home pantry tops
             out around 74% — and tipo 00, despite the protein on the label,
             often collapses above 70%.
           </p>
           <p>
-            DoughMatrix treats that limit as a{" "}
+            That limit is the{" "}
             <strong className="font-medium text-fg">hydration ceiling</strong>:
-            the true water-to-flour ratio at which the gluten sheet can no
-            longer hold a skin. Below it, folds build tension. Four points under
-            it, you are in the caution band. At or above it, the mix shears, the
-            bench floods, and no amount of slap-and-fold will invent gluten the
-            mill did not put in the bag.
+            the point where the gluten can't hold a skin anymore. Below it,
+            folds build tension. Within 4 points of it, you're in the caution
+            zone. At or past it, the dough tears, the bench floods, and no
+            amount of slap-and-fold creates gluten the mill didn't put in the
+            bag.
           </p>
         </div>
 
         <section className="mt-12">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            True hydration, not baker’s percent
+            True hydration counts your starter too
           </h2>
           <p className="mt-4 leading-relaxed text-fg/90">
-            Baker’s percent is bowl water over bowl flour. That under-counts
-            water and flour already sitting in the starter. A 100 g levain at
-            1:1 (100% hydration) is 50 g flour and 50 g water. Those grams join
-            the dough whether you write them down or not.
+            Baker's percent only counts the water in the bowl against the flour
+            in the bowl. It misses the flour and water already sitting in your
+            starter. A 100 g starter at 1:1 (100% hydration) is 50 g flour and
+            50 g water — those grams are in your dough whether you wrote them
+            down or not.
           </p>
           <div className="mt-6 rounded-lg bg-card p-4 shadow-[0_0_0_1px_var(--color-border)] sm:p-5">
             <p className="text-xs font-medium tracking-wide text-muted uppercase">
-              Worked example
+              A quick example
             </p>
             <p className="mt-3 font-display text-xl text-fg">
               500 g flour · 350 g water · 100 g starter (1:1)
@@ -113,8 +114,8 @@ function FlourCeilingGuide() {
           <p className="mt-4 leading-relaxed text-fg/90">
             Protein is a hint, not a passport. Ash, bran, mill extraction, and
             pentosans change how much water a flour can drink before the net
-            fails. DoughMatrix maps true hydration onto three bands against the
-            active flour’s ceiling:
+            fails. The calculator shows your true hydration against the flour’s
+            ceiling in three bands:
           </p>
           <ul className="mt-6 grid gap-3 sm:grid-cols-3">
             <Band
@@ -137,12 +138,12 @@ function FlourCeilingGuide() {
 
         <section className="mt-12">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            Absorption benchmarks
+            Hydration benchmarks
           </h2>
           <p className="mt-4 leading-relaxed text-fg/90">
-            Sweet spot is where the loaf usually wants to live. Ceiling is
+            Sweet spot is where your loaf usually wants to live. Ceiling is
             where the mix stops being a loaf. Both are true-hydration numbers,
-            starter included. Use them as a starting index — then match the bag
+            starter included. Use them as a starting point — then match the bag
             in front of you.
           </p>
           <div className="mt-6 overflow-x-auto">
@@ -217,7 +218,7 @@ function FlourCeilingGuide() {
             </li>
             <li>
               Bulk “never comes.” That is not under-fermentation. The dough
-              cannot trap gas because there is no continuous sheet.
+              cannot trap gas because there is no continuous skin to hold it.
             </li>
           </ol>
         </section>
@@ -230,17 +231,16 @@ function FlourCeilingGuide() {
             <p>
               <strong className="font-medium text-fg">Before you mix.</strong>{" "}
               Pick the flour (or blend) first. Set true hydration to its sweet
-              spot, not to a number from a video. DoughMatrix lights the ceiling
-              as you move the paddle.
+              spot, not to a number from a video. The calculator lights the
+              ceiling as you adjust the grams.
             </p>
             <p>
               <strong className="font-medium text-fg">If you already over-poured.</strong>{" "}
-              Do not dump the bowl. Extra flour is{" "}
-              <span className="text-accent">extra water ÷ target hydration</span>
-              . Extra salt is that flour times your salt percent. Rescue in
-              DoughMatrix does the algebra so the dough returns to the same
-              true hydration and seasoning — not a guess-handful of flour that
-              under-salts the loaf.
+              Do not dump the bowl. Extra flour pulls the extra water back
+              into balance, and a pinch more salt keeps the seasoning right.
+              The rescue card in the calculator does the algebra — same true
+              hydration, same seasoning — instead of a guess-handful of flour
+              that leaves the loaf under-salted.
             </p>
             <p>
               <strong className="font-medium text-fg">If the flour is the problem.</strong>{" "}
@@ -259,15 +259,15 @@ function FlourCeilingGuide() {
 
         <aside className="mt-12 rounded-lg bg-accent-dim p-5 shadow-[0_0_0_1px_rgb(229_169_98_/_0.35)] sm:p-6">
           <p className="text-xs font-medium tracking-wide text-accent uppercase">
-            Open the engine
+            Open the calculator
           </p>
           <p className="mt-2 font-display text-2xl tracking-tight text-fg">
             Set the flour. Watch the ceiling. Mix the number the bag can hold.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            The DoughMatrix sourdough engine is the same math in this
-            guide: true hydration, flour-ceiling danger light, and over-pour
-            rescue — live as you bump grams.
+            The sourdough calculator is this guide as a tool: true hydration,
+            the flour ceiling, and over-pour rescue — live as you change the
+            grams.
           </p>
           <Link
             to="/engines/sourdough"

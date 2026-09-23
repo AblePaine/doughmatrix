@@ -29,7 +29,7 @@ export const Route = createFileRoute("/flours_/$slug")({
     if (!flour) return {};
     return socialHead({
       title: `${flour.name} Hydration Ceiling & Flour Specs | DoughMatrix`,
-      description: `Technical specs, protein content, ash rate, and water absorption ceiling for ${flour.brand} ${flour.name}. Calibrate your recipe with precision.`,
+      description: `Protein, ash, and how much water ${flour.brand} ${flour.name} can actually take. Look up the numbers, then load the bag straight into the sourdough calculator.`,
       path: `/flours/${flour.id}`,
       cardTitle: `${flour.brand} ${flour.name}`,
       category: "FLOUR SPECIFICATION",
@@ -92,13 +92,13 @@ function FlourProfile() {
           search={{ flour: flour.id }}
           className="mt-6 inline-flex h-12 items-center gap-2 rounded-md bg-accent px-5 text-base font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
         >
-          Load into Sourdough Engine
+          Load into Sourdough Calculator
           <ArrowRight className="size-4" />
         </Link>
 
         <section className="mt-12">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            Technical specifications
+            The numbers
           </h2>
           <dl className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
             <Metric label="Protein" value={`${flour.protein.toFixed(1)}%`} />
@@ -116,7 +116,7 @@ function FlourProfile() {
           </dl>
           <div className="mt-6 rounded-lg bg-card p-5 shadow-[0_0_0_1px_var(--color-border)]">
             <p className="text-xs font-medium tracking-wide text-muted uppercase">
-              Absorption gauge
+              How much water it takes
             </p>
             <HydrationGauge
               safe={flour.safeHydration}
@@ -128,7 +128,7 @@ function FlourProfile() {
 
         <section className="mt-12">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            Grain rheology & characteristics
+            About this flour
           </h2>
           <dl className="mt-5 grid gap-3 sm:grid-cols-3">
             <Fact label="Wheat type" value={flour.wheatType} />
@@ -136,11 +136,11 @@ function FlourProfile() {
             <Fact label="Enzymatic profile" value={flour.enzymaticActivity} />
           </dl>
           <h3 className="mt-8 font-display text-xl tracking-tight text-fg">
-            Dough handling & matrix behavior
+            How it handles
           </h3>
           <p className="mt-3 leading-relaxed text-fg/90">{flour.handlingNotes}</p>
           <h3 className="mt-8 font-display text-xl tracking-tight text-fg">
-            Ideal applications
+            Good for
           </h3>
           <ul className="mt-3 flex flex-wrap gap-2">
             {flour.bestStyles.map((style) => (
@@ -167,7 +167,7 @@ function FlourProfile() {
             <GuideCard
               to="/guides/sourdough-crumb-troubleshooting"
               kicker="Diagnosis"
-              title="Sourdough Crumb Forensics"
+              title="Reading Your Sourdough Crumb"
             />
           </ul>
           <Link
@@ -254,8 +254,8 @@ function FlourNotFound() {
           Flour not in the index
         </h1>
         <p className="mt-3 text-muted">
-          That slug is not one of the 16 catalog bags. Open the Flour Index and
-          pick a mill sheet.
+          That bag isn't in the index. Head back to the Flour Index and pick
+          one of the 16.
         </p>
         <Link
           to="/flours"

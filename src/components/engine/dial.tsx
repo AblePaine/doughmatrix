@@ -31,19 +31,19 @@ const STATUS: Record<
     label: "Safe",
     color: "var(--color-safe)",
     glow: "var(--shadow-glow-safe)",
-    copy: "Under the flour ceiling. The gluten net should hold.",
+    copy: "Comfortably under your flour's ceiling. The dough should hold together and build strength.",
   },
   caution: {
     label: "Caution",
     color: "var(--color-caution)",
     glow: "var(--shadow-glow-caution)",
-    copy: "Within 4 points of the ceiling. Expect a slack, high-skill mix.",
+    copy: "Close to the ceiling — within 4 points. Expect a slack, sticky dough that needs confident handling.",
   },
   danger: {
     label: "Danger",
     color: "var(--color-danger)",
     glow: "var(--shadow-glow-danger)",
-    copy: "At or over the ceiling. Add flour, or commit to a pan dough.",
+    copy: "At or past the ceiling. Add flour to bring it back, or bake it as a pan loaf and call it a day.",
   },
 };
 

@@ -10,7 +10,7 @@ export const Route = createFileRoute("/guides/")({
     socialHead({
       title: "Guides — DoughMatrix",
       description:
-        "DoughMatrix guides: flour hydration ceilings, bulk by temperature, levain peak timing, autolyse vs. fermentolyse, and sourdough crumb forensics.",
+        "DoughMatrix guides: flour hydration ceilings, bulk by temperature and starter, starter feeding and peak timing, autolyse vs. fermentolyse, and reading your sourdough crumb.",
       path: "/guides",
       image: OG_IMAGES.home,
       cardTitle: "Field Guides",
@@ -30,8 +30,8 @@ function GuidesHub() {
           Guides
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">
-          Bench notes behind the engine. Hydration, the jar, the rest, the bulk
-          clock, then the cut.
+          Notes from the bench, behind the calculator. The water, the jar, the
+          rest, the clock, then the cut.
         </p>
         <ul className="mt-10 grid gap-4">
           {PUBLISHED_GUIDES.map((g) => (

@@ -12,7 +12,7 @@ export function GuidesFooter({ className }: { className?: string }) {
       )}
     >
       <Link to="/engines/sourdough" className="text-muted hover:text-accent">
-        Sourdough Engine
+        Sourdough Calculator
       </Link>
       <Link to="/guides" className="text-muted hover:text-accent">
         All guides

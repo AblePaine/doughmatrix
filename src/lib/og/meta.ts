@@ -45,7 +45,7 @@ export function socialHead(opts: {
     ? absUrl(opts.image)
     : ogCardUrl({
         title: opts.cardTitle ?? opts.title,
-        category: opts.category ?? "BAKING SUITE",
+        category: opts.category ?? "BAKING TOOLS",
         detail: opts.detail,
       });
   const jpeg = image.endsWith(".jpg") || image.endsWith(".jpeg") || image.endsWith(".png");

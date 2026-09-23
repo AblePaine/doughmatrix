@@ -13,7 +13,7 @@ export const Route = createFileRoute("/engines/sourdough")({
     socialHead({
       title: "Sourdough Hydration & Fermentation Calculator | DoughMatrix",
       description:
-        "Calculate true hydration with hidden starter water, find your exact water mix temperature, and dial in your bulk fermentation window.",
+        "Figure out your true hydration (the water hiding in your starter counts), find the water temp that lands your dough right, and know when bulk should be done.",
       path: "/engines/sourdough",
       image: OG_IMAGES.engine,
       cardTitle: "Sourdough Hydration & Fermentation Calculator",

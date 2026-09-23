@@ -1,36 +1,36 @@
 export const LIVE_ENGINE = {
   id: "sourdough",
   to: "/engines/sourdough" as const,
-  name: "Sourdough Engine",
+  name: "Sourdough Calculator",
   short: "Sourdough",
   badge: "Live",
   blurb:
-    "Calculate true hydration (including starter water), find the exact water temp to hit your target, and predict your bulk rise time.",
+    "True hydration with the starter water counted, the water temp that lands your dough where you want it, and a bulk window for your kitchen — not someone else's.",
 } as const;
 
 export const UPCOMING_ENGINES = [
   {
     id: "pizza",
-    name: "Pizza Matrix",
+    name: "Pizza Calculator",
     short: "Pizza",
-    badge: "Phase 2",
+    badge: "Coming soon",
     blurb:
-      "Formulate dough for Neapolitan, NY, Detroit, or pan styles with cold-ferment schedules and pan size math.",
+      "Neapolitan, NY, Detroit, and pan pizza — cold-ferment timing and pan sizes worked out for you.",
   },
   {
     id: "bagel",
     name: "Bagels & Stiff Doughs",
     short: "Bagels",
-    badge: "Phase 3",
+    badge: "Coming soon",
     blurb:
-      "Nail low-hydration chewy doughs, barley malt dosing, and boiling bath times without burning out your mixer.",
+      "Chewy low-hydration bagels: how much barley malt, how long the boil, and a mix your mixer survives.",
   },
   {
     id: "enriched",
     name: "Enriched & Pastry",
     short: "Enriched",
-    badge: "Phase 4",
+    badge: "Coming soon",
     blurb:
-      "Balance butter, eggs, and sugar without stalling your yeast or tearing delicate gluten structures.",
+      "Butter, eggs, and sugar in the right amounts — a rich dough that still rises and doesn't tear.",
   },
 ] as const;

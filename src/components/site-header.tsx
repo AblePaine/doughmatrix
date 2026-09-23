@@ -24,7 +24,7 @@ export function SiteHeader({
               DoughMatrix
             </Title>
             <p className="mt-1 text-xs leading-snug text-faint">
-              Smarter Baking Tools
+              Baking tools that do the math
             </p>
           </div>
         </Link>
@@ -75,7 +75,7 @@ function EnginesMenu() {
           sourdoughActive && "text-accent hover:text-accent",
         )}
       >
-        Engines
+        Calculators
         <ChevronDown className="size-3.5" />
       </summary>
       <div className="absolute top-full left-0 z-30 mt-1 min-w-56 rounded-md bg-card py-1 shadow-[0_0_0_1px_var(--color-border)]">

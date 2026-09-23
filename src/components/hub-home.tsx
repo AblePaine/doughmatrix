@@ -12,15 +12,15 @@ export function HubHome() {
       <main className="mx-auto max-w-6xl px-4 pb-10">
         <section className="pt-6 pb-10 sm:pt-10 sm:pb-14">
           <p className="text-xs font-medium tracking-wide text-accent uppercase">
-            Smarter Baking Tools
+            Baking tools that do the math
           </p>
           <h1 className="mt-4 max-w-3xl font-display text-4xl leading-tight tracking-tight text-fg sm:text-5xl">
             Baking science, minus the guesswork.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
-            Dial in your water absorption, hit your proofing windows, and stop
-            ending up with flat, sticky dough. Real flour data and fermentation
-            math—built for home and micro-bakers.
+            Get your water right, land your dough temp, and stop guessing when
+            bulk is done. Real numbers from real flour — for home and
+            micro-bakers who would rather bake than calculate.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
@@ -41,10 +41,10 @@ export function HubHome() {
 
         <section>
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            Engine matrix
+            The toolkit
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
-            One live bench engine now. Three more verticals on the same math.
+            One live calculator now. Three more on the way.
           </p>
           <ul className="mt-6 grid gap-4 md:grid-cols-2">
             <li>
@@ -98,8 +98,9 @@ export function HubHome() {
             Know what your flour can actually handle.
           </p>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
-            Every flour has a limit before turning into soup. Check verified
-            protein, ash, and absorption ceilings for 16 popular artisan flours.
+            Every flour taps out somewhere. Look up protein, ash, and how much
+            water 16 popular artisan flours can actually take before they turn
+            to soup.
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
             {["Protein %", "Ash %", "Hydration ceiling"].map((label) => (
@@ -122,11 +123,11 @@ export function HubHome() {
 
         <section className="mt-14">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            Field Guides & Kitchen Troubleshooting
+            Guides & troubleshooting
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
-            Clear explanations for sticky dough, gummy crumb, and tricky
-            fermentation timing.
+            Plain answers for sticky dough, gummy crumb, and bulk that never
+            seems to end on time.
           </p>
           <ul className="mt-6 grid gap-4 md:grid-cols-2">
             {PUBLISHED_GUIDES.map((g) => (

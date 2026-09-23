@@ -4,19 +4,19 @@ import { GuideShell } from "@/components/guide-shell";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const H1 =
-  "Autolyse vs. Fermentolyse: Enzymatic Kinetics, Extensibility, and When to Skip It";
+  "Autolyse vs. Fermentolyse: When to Rest Your Dough — and When to Skip It";
 
-const TITLE = "Autolyse vs. Fermentolyse: Dough Kinetics & Timing | DoughMatrix";
+const TITLE = "Autolyse vs. Fermentolyse | DoughMatrix";
 
 const DESCRIPTION =
-  "Biochemical breakdown of autolyse vs. fermentolyse. Learn how protease activity, pH drop, and flour choice dictate resting times for artisan bread.";
+  "Should you rest flour and water before adding starter? It depends on the flour. Here's when an autolyse or fermentolyse helps — and when it turns your dough to soup.";
 
 const ROWS = [
   {
     process: "Skip",
     bowl: "Flour, water, levain, salt — one mix",
-    protease: "Mix shear only",
-    ph: "No dedicated drop",
+    protease: "Just the mixing",
+    ph: "Stays where the flour is",
     window: "0 min",
     use: "Rye, 00 pizza, stiff bagels, already-slack AP",
     skip: "—",
@@ -24,7 +24,7 @@ const ROWS = [
   {
     process: "Autolyse",
     bowl: "Flour + water. Levain and salt out.",
-    protease: "Endogenous proteases, no acid yet",
+    protease: "The flour's own enzymes, no acid yet",
     ph: "~6.0–6.2 (flour)",
     window: "20–45 min",
     use: "Strong patent bread flour, baguettes, wet country",
@@ -33,7 +33,7 @@ const ROWS = [
   {
     process: "Long autolyse",
     bowl: "Flour + water, often cold",
-    protease: "Unopposed, hours of hydrolysis",
+    protease: "Hours of softening, nothing holding it back",
     ph: "Slow, still near flour",
     window: "2–12 h (cold)",
     use: "Very strong hi-gluten, rare",
@@ -42,7 +42,7 @@ const ROWS = [
   {
     process: "Fermentolyse",
     bowl: "Flour + water + levain. Salt out.",
-    protease: "Protease + LAB acid",
+    protease: "Enzymes plus starter acid",
     ph: "Falls toward 5.2–4.5",
     window: "20–40 min",
     use: "Daily sourdough on bread flour",
@@ -74,24 +74,25 @@ function AutolyseGuide() {
           {H1}
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">
-          Autolyse is not a personality. It is a timed protease rest. Add levain
-          and you have fermentolyse — same enzymes, plus a pH drop that
-          accelerates them. Skip both when the flour cannot spare the gluten.
+          An autolyse is just flour and water, resting. Add your starter to the
+          rest and it's a fermentolyse — the acid in the starter softens the
+          dough faster. Skip both when your flour can't afford to lose any
+          strength.
         </p>
 
         <div className="mt-8 space-y-5 text-base leading-relaxed text-fg/90">
           <p>
-            Calvel’s autolyse is flour and water, nothing else. Hydration lets
-            glutenin and gliadin hydrate. Proteases nibble the network just
-            enough that the dough becomes extensible without a long mix. Salt
-            stays out because salt is the brake. Levain stays out because acid
-            is the accelerator.
+            The classic autolyse (Professor Calvel's idea) is flour and water,
+            nothing else. As the flour hydrates, the gluten relaxes just enough
+            that you skip a long mix. Salt stays out because salt tightens
+            everything back up. Starter stays out because its acid speeds the
+            softening.
           </p>
           <p>
-            Fermentolyse puts the levain in the rest. You buy speed and
-            extensibility. You also start bulk before you meant to: lactic acid
-            bacteria drop pH, proteases run hotter, and a 90-minute “autolyse”
-            on a high-extraction bag is how a gluten net becomes soup.
+            A fermentolyse puts the starter in the rest. You get a head start on
+            flavor and a stretchier dough — but bulk starts early too. Ninety
+            minutes of "rest" on a high-extraction flour, with all that acid
+            working, is how a strong dough turns to soup.
           </p>
           <p>
             The{" "}
@@ -101,28 +102,28 @@ function AutolyseGuide() {
             >
               flour hydration ceiling
             </Link>{" "}
-            still wins. A rest cannot invent gluten the mill did not put in the
+            still wins. No rest can create gluten the mill didn't put in the
             bag. Check the{" "}
             <Link to="/flours" className="text-accent hover:text-accent-hover">
               Flour Index
             </Link>{" "}
-            before you set a timer.
+            before you start a timer.
           </p>
         </div>
 
         <section className="mt-12">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            Process selection matrix
+            Which rest fits your flour
           </h2>
           <p className="mt-4 leading-relaxed text-fg/90">
-            Pick one rest. Do not stack a long autolyse and a fermentolyse. The
-            dough only has so much protein to hydrolyze.
+            Pick one rest. Don't stack a long autolyse and a fermentolyse. The
+            dough only has so much gluten to give.
           </p>
           <div className="mt-6 overflow-x-auto">
             <table className="w-full min-w-[44rem] border-collapse text-left text-sm">
               <caption className="sr-only">
-                Autolyse versus fermentolyse versus skip: bowl contents,
-                protease driver, pH, window, and when to use
+                Skip, autolyse, and fermentolyse compared: what's in the bowl,
+                how long, and when to use each
               </caption>
               <thead>
                 <tr className="border-b border-border text-xs tracking-wide text-faint uppercase">
@@ -165,7 +166,7 @@ function AutolyseGuide() {
 
         <section className="mt-12">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            Three golden rules
+            Three rules that keep you out of trouble
           </h2>
           <ol className="mt-6 space-y-5">
             <li className="rounded-lg bg-card p-5 shadow-[0_0_0_1px_var(--color-border)]">
@@ -173,12 +174,12 @@ function AutolyseGuide() {
                 1 · Flour first
               </p>
               <p className="mt-2 leading-relaxed text-fg/90">
-                Time the rest to the bag, not the blog. Strong patent bread
-                flour (KA bread, ABC Plus, Peak Performer): 20–45 min autolyse.
-                High extraction and whole wheat: 15–20 min or skip — bran and
-                ash already cut the net. Rye and pentosan doughs: skip. Tipo 00
-                pizza: skip or under 15 min. Load the mill sheet from the Flour
-                Index before you start a clock.
+                Time the rest to the bag, not the blog. Strong bread flour
+                (King Arthur bread, ABC Plus, Peak Performer): 20–45 min
+                autolyse. High-extraction and whole wheat: 15–20 min or skip —
+                the bran is already cutting the gluten. Rye: skip. Tipo 00
+                pizza: skip or under 15 min. Look up your bag in the Flour
+                Index before you start a timer.
               </p>
             </li>
             <li className="rounded-lg bg-card p-5 shadow-[0_0_0_1px_var(--color-border)]">
@@ -186,12 +187,12 @@ function AutolyseGuide() {
                 2 · Acid is the accelerator
               </p>
               <p className="mt-2 leading-relaxed text-fg/90">
-                Fermentolyse drops pH immediately. Proteases run faster in acid.
-                A 30-minute fermentolyse on bread flour is a tool. A 90-minute
-                fermentolyse on Type 82 is hydrolysis. Never run a long autolyse
-                and then a fermentolyse. One rest. If the levain is late and
-                already acidic, shorten the rest or skip it — the acid is
-                already in the jar.
+                A fermentolyse turns the acid up right away, and acid softens
+                dough faster. Thirty minutes on bread flour: a useful tool.
+                Ninety minutes on Type 82: soup. Never run a long autolyse and
+                then a fermentolyse — pick one rest. If the starter is late and
+                already sour, shorten the rest or skip it. The acid is already
+                in the jar.
               </p>
             </li>
             <li className="rounded-lg bg-card p-5 shadow-[0_0_0_1px_var(--color-border)]">
@@ -199,11 +200,11 @@ function AutolyseGuide() {
                 3 · Salt is the brake — skip if it is already slack
               </p>
               <p className="mt-2 leading-relaxed text-fg/90">
-                Salt tightens gluten and slows protease. Hold it until the rest
-                ends. If the mix is already slack at first contact — hydration
-                near the ceiling, weak AP, rye blend — there is nothing left to
-                relax. Mix, salt, develop, fold. A rest on a puddle is just a
-                wait.
+                Salt firms the gluten back up and slows the softening, so hold it
+                until the rest is over. If the dough is already slack the
+                moment you touch it — wet mix, weak flour, rye blend — there
+                is nothing left to relax. Just mix it, salt it, build strength,
+                fold. Resting a puddle is just waiting.
               </p>
             </li>
           </ol>
@@ -211,29 +212,29 @@ function AutolyseGuide() {
 
         <section className="mt-12">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            How DoughMatrix times it
+            How the calculator handles it
           </h2>
           <p className="mt-4 leading-relaxed text-fg/90">
-            The sourdough engine holds back ~8% of bowl water as a reserve,
-            autolyses flour with the rest, then mixes levain, salt, and the
-            reserve. That is a short autolyse, not a fermentolyse: acid and salt
-            arrive together at mix. If you want fermentolyse, add the levain at
-            the rest and keep salt for mix — and cut the rest to 20–40 min on
-            bread flour.
+            The sourdough calculator holds back about 8% of the water as a
+            reserve, rests the flour with the rest, then mixes in the levain,
+            salt, and reserve together. That's a short autolyse — the acid and
+            salt arrive at mix time, not during the rest. If you'd rather do a
+            fermentolyse, add the levain at the rest and hold the salt for the
+            mix — and keep it to 20–40 min on bread flour.
           </p>
         </section>
 
         <aside className="mt-12 rounded-lg bg-accent-dim p-5 shadow-[0_0_0_1px_rgb(229_169_98_/_0.35)] sm:p-6">
           <p className="text-xs font-medium tracking-wide text-accent uppercase">
-            Open the engine
+            Open the calculator
           </p>
           <p className="mt-2 font-display text-2xl tracking-tight text-fg">
             Set the flour. Time the rest. Mix the reserve, levain, and salt
             together.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            Autolyse water and reserve are on the timeline. Ceiling and bulk
-            still follow the bag you loaded.
+            The rest and the reserve water are on your timeline. The ceiling and
+            bulk times still follow the flour you picked.
           </p>
           <Link
             to="/engines/sourdough"

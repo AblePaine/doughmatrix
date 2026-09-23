@@ -20,10 +20,10 @@ export const Route = createFileRoute("/flours")({
     socialHead({
       title: "Artisan Flour Absorption Index & Specs — DoughMatrix",
       description:
-        "Protein, ash, malt, and true-hydration ceilings for 16 baseline artisan flours — King Arthur, Central Milling, Bob’s Red Mill, Caputo, General Mills, and Giusto’s. Load any bag into the sourdough engine.",
+        "Protein, ash, malt, and how much water 16 artisan flours can take — King Arthur, Central Milling, Bob's Red Mill, Caputo, General Mills, and Giusto's. Load any bag into the sourdough calculator.",
       path: "/flours",
       image: OG_IMAGES.flours,
-      cardTitle: "Artisan Flour Absorption Index",
+      cardTitle: "The Flour Index",
       category: "FLOUR INDEX",
       detail: "16+ Verified Commercial & Artisan Flours",
     }),
@@ -48,9 +48,9 @@ function FlourIndex() {
           Artisan Flour Absorption Index & Specs
         </h1>
         <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted">
-          Sixteen mill bags. Protein and ash from typical sheets; safe and max
-          hydration are DoughMatrix true-hydration — starter included. Open a
-          spec sheet or load the bag into the engine.
+          Sixteen bags from the mill. Protein and ash from the spec sheets; the
+          safe and max hydration numbers count your starter too. Open a flour's
+          page or load the bag straight into the calculator.
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -163,7 +163,7 @@ function FlourCard({ flour: f }: { flour: ArtisanFlour }) {
           search={{ flour: f.id }}
           className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-accent px-4 text-sm font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
         >
-          Load into Sourdough Engine
+          Load into Sourdough Calculator
           <ArrowRight className="size-4" />
         </Link>
         <Link

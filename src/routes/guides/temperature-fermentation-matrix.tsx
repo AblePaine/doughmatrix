@@ -13,10 +13,10 @@ import { GuideShell } from "@/components/guide-shell";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE =
-  "The Ambient Temp vs. Starter % Matrix: How to Predict Bulk Fermentation to the Hour";
+  "Bulk Fermentation by Temperature and Starter Amount";
 
 const DESCRIPTION =
-  "Bulk time is a temperature-decay curve, not a kitchen timer. Use DoughMatrix’s ambient-temp vs. starter-% matrix and the 4-factor DDT formula to land bulk to the hour.";
+  "Warm kitchen, fast bulk. Cold kitchen, slow bulk. Read your hours from dough temp and starter amount — then land your dough temp with the right water.";
 
 const TEMPS_C = [18, 20, 22, 24, 26, 28, 30] as const;
 const INOCS = [0.1, 0.15, 0.2, 0.25, 0.3] as const;
@@ -42,44 +42,46 @@ function TempMatrixGuide() {
           Guide
         </p>
         <h1 className="mt-3 font-display text-3xl leading-tight tracking-tight text-fg sm:text-4xl">
-          The Ambient Temp vs. Starter % Matrix: How to Predict Bulk
-          Fermentation to the Hour
+          Bulk Fermentation by Temperature and Starter Amount
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">
-          “Bulk until it looks ready” is how you miss dinner. Yeast and lactic
-          acid bacteria double on a clock. Temperature sets the clock. Inoculation
-          sets how many clocks you started.
+          “Bulk until it looks ready” is how you miss dinner. The yeast in
+          your starter works on a clock, and temperature sets how fast that
+          clock ticks. How much starter you mix in decides how many workers
+          are on the shift.
         </p>
 
         <div className="mt-8 space-y-5 text-base leading-relaxed text-fg/90">
           <p>
-            A 20% inoculation at 24°C with a peak levain is DoughMatrix’s
-            reference: five hours to the window. Drop the room to 18°C and that
-            same dough wants a little over eight. Cut the starter in half at 24°C
-            and you have doubled the wait. The matrix below is that curve, not a
-            vibe.
+            A 20% starter at 24°C with a peaked levain is the calculator's
+            reference point: about five hours to the window. Drop the room to
+            18°C and that same dough wants a little over eight. Halve the
+            starter at 24°C and you double the wait. The table below is that
+            pattern — not a vibe, a lookup.
           </p>
           <p>
-            Starter percent here is{" "}
+            Starter percent here means{" "}
             <strong className="font-medium text-fg">
-              levain weight over bowl flour
+              starter weight over bowl flour
             </strong>
-            , the baker’s inoculation, not a share of total dough. A 100 g starter
-            on 500 g flour is 20% — the same 20% that anchors the table.
+            , not a share of the total dough. A 100 g starter on 500 g flour is
+            20% — the same 20% that anchors the table.
           </p>
         </div>
 
         <section className="mt-12">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            The decay equation
+            The timing behind the table
           </h2>
           <p className="mt-4 leading-relaxed text-fg/90">
-            Bulk center time follows a Q10-style doubling interval of{" "}
-            {BULK_TAU_C}°C in the 18–30°C band:
+            Bulk time halves for every {BULK_TAU_C}°C warmer in the 18–30°C
+            band. The rule underneath is simple: warmer dough goes faster,
+            more starter goes faster, a past-peak starter goes faster. Here's
+            the full version for the curious:
           </p>
           <div className="mt-6 rounded-lg bg-card p-4 shadow-[0_0_0_1px_var(--color-border)] sm:p-5">
             <p className="text-xs font-medium tracking-wide text-muted uppercase">
-              Calibrated bulk window
+              The timing rule
             </p>
             <p className="mt-3 font-sans text-base leading-relaxed text-fg sm:text-lg">
               t(T) = {BULK_T_REF_HOURS.toFixed(1)}h · 2
@@ -90,26 +92,28 @@ function TempMatrixGuide() {
             </p>
             <p className="mt-4 text-sm leading-relaxed text-muted">
               Reference: {BULK_T_REF_HOURS.toFixed(1)} hours at {BULK_T_REF_C}°C
-              with {Math.round(BULK_INOC_REF * 100)}% peak levain. The usable
-              window is ±18% around that center — dough feel and starter vigor
-              still matter, but they no longer get to invent the hour.
+              with {Math.round(BULK_INOC_REF * 100)}% peaked starter. The usable
+              window is ±18% around that center — how the dough feels and how
+              strong your starter is still matter, but they no longer get to
+              invent the hour.
             </p>
           </div>
         </section>
 
         <section className="mt-12">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            Ambient temp vs. starter %
+            The table: read down for more starter, right for warmer dough
           </h2>
           <p className="mt-4 leading-relaxed text-fg/90">
-            Hours to end of bulk at peak levain. Gold cell is the 5.0 h
-            reference. Read down to add starter, read right to warm the dough.
+            Hours to the end of bulk with a peaked starter. Gold cell is the
+            5.0 h reference. Read down to add starter, read right to warm the
+            dough.
           </p>
           <div className="mt-6 overflow-x-auto">
             <table className="w-full border-collapse text-sm">
               <caption className="sr-only">
                 Bulk fermentation hours by dough temperature and starter
-                inoculation
+                amount
               </caption>
               <thead>
                 <tr className="border-b border-border text-xs tracking-wide text-faint uppercase">
@@ -161,7 +165,7 @@ function TempMatrixGuide() {
           </div>
           <p className="mt-4 text-sm leading-relaxed text-muted">
             Columns are starter as a percent of bowl flour. A 20°C kitchen at
-            10% inoculation is a 13h 51m bulk — overnight, not “a little slow.”
+            10% starter is a 13h 51m bulk — overnight, not “a little slow.”
             The same dough at 30% and 26°C is a 2h 50m sprint. Pick the cell
             that matches the clock you actually have.
           </p>
@@ -173,15 +177,16 @@ function TempMatrixGuide() {
           </h2>
           <div className="mt-4 space-y-4 leading-relaxed text-fg/90">
             <p>
-              Want five hours in a 20°C kitchen? Temperature alone stretches the
-              reference by ~1.39×. You need roughly 28% starter, not 20%, to put
-              the center back on five hours. DoughMatrix solves this live when
-              you bump dough temp and starter weight.
+              Want five hours in a 20°C kitchen? Temperature alone stretches
+              the reference by ~1.39×. You need roughly 28% starter, not
+              20%, to put the center back on five hours. The calculator solves
+              this live when you change dough temp and starter weight.
             </p>
             <p>
               <strong className="font-medium text-fg">Warm kitchen, small starter.</strong>{" "}
-              10% at 28°C is still about 7 hours — not a crash. Under-inoculating
-              is a valid schedule, not a defect, as long as you own the hour.
+              10% at 28°C is still about 7 hours — not a crash. Using less
+              starter is a valid schedule, not a defect, as long as you own the
+              hour.
             </p>
             <p>
               <strong className="font-medium text-fg">Cold kitchen, big starter.</strong>{" "}
@@ -193,11 +198,11 @@ function TempMatrixGuide() {
 
         <section className="mt-12">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            Maturity still moves the window
+            Your starter's ripeness still moves the window
           </h2>
           <p className="mt-4 leading-relaxed text-fg/90">
-            The matrix assumes a peak levain. Young and late cultures scale the
-            whole table:
+            The table assumes a peaked starter. A young or past-peak culture
+            stretches or shrinks the whole table:
           </p>
           <ul className="mt-6 grid gap-3 sm:grid-cols-3">
             <Band
@@ -206,7 +211,7 @@ function TempMatrixGuide() {
             />
             <Band
               title="Peak · 1.00×"
-              body="Domed, just starting to fall. This is the matrix. Mix here unless you have a reason not to."
+              body="Domed, just starting to fall. This is what the table runs on. Mix here unless you have a reason not to."
             />
             <Band
               title="Late · 0.88×"
@@ -217,37 +222,42 @@ function TempMatrixGuide() {
 
         <section className="mt-12">
           <h2 className="font-display text-2xl tracking-tight text-fg">
-            DDT: the water that makes the matrix true
+            DDT: the water temp that makes the table true
           </h2>
           <p className="mt-4 leading-relaxed text-fg/90">
             Ambient air is not dough temperature. Friction from mixing, flour
-            from a cold pantry, and a warm levain all shift the mix. Desired
-            dough temperature (DDT) is the number the matrix actually uses.
-            DoughMatrix solves the 4-factor water temperature so the dough lands
+            from a cold pantry, and a warm starter all shift the mix. Desired
+            dough temperature (DDT) is the number the table actually runs on.
+            The calculator finds the water temperature that lands your dough
             on the cell you picked:
           </p>
           <div className="mt-6 rounded-lg bg-card p-4 shadow-[0_0_0_1px_var(--color-border)] sm:p-5">
             <p className="text-xs font-medium tracking-wide text-muted uppercase">
-              4-factor DDT
+              Desired dough temperature
             </p>
             <p className="mt-3 font-sans text-base leading-relaxed text-fg sm:text-lg">
               T<sub>water</sub> = 4 · DDT − T<sub>flour</sub> − T<sub>room</sub>{" "}
               − T<sub>starter</sub> − friction
             </p>
+            <p className="mt-3 text-sm leading-relaxed text-muted">
+              In plain English: your water temp makes up for cold flour, a cool
+              room, warm starter, and mixing friction — so the dough lands at
+              your target temp, not the room's.
+            </p>
             <dl className="mt-5 grid gap-3 sm:grid-cols-3">
-              <Stat label="Target DDT" value="24°C" hint="Matrix reference row" />
-              <Stat label="Flour / room / starter" value="21 / 22 / 23°C" hint="Engine defaults" />
+              <Stat label="Target DDT" value="24°C" hint="Table reference row" />
+              <Stat label="Flour / room / starter" value="21 / 22 / 23°C" hint="Calculator defaults" />
               <Stat label="Friction" value="1°C" hint="Hand mix, light" />
             </dl>
             <p className="mt-4 font-display text-lg text-accent">
               Water at 29°C → 4×24 − 21 − 22 − 23 − 1
             </p>
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              Mixer friction is higher (often 4–8°C). If the solved water
-              temperature drops below fridge temp, you need ice or a cooler
-              room — the algebra is telling you the matrix cell is unreachable
-              from this kitchen. If it climbs past ~40°C you will shock the
-              culture; lower DDT or mix gentler instead.
+              Mixer friction is higher (often 4–8°C). If the water temperature
+              drops below fridge temp, you need ice or a cooler room — the
+              numbers are telling you the table cell is unreachable from this
+              kitchen. If it climbs past ~40°C you will shock the culture;
+              lower your DDT or mix gentler instead.
             </p>
           </div>
         </section>
@@ -257,11 +267,11 @@ function TempMatrixGuide() {
             Folds ride the same clock
           </h2>
           <p className="mt-4 leading-relaxed text-fg/90">
-            DoughMatrix packs coil folds into the first 40% of bulk, capped at
-            two hours: every 40 minutes at ≤21°C, every 30 in the middle, every
-            25 at ≥27°C. A 3-hour warm bulk does not get six folds. A 10-hour
-            cool bulk does not get twelve. The matrix sets the hour; fold
-            spacing follows.
+            The calculator packs coil folds into the first 40% of bulk, capped
+            at two hours: every 40 minutes at 21°C or below, every 30 in the
+            middle, every 25 at 27°C or above. A 3-hour warm bulk does not get
+            six folds. A 10-hour cool bulk does not get twelve. The table sets
+            the hour; fold spacing follows.
           </p>
         </section>
 
@@ -279,15 +289,15 @@ function TempMatrixGuide() {
 
         <aside className="mt-12 rounded-lg bg-accent-dim p-5 shadow-[0_0_0_1px_rgb(229_169_98_/_0.35)] sm:p-6">
           <p className="text-xs font-medium tracking-wide text-accent uppercase">
-            Open the engine
+            Open the calculator
           </p>
           <p className="mt-2 font-display text-2xl tracking-tight text-fg">
             Set dough temp and starter. Read the bulk window to the hour.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            The DoughMatrix sourdough engine is this matrix, live:
-            temperature-decay bulk, maturity, fold spacing, and DDT water —
-            updated as you bump the paddles.
+            The sourdough calculator is this table, live: bulk timing by
+            dough temp and starter amount, starter ripeness, fold spacing, and
+            DDT water — updated as you change the numbers.
           </p>
           <Link
             to="/engines/sourdough"

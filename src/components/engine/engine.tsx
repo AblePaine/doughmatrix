@@ -100,9 +100,9 @@ export function Engine() {
               Sourdough Hydration & Fermentation Calculator
             </h1>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
-              Calculate true hydration with hidden starter water, find your
-              exact water mix temperature, and dial in your bulk fermentation
-              window.
+              Figure out your true hydration (yes, the water in your starter
+              counts), get the water temp that lands your dough where you want
+              it, and get a bulk window for your kitchen — not someone else's.
             </p>
           </div>
           <PresetsRow />
@@ -420,7 +420,7 @@ function ScaleCard({ formula }: { formula: FormulaResult }) {
   ] as const;
 
   return (
-    <Card title="Scale-out" icon={<Droplets className="size-4" />}>
+    <Card title="What to weigh" icon={<Droplets className="size-4" />}>
       <ul className="divide-y divide-border">
         {rows.map((row) => (
           <li key={row.label} className="flex items-baseline justify-between gap-3 py-2.5">
@@ -488,7 +488,8 @@ function FermentCard({ formula }: { formula: FormulaResult }) {
         <TimeStat label="Latest" value={formatHours(bulk.maxH)} />
       </div>
       <p className="mt-3 text-xs leading-relaxed text-faint">
-        t(T) = 5.0h · 2^((24 − T) / 8.5) · (20% / inoculation) · maturity. Inoculation{" "}
+        Timing stretches or shrinks with your dough temp, how much starter you
+        used, and whether your starter was young, at peak, or late. Inoculation{" "}
         {(formula.inoculation * 100).toFixed(0)}% of flour. Folds every {bulk.foldEveryMin} min
         × {bulk.foldCount}. Warm proof ~{formatHours(bulk.proofH)}, or retard{" "}
         {bulk.coldProofMinH}–{bulk.coldProofMaxH} h at 4°C.
@@ -532,9 +533,9 @@ function LevainCard({ formula }: { formula: FormulaResult }) {
   const readyH = 5 * Math.pow(2, (24 - doughTempC) / 8.5);
 
   return (
-    <Card title="Build the levain">
+    <Card title="Build your starter">
       <p className="text-sm text-muted">
-        1:2:2 from seed to make {formatGrams(need)} g at {formatGrams(starterHydration)}% H.
+        Build it 1:2:2 (seed : flour : water) to get {formatGrams(need)} g at {formatGrams(starterHydration)}% H.
       </p>
       <ul className="mt-3 space-y-2 text-sm">
         <Li k="Ripe seed" v={`${formatGrams(seed, 1)} g`} />
@@ -561,7 +562,7 @@ function DdtCard({ formula }: { formula: FormulaResult }) {
         <span className="ml-1 text-base text-muted">°C water</span>
       </div>
       <p className="mt-1 text-xs text-faint">
-        4-factor: 4×DDT − flour − room − starter − friction
+        Your water temp accounts for flour, room, starter, and mixing friction.
       </p>
       {warn ? (
         <p className="mt-2 text-sm text-caution">

@@ -90,8 +90,10 @@ export function OverPourRescue({
           </div>
 
           <p className="mt-4 text-xs leading-relaxed text-faint">
-            extraFlour = (totalWater + extra) / (H/100) − totalFlour. Salt is scaled at{" "}
-            {saltPercent.toFixed(1)}% of the new flour only. Starter already in the mix stays put.
+            More flour pulls the extra water back into balance — same hydration,
+            same seasoning. Salt is added only for the new flour (
+            {saltPercent.toFixed(1)}%), since the rest of the dough is already
+            seasoned. Your starter stays as-is.
           </p>
 
           <div className="mt-5 flex gap-2">
