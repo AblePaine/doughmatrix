@@ -12,9 +12,9 @@
 // plain "Coming soon" line for that engine.
 
 export const NEWSLETTER_FORMS: Record<string, string> = {
-  pizza: "",
-  bagel: "",
-  enriched: "",
+  pizza: "9950600",
+  bagel: "9950607",
+  enriched: "9950613",
 };
 
 export function newsletterActionUrl(engineId: string): string | null {
