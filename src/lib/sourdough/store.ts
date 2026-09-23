@@ -85,7 +85,19 @@ export const useBaker = create<BakerStore>()(
     (set, get) => ({
       ...DEFAULT_INPUT,
       bulkStartedAt: null,
-      set: (patch) => set(patch),
+      set: (patch) => {
+        // Clamp numeric patches to BOUNDS so direct sets can't push the
+        // formula out of range (bump already clamps; set previously didn't).
+        const next = { ...patch } as Partial<BakerInput>;
+        (Object.keys(next) as NumericKey[]).forEach((key) => {
+          const bounds = BOUNDS[key];
+          const value = next[key];
+          if (bounds && typeof value === "number") {
+            next[key] = clampNum(value, bounds.min, bounds.max);
+          }
+        });
+        set(next);
+      },
       bump: (key, delta) => {
         const { min, max, step } = BOUNDS[key];
         const next = roundTo(get()[key] + delta, step);

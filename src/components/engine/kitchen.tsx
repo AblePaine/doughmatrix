@@ -77,7 +77,22 @@ export function KitchenMode({
   const startBulk = useBaker((s) => s.startBulk);
   const clearBulk = useBaker((s) => s.clearBulk);
   const bulkStartedAt = useBaker((s) => s.bulkStartedAt);
+  const mixMode = useBaker((s) => s.mixMode);
   const formula = computeFormula(input);
+
+  // In dough mode flourWeight is derived from doughWeightTarget, so route
+  // flour adjustments through the target, scaled by the formula's
+  // dough-per-flour ratio (setting flourWeight directly is a dead click).
+  const bumpFlour = (delta: number) => {
+    if (mixMode === "dough" && formula.flourWeight > 0) {
+      bump(
+        "doughWeightTarget",
+        Math.round((delta * formula.doughWeight) / formula.flourWeight),
+      );
+    } else {
+      bump("flourWeight", delta);
+    }
+  };
   const wake = useWakeLock(open);
   const [, setTick] = useState(0);
 
@@ -183,8 +198,8 @@ export function KitchenMode({
         <Paddle
           label="Flour"
           unit="10 g"
-          onDec={() => bump("flourWeight", -10)}
-          onInc={() => bump("flourWeight", 10)}
+          onDec={() => bumpFlour(-10)}
+          onInc={() => bumpFlour(10)}
         />
         <Paddle
           label="Hydration"

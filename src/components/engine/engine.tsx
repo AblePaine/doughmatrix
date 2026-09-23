@@ -531,11 +531,17 @@ function LevainCard({ formula }: { formula: FormulaResult }) {
   const flour = (need - seed) * (100 / (100 + starterHydration));
   const water = need - seed - flour;
   const readyH = 5 * Math.pow(2, (24 - doughTempC) / 8.5);
+  // The build ratio only equals 1:2:2 at 100% starter hydration — derive it
+  // from the actual split so the label stays honest at other hydrations.
+  const ratioPart = (v: number) => {
+    const r = v / seed;
+    return Number.isInteger(r) ? String(r) : r.toFixed(1);
+  };
 
   return (
     <Card title="Build your starter">
       <p className="text-sm text-muted">
-        Build it 1:2:2 (seed : flour : water) to get {formatGrams(need)} g at {formatGrams(starterHydration)}% H.
+        Build it {`1:${ratioPart(flour)}:${ratioPart(water)}`} (seed : flour : water) to get {formatGrams(need)} g at {formatGrams(starterHydration)}% H.
       </p>
       <ul className="mt-3 space-y-2 text-sm">
         <Li k="Ripe seed" v={`${formatGrams(seed, 1)} g`} />

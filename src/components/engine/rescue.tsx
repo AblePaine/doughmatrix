@@ -21,6 +21,7 @@ export function OverPourRescue({
   const target = useBaker((s) => s.targetTrueHydration);
   const set = useBaker((s) => s.set);
   const flourWeight = useBaker((s) => s.flourWeight);
+  const mixMode = useBaker((s) => s.mixMode);
 
   const rescue = useMemo(
     () => rescueOverPour(formula, extra, saltPercent, target),
@@ -28,9 +29,15 @@ export function OverPourRescue({
   );
 
   const apply = () => {
-    set({
-      flourWeight: Number((flourWeight + rescue.extraFlour).toFixed(1)),
-    });
+    if (mixMode === "dough") {
+      // In dough mode flourWeight is derived from doughWeightTarget, so
+      // apply the rescue through the target (setting flourWeight is a dead click).
+      set({ doughWeightTarget: Math.round(rescue.newDoughWeight) });
+    } else {
+      set({
+        flourWeight: Number((flourWeight + rescue.extraFlour).toFixed(1)),
+      });
+    }
     onOpenChange(false);
   };
 
