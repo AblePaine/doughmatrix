@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { GuidesFooter } from "@/components/guides-footer";
+import { NotifyForm } from "@/components/notify-form";
 import { LIVE_ENGINE, UPCOMING_ENGINES } from "@/lib/engines";
 import { PUBLISHED_GUIDES } from "@/lib/guides";
 
@@ -83,7 +84,7 @@ export function HubHome() {
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
                     {engine.blurb}
                   </p>
-                  <p className="mt-5 text-sm text-faint">Coming soon</p>
+                  <NotifyForm engineId={engine.id} />
                 </div>
               </li>
             ))}
