@@ -10,12 +10,12 @@ export const Route = createFileRoute("/guides/")({
     socialHead({
       title: "Guides — DoughMatrix",
       description:
-        "DoughMatrix guides: flour hydration ceilings, bulk by temperature and starter, starter feeding and peak timing, autolyse vs. fermentolyse, and reading your sourdough crumb.",
+        "DoughMatrix guides: flour hydration ceilings, bulk by temperature and starter, starter feeding and peak timing, autolyse vs. fermentolyse, reading your sourdough crumb — plus pizza and bagel dough, enriched doughs, preferments, scoring, and work-week baking schedules.",
       path: "/guides",
       image: OG_IMAGES.home,
       cardTitle: "Field Guides",
       category: "FIELD GUIDE",
-      detail: "Hydration, fermentation, levain, mix, and crumb",
+      detail: "Hydration, fermentation, levain, mix, crumb, pizza, bagels, enriched, and more",
     }),
 });
 

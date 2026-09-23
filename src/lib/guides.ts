@@ -39,4 +39,52 @@ export const PUBLISHED_GUIDES = [
     blurb:
       "Rest flour and water first, add the starter to the rest, or skip it entirely? It depends on your flour. Here's when a rest helps — and when it melts your dough.",
   },
+  {
+    to: "/guides/pizza-dough-hydration" as const,
+    kicker: "Pizza",
+    title: "Pizza Dough Hydration: 60% vs 70% vs 80%",
+    short: "Pizza hydration",
+    blurb:
+      "What 60%, 70%, and 80% hydration actually do to pizza dough — and which range works in a home oven versus on a steel or stone.",
+  },
+  {
+    to: "/guides/bagel-dough" as const,
+    kicker: "Bagels",
+    title: "Bagel Dough: Mixing, Shaping, and the Boil",
+    short: "Bagel dough",
+    blurb:
+      "How to mix, shape, boil, and bake bagel dough at 55–58% hydration so the crumb stays dense and the crust shines.",
+  },
+  {
+    to: "/guides/enriched-doughs-fermentation" as const,
+    kicker: "Enriched",
+    title: "Enriched Doughs and Fermentation",
+    short: "Enriched doughs",
+    blurb:
+      "What butter, eggs, and sugar do to rise time and gluten — plus exact adjustments so brioche and milk bread still ferment on schedule.",
+  },
+  {
+    to: "/guides/preferments-poolish-biga-levain" as const,
+    kicker: "Preferments",
+    title: "Preferments: Poolish, Biga, Levain",
+    short: "Preferments compared",
+    blurb:
+      "Exact ratios and fermentation times for poolish, biga, and levain — and when each one belongs in a home bake.",
+  },
+  {
+    to: "/guides/scoring-bread-ear" as const,
+    kicker: "Scoring",
+    title: "Scoring for an Open Ear",
+    short: "Scoring bread",
+    blurb:
+      "How deep to cut, what angle to hold the lame, and when to score so a boule opens an ear instead of a split.",
+  },
+  {
+    to: "/guides/sourdough-work-week-schedule" as const,
+    kicker: "Schedule",
+    title: "Sourdough Around a Work Week",
+    short: "Work-week schedules",
+    blurb:
+      "Three timed sourdough schedules — weeknight mix, fridge bulk, and weekend bake — so fermentation happens while you are at work.",
+  },
 ];
