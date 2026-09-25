@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { GuideShell } from "@/components/guide-shell";
-import { socialHead } from "@/lib/og/meta";
+import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE = "Baking Around a Job: Sourdough Schedules That Fit a Work Week";
 
@@ -9,18 +9,19 @@ const DESCRIPTION =
   "Three timed sourdough schedules — weeknight mix, fridge bulk, and weekend bake — so fermentation happens while you are at work.";
 
 export const Route = createFileRoute("/guides/sourdough-work-week-schedule")({
-  component: WorkWeekScheduleGuide,
+  component: WorkWeekGuide,
   head: () =>
     socialHead({
       title: `${TITLE} — DoughMatrix`,
       description: DESCRIPTION,
       path: "/guides/sourdough-work-week-schedule",
+      image: OG_IMAGES.temp,
       cardTitle: TITLE,
       category: "FIELD GUIDE",
     }),
 });
 
-function WorkWeekScheduleGuide() {
+function WorkWeekGuide() {
   return (
     <GuideShell>
       <article className="mx-auto max-w-3xl px-4 pb-10">
@@ -31,17 +32,18 @@ function WorkWeekScheduleGuide() {
           Baking Around a Job: Sourdough Schedules That Fit a Work Week
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">
-          Sourdough does not care that you have a 8:00 meeting. The dough only
-          cares about temperature and time. Fit those two to the hours you are
-          actually home, and the loaf stops owning the calendar.
+          Sourdough does not know you have a 9-to-5. The fridge does. Fit
+          temperature and time to the hours you are actually home, and the loaf
+          stops owning the calendar.
         </p>
 
         <div className="mt-8 space-y-5 text-base leading-relaxed text-fg/90">
           <p>
-            All three schedules below assume a single 850–900 g lean boule: 500
-            g flour, 70–75% hydration by the standard method (all water ÷ all
-            flour, including starter water), 2% salt, 20% ripe levain. If your
-            calculator excludes starter water from the headline hydration, your
+            The dough only cares about temperature and time. All three
+            schedules below assume a single 850–900 g lean boule: 500 g flour,
+            70–75% hydration by the standard method (all water ÷ all flour,
+            including starter water), 2% salt, 20% ripe levain. If your
+            calculator excludes starter water from the headline number, your
             72% will feel like this dough’s 75%. Same dough, different label.
           </p>
         </div>
@@ -53,50 +55,57 @@ function WorkWeekScheduleGuide() {
           <p className="mt-4 leading-relaxed text-fg/90">
             Fermentation rate roughly doubles every 15°F in the range home
             bakers use. A bulk that takes 5 hours at 75°F takes about 8 hours
-            at 68°F and 2.5–3 hours at 82°F.
+            at 68°F and 2.5–3 hours at 82°F. A cheap probe thermometer in the
+            dough is worth more than another recipe.
           </p>
           <div className="mt-6 overflow-x-auto">
             <table className="w-full border-collapse text-left text-sm">
               <caption className="sr-only">
-                Bulk fermentation time by dough temperature at 20% levain
+                Dough temperature and rough bulk time to 50–60% rise
               </caption>
               <thead>
                 <tr className="border-b border-border text-xs tracking-wide text-faint uppercase">
                   <th className="py-3 pr-3 font-medium">Dough temp</th>
                   <th className="py-3 pr-3 font-medium">
-                    Rough bulk to 50–60% rise at 20% levain
+                    Rough bulk to 50–60% rise
                   </th>
                   <th className="py-3 font-medium">Use it when</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="border-b border-border/70 last:border-0">
-                  <td className="py-3 pr-3 font-medium text-fg tabular-nums">
+                  <td className="py-3 pr-3 font-medium whitespace-nowrap text-fg tabular-nums">
                     68°F
                   </td>
-                  <td className="py-3 pr-3 text-muted">7–9 hours</td>
+                  <td className="py-3 pr-3 whitespace-nowrap text-muted tabular-nums">
+                    7–9 hours
+                  </td>
                   <td className="py-3 text-muted">
                     Overnight on the counter in a cool house
                   </td>
                 </tr>
                 <tr className="border-b border-border/70 last:border-0">
-                  <td className="py-3 pr-3 font-medium text-fg tabular-nums">
+                  <td className="py-3 pr-3 font-medium whitespace-nowrap text-fg tabular-nums">
                     75°F
                   </td>
-                  <td className="py-3 pr-3 text-muted">4–5.5 hours</td>
+                  <td className="py-3 pr-3 whitespace-nowrap text-muted tabular-nums">
+                    4–5.5 hours
+                  </td>
                   <td className="py-3 text-muted">
                     Evening mix, shape before bed
                   </td>
                 </tr>
                 <tr className="border-b border-border/70 last:border-0">
-                  <td className="py-3 pr-3 font-medium text-fg tabular-nums">
+                  <td className="py-3 pr-3 font-medium whitespace-nowrap text-fg tabular-nums">
                     78–80°F
                   </td>
-                  <td className="py-3 pr-3 text-muted">3–4 hours</td>
+                  <td className="py-3 pr-3 whitespace-nowrap text-muted tabular-nums">
+                    3–4 hours
+                  </td>
                   <td className="py-3 text-muted">Short window after work</td>
                 </tr>
                 <tr className="border-b border-border/70 last:border-0">
-                  <td className="py-3 pr-3 font-medium text-fg tabular-nums">
+                  <td className="py-3 pr-3 font-medium whitespace-nowrap text-fg tabular-nums">
                     39–42°F (fridge)
                   </td>
                   <td className="py-3 pr-3 text-muted">
@@ -107,10 +116,6 @@ function WorkWeekScheduleGuide() {
               </tbody>
             </table>
           </div>
-          <p className="mt-4 leading-relaxed text-fg/90">
-            A cheap probe thermometer in the dough is worth more than another
-            recipe.
-          </p>
         </section>
 
         <section className="mt-12">
@@ -125,17 +130,20 @@ function WorkWeekScheduleGuide() {
               <strong className="font-medium text-fg">
                 Tuesday 6:15 p.m.
               </strong>{" "}
-              Feed the starter 1:5:5 (20 g starter / 100 g flour / 100 g water)
-              at 80°F water. It should peak Wednesday 6–8 p.m., right when you
-              mix. A 1:2:2 feed peaks in 4–6 hours and would be long past peak
-              by Wednesday evening — too acidic for this schedule.
+              Feed the starter 1:10:10 (10 g starter / 100 g flour / 100 g
+              water). At normal room temp it peaks in about 24 hours — right
+              when you mix on Wednesday. In a warm kitchen it runs faster, so
+              feed closer to bedtime if yours sits above 76°F. A 1:2:2 feed
+              peaks in 4–6 hours and would be long past peak by Wednesday
+              evening — too acidic for this schedule.
             </p>
             <p>
               <strong className="font-medium text-fg">
                 Wednesday 6:15 p.m.
               </strong>{" "}
-              Mix final dough. Target dough temp 76–78°F. Rest 30 minutes. Three
-              sets of stretch-and-folds, 20 minutes apart (6:45, 7:05, 7:25).
+              Mix final dough. Target dough temp 76–78°F. Rest 30 minutes.
+              Three sets of stretch-and-folds, 20 minutes apart (6:45, 7:05,
+              7:25).
             </p>
             <p>
               <strong className="font-medium text-fg">
@@ -144,11 +152,9 @@ function WorkWeekScheduleGuide() {
               Cover and refrigerate the dough in the bowl (cold bulk).
             </p>
             <p>
-              <strong className="font-medium text-fg">
-                Thursday 6:00 p.m.
-              </strong>{" "}
-              Divide if needed, preshape, rest 20 minutes, shape, into a floured
-              basket.
+              <strong className="font-medium text-fg">Thursday 6:00 p.m.</strong>{" "}
+              Divide if needed, preshape, rest 20 minutes, shape, into a
+              floured basket.
             </p>
             <p>
               <strong className="font-medium text-fg">
@@ -195,12 +201,11 @@ function WorkWeekScheduleGuide() {
                 Saturday 11:00 a.m. to 3:30 p.m.
               </strong>{" "}
               Warm bulk while you run errands. Check at 3:00. If it has risen
-              50–60% and jiggles, shape. If it is sluggish, leave it until 4:30.
+              50–60% and jiggles, shape. If it is sluggish, leave it until
+              4:30.
             </p>
             <p>
-              <strong className="font-medium text-fg">
-                Saturday 4:00 p.m.
-              </strong>{" "}
+              <strong className="font-medium text-fg">Saturday 4:00 p.m.</strong>{" "}
               Shape. Basket into the fridge.
             </p>
             <p>
@@ -211,9 +216,9 @@ function WorkWeekScheduleGuide() {
             </p>
           </div>
           <p className="mt-4 leading-relaxed text-fg/90">
-            This is the schedule that survives soccer and grocery runs. The only
-            committed blocks are Saturday late morning (mix + three folds in a
-            70-minute window) and Sunday morning bake.
+            This is the schedule that survives soccer and grocery runs. The
+            only committed blocks are Saturday late morning (mix + three folds
+            in a 70-minute window) and the Sunday morning bake.
           </p>
         </section>
 
@@ -258,13 +263,14 @@ function WorkWeekScheduleGuide() {
           </h2>
           <p className="mt-4 leading-relaxed text-fg/90">
             Do not mix at 10 p.m. and hope a 68°F kitchen finishes bulk by 6
-            a.m. without checking. Either fridge it at 10:30 after one fold, or
-            get a $15 plug-in seedling mat under the bowl and actually hit 75°F.
+            a.m. without checking. Either fridge it at 10:30 after one fold,
+            or get a $15 plug-in seedling mat under the bowl and actually hit
+            75°F.
           </p>
           <p className="mt-4 leading-relaxed text-fg/90">
             Do not bake from a warm, fully doubled basket after an 8-hour
-            unattended bulk. That loaf is already done fermenting. Put it in the
-            fridge two hours earlier next time.
+            unattended bulk. That loaf is already done fermenting. Put it in
+            the fridge two hours earlier next time.
           </p>
         </section>
 
@@ -274,19 +280,19 @@ function WorkWeekScheduleGuide() {
           </h2>
           <p className="mt-4 leading-relaxed text-fg/90">
             A starter that peaks in 4 hours at 77°F after a 1:2:2 feed is ready
-            for Schedule A and C. If it takes 8 hours, either keep it warmer or
-            feed 1:1:1 so it fits the evening window.
+            for Schedules A and C. If it takes 8 hours, either keep it warmer
+            or feed 1:1:1 so it fits the evening window.
           </p>
           <p className="mt-4 leading-relaxed text-fg/90">
-            Store the jar in the fridge after Thursday’s bake. Friday night feed
-            and leave out only if you are on Schedule B. Two feeds a week is
-            enough for these schedules. Daily feeding is for bakeries, not for
-            one loaf.
+            Store the jar in the fridge after Thursday’s bake. Friday night
+            feed and leave out only if you are on Schedule B. Two feeds a week
+            is enough for these schedules. Daily feeding is for bakeries, not
+            for one loaf.
           </p>
           <p className="mt-4 leading-relaxed text-fg/90">
-            Write the schedule on a sticky note on the flour bin: feed day, mix
-            day, bake day. The dough does not need a new formula when life gets
-            loud. It needs the same 20% levain and a fridge. If you miss
+            Write the schedule on a sticky note on the flour bin: feed day,
+            mix day, bake day. The dough does not need a new formula when life
+            gets loud. It needs the same 20% levain and a fridge. If you miss
             Thursday shape, the dough can sit cold until Saturday. Cold is the
             pause button. Room-temp bulk is not.
           </p>
@@ -310,18 +316,19 @@ function WorkWeekScheduleGuide() {
             Open the calculator
           </p>
           <p className="mt-2 font-display text-2xl tracking-tight text-fg">
-            Fit the bulk to the hours you are home.
+            Read your bulk hours from dough temp, then hit the temp with the
+            right water.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            The sourdough calculator reads your bulk window from dough temp and
-            starter amount — pick the schedule, then set the numbers so the
-            dough is ready when you are.
+            The sourdough calculator is the temperature lever as a tool: bulk
+            timing from dough temperature and starter amount, plus DDT water
+            temperature so the mix actually lands there.
           </p>
           <Link
             to="/engines/sourdough"
             className="mt-5 inline-flex h-12 items-center gap-2 rounded-md bg-accent px-5 text-base font-medium text-inverse shadow-[0_0_0_1px_rgb(229_169_98_/_0.4)] hover:bg-accent-hover"
           >
-            Open the bulk-timing calculator
+            Open the bulk timer
             <ArrowRight className="size-4" />
           </Link>
         </aside>

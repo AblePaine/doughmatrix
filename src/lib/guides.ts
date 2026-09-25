@@ -45,39 +45,39 @@ export const PUBLISHED_GUIDES = [
     title: "Pizza Dough Hydration: 60% vs 70% vs 80%",
     short: "Pizza hydration",
     blurb:
-      "What 60%, 70%, and 80% hydration actually do to pizza dough — and which range works in a home oven versus on a steel or stone.",
+      "60% for the sheet pan, 70% for the steel, 80% only if the oven can cash the check. Match the water to the heat you own.",
   },
   {
     to: "/guides/bagel-dough" as const,
     kicker: "Bagels",
-    title: "Bagel Dough: Mixing, Shaping, and the Boil",
+    title: "Bagel Dough: Mix, Shape, Boil",
     short: "Bagel dough",
     blurb:
-      "How to mix, shape, boil, and bake bagel dough at 55–58% hydration so the crumb stays dense and the crust shines.",
+      "55–58% hydration, a boil you don't skip, and a hole that looks too big. Dense crumb and shiny crust, on purpose.",
   },
   {
     to: "/guides/enriched-doughs-fermentation" as const,
     kicker: "Enriched",
     title: "Enriched Doughs and Fermentation",
-    short: "Enriched doughs",
+    short: "Butter, eggs, sugar",
     blurb:
-      "What butter, eggs, and sugar do to rise time and gluten — plus exact adjustments so brioche and milk bread still ferment on schedule.",
+      "Fat and sugar slow the yeast and lie about the proof. Mix gluten first, run warmer, and read a 60% rise instead of a double.",
   },
   {
     to: "/guides/preferments-poolish-biga-levain" as const,
-    kicker: "Preferments",
-    title: "Preferments: Poolish, Biga, Levain",
+    kicker: "Preferment",
+    title: "Poolish, Biga, and Levain",
     short: "Preferments compared",
     blurb:
-      "Exact ratios and fermentation times for poolish, biga, and levain — and when each one belongs in a home bake.",
+      "Three preferments, three jobs: poolish for stretch, biga for strength, levain for tang. Ratios, clocks, and which one your bake actually needs.",
   },
   {
     to: "/guides/scoring-bread-ear" as const,
     kicker: "Scoring",
     title: "Scoring for an Open Ear",
-    short: "Scoring bread",
+    short: "Blade angle and depth",
     blurb:
-      "How deep to cut, what angle to hold the lame, and when to score so a boule opens an ear instead of a split.",
+      "The ear comes from proof, blade angle, and depth — in that order. 30°, 10 mm deep, one motion, cold dough.",
   },
   {
     to: "/guides/sourdough-work-week-schedule" as const,
@@ -85,6 +85,6 @@ export const PUBLISHED_GUIDES = [
     title: "Sourdough Around a Work Week",
     short: "Work-week schedules",
     blurb:
-      "Three timed sourdough schedules — weeknight mix, fridge bulk, and weekend bake — so fermentation happens while you are at work.",
+      "Three timed schedules so fermentation happens while you're at work. The fridge is the pause button; room temp is not.",
   },
 ];

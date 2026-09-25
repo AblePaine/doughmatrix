@@ -15,8 +15,14 @@ import { Route as EnginesSourdoughRouteImport } from './routes/engines/sourdough
 import { Route as FloursSlugRouteImport } from './routes/flours_.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as GuidesAutolyseVsFermentolyseRouteImport } from './routes/guides/autolyse-vs-fermentolyse'
+import { Route as GuidesBagelDoughRouteImport } from './routes/guides/bagel-dough'
+import { Route as GuidesEnrichedDoughsFermentationRouteImport } from './routes/guides/enriched-doughs-fermentation'
 import { Route as GuidesFlourHydrationCeilingRouteImport } from './routes/guides/flour-hydration-ceiling'
+import { Route as GuidesPizzaDoughHydrationRouteImport } from './routes/guides/pizza-dough-hydration'
+import { Route as GuidesPrefermentsPoolishBigaLevainRouteImport } from './routes/guides/preferments-poolish-biga-levain'
+import { Route as GuidesScoringBreadEarRouteImport } from './routes/guides/scoring-bread-ear'
 import { Route as GuidesSourdoughCrumbTroubleshootingRouteImport } from './routes/guides/sourdough-crumb-troubleshooting'
+import { Route as GuidesSourdoughWorkWeekScheduleRouteImport } from './routes/guides/sourdough-work-week-schedule'
 import { Route as GuidesStarterFeedingRatiosKineticsRouteImport } from './routes/guides/starter-feeding-ratios-kinetics'
 import { Route as GuidesTemperatureFermentationMatrixRouteImport } from './routes/guides/temperature-fermentation-matrix'
 
@@ -51,16 +57,50 @@ const GuidesAutolyseVsFermentolyseRoute =
     path: '/guides/autolyse-vs-fermentolyse',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GuidesBagelDoughRoute = GuidesBagelDoughRouteImport.update({
+  id: '/guides/bagel-dough',
+  path: '/guides/bagel-dough',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesEnrichedDoughsFermentationRoute =
+  GuidesEnrichedDoughsFermentationRouteImport.update({
+    id: '/guides/enriched-doughs-fermentation',
+    path: '/guides/enriched-doughs-fermentation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GuidesFlourHydrationCeilingRoute =
   GuidesFlourHydrationCeilingRouteImport.update({
     id: '/guides/flour-hydration-ceiling',
     path: '/guides/flour-hydration-ceiling',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GuidesPizzaDoughHydrationRoute =
+  GuidesPizzaDoughHydrationRouteImport.update({
+    id: '/guides/pizza-dough-hydration',
+    path: '/guides/pizza-dough-hydration',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GuidesPrefermentsPoolishBigaLevainRoute =
+  GuidesPrefermentsPoolishBigaLevainRouteImport.update({
+    id: '/guides/preferments-poolish-biga-levain',
+    path: '/guides/preferments-poolish-biga-levain',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GuidesScoringBreadEarRoute = GuidesScoringBreadEarRouteImport.update({
+  id: '/guides/scoring-bread-ear',
+  path: '/guides/scoring-bread-ear',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GuidesSourdoughCrumbTroubleshootingRoute =
   GuidesSourdoughCrumbTroubleshootingRouteImport.update({
     id: '/guides/sourdough-crumb-troubleshooting',
     path: '/guides/sourdough-crumb-troubleshooting',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GuidesSourdoughWorkWeekScheduleRoute =
+  GuidesSourdoughWorkWeekScheduleRouteImport.update({
+    id: '/guides/sourdough-work-week-schedule',
+    path: '/guides/sourdough-work-week-schedule',
     getParentRoute: () => rootRouteImport,
   } as any)
 const GuidesStarterFeedingRatiosKineticsRoute =
@@ -82,8 +122,14 @@ export interface FileRoutesByFullPath {
   '/engines/sourdough': typeof EnginesSourdoughRoute
   '/flours/$slug': typeof FloursSlugRoute
   '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
+  '/guides/bagel-dough': typeof GuidesBagelDoughRoute
+  '/guides/enriched-doughs-fermentation': typeof GuidesEnrichedDoughsFermentationRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
+  '/guides/pizza-dough-hydration': typeof GuidesPizzaDoughHydrationRoute
+  '/guides/preferments-poolish-biga-levain': typeof GuidesPrefermentsPoolishBigaLevainRoute
+  '/guides/scoring-bread-ear': typeof GuidesScoringBreadEarRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
+  '/guides/sourdough-work-week-schedule': typeof GuidesSourdoughWorkWeekScheduleRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
   '/guides/': typeof GuidesIndexRoute
@@ -94,8 +140,14 @@ export interface FileRoutesByTo {
   '/engines/sourdough': typeof EnginesSourdoughRoute
   '/flours/$slug': typeof FloursSlugRoute
   '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
+  '/guides/bagel-dough': typeof GuidesBagelDoughRoute
+  '/guides/enriched-doughs-fermentation': typeof GuidesEnrichedDoughsFermentationRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
+  '/guides/pizza-dough-hydration': typeof GuidesPizzaDoughHydrationRoute
+  '/guides/preferments-poolish-biga-levain': typeof GuidesPrefermentsPoolishBigaLevainRoute
+  '/guides/scoring-bread-ear': typeof GuidesScoringBreadEarRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
+  '/guides/sourdough-work-week-schedule': typeof GuidesSourdoughWorkWeekScheduleRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
   '/guides': typeof GuidesIndexRoute
@@ -107,8 +159,14 @@ export interface FileRoutesById {
   '/engines/sourdough': typeof EnginesSourdoughRoute
   '/flours_/$slug': typeof FloursSlugRoute
   '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
+  '/guides/bagel-dough': typeof GuidesBagelDoughRoute
+  '/guides/enriched-doughs-fermentation': typeof GuidesEnrichedDoughsFermentationRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
+  '/guides/pizza-dough-hydration': typeof GuidesPizzaDoughHydrationRoute
+  '/guides/preferments-poolish-biga-levain': typeof GuidesPrefermentsPoolishBigaLevainRoute
+  '/guides/scoring-bread-ear': typeof GuidesScoringBreadEarRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
+  '/guides/sourdough-work-week-schedule': typeof GuidesSourdoughWorkWeekScheduleRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
   '/guides/': typeof GuidesIndexRoute
@@ -121,8 +179,14 @@ export interface FileRouteTypes {
     | '/engines/sourdough'
     | '/flours/$slug'
     | '/guides/autolyse-vs-fermentolyse'
+    | '/guides/bagel-dough'
+    | '/guides/enriched-doughs-fermentation'
     | '/guides/flour-hydration-ceiling'
+    | '/guides/pizza-dough-hydration'
+    | '/guides/preferments-poolish-biga-levain'
+    | '/guides/scoring-bread-ear'
     | '/guides/sourdough-crumb-troubleshooting'
+    | '/guides/sourdough-work-week-schedule'
     | '/guides/starter-feeding-ratios-kinetics'
     | '/guides/temperature-fermentation-matrix'
     | '/guides/'
@@ -133,8 +197,14 @@ export interface FileRouteTypes {
     | '/engines/sourdough'
     | '/flours/$slug'
     | '/guides/autolyse-vs-fermentolyse'
+    | '/guides/bagel-dough'
+    | '/guides/enriched-doughs-fermentation'
     | '/guides/flour-hydration-ceiling'
+    | '/guides/pizza-dough-hydration'
+    | '/guides/preferments-poolish-biga-levain'
+    | '/guides/scoring-bread-ear'
     | '/guides/sourdough-crumb-troubleshooting'
+    | '/guides/sourdough-work-week-schedule'
     | '/guides/starter-feeding-ratios-kinetics'
     | '/guides/temperature-fermentation-matrix'
     | '/guides'
@@ -145,8 +215,14 @@ export interface FileRouteTypes {
     | '/engines/sourdough'
     | '/flours_/$slug'
     | '/guides/autolyse-vs-fermentolyse'
+    | '/guides/bagel-dough'
+    | '/guides/enriched-doughs-fermentation'
     | '/guides/flour-hydration-ceiling'
+    | '/guides/pizza-dough-hydration'
+    | '/guides/preferments-poolish-biga-levain'
+    | '/guides/scoring-bread-ear'
     | '/guides/sourdough-crumb-troubleshooting'
+    | '/guides/sourdough-work-week-schedule'
     | '/guides/starter-feeding-ratios-kinetics'
     | '/guides/temperature-fermentation-matrix'
     | '/guides/'
@@ -158,8 +234,14 @@ export interface RootRouteChildren {
   EnginesSourdoughRoute: typeof EnginesSourdoughRoute
   FloursSlugRoute: typeof FloursSlugRoute
   GuidesAutolyseVsFermentolyseRoute: typeof GuidesAutolyseVsFermentolyseRoute
+  GuidesBagelDoughRoute: typeof GuidesBagelDoughRoute
+  GuidesEnrichedDoughsFermentationRoute: typeof GuidesEnrichedDoughsFermentationRoute
   GuidesFlourHydrationCeilingRoute: typeof GuidesFlourHydrationCeilingRoute
+  GuidesPizzaDoughHydrationRoute: typeof GuidesPizzaDoughHydrationRoute
+  GuidesPrefermentsPoolishBigaLevainRoute: typeof GuidesPrefermentsPoolishBigaLevainRoute
+  GuidesScoringBreadEarRoute: typeof GuidesScoringBreadEarRoute
   GuidesSourdoughCrumbTroubleshootingRoute: typeof GuidesSourdoughCrumbTroubleshootingRoute
+  GuidesSourdoughWorkWeekScheduleRoute: typeof GuidesSourdoughWorkWeekScheduleRoute
   GuidesStarterFeedingRatiosKineticsRoute: typeof GuidesStarterFeedingRatiosKineticsRoute
   GuidesTemperatureFermentationMatrixRoute: typeof GuidesTemperatureFermentationMatrixRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
@@ -209,6 +291,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesAutolyseVsFermentolyseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/bagel-dough': {
+      id: '/guides/bagel-dough'
+      path: '/guides/bagel-dough'
+      fullPath: '/guides/bagel-dough'
+      preLoaderRoute: typeof GuidesBagelDoughRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/enriched-doughs-fermentation': {
+      id: '/guides/enriched-doughs-fermentation'
+      path: '/guides/enriched-doughs-fermentation'
+      fullPath: '/guides/enriched-doughs-fermentation'
+      preLoaderRoute: typeof GuidesEnrichedDoughsFermentationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guides/flour-hydration-ceiling': {
       id: '/guides/flour-hydration-ceiling'
       path: '/guides/flour-hydration-ceiling'
@@ -216,11 +312,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesFlourHydrationCeilingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/pizza-dough-hydration': {
+      id: '/guides/pizza-dough-hydration'
+      path: '/guides/pizza-dough-hydration'
+      fullPath: '/guides/pizza-dough-hydration'
+      preLoaderRoute: typeof GuidesPizzaDoughHydrationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/preferments-poolish-biga-levain': {
+      id: '/guides/preferments-poolish-biga-levain'
+      path: '/guides/preferments-poolish-biga-levain'
+      fullPath: '/guides/preferments-poolish-biga-levain'
+      preLoaderRoute: typeof GuidesPrefermentsPoolishBigaLevainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/scoring-bread-ear': {
+      id: '/guides/scoring-bread-ear'
+      path: '/guides/scoring-bread-ear'
+      fullPath: '/guides/scoring-bread-ear'
+      preLoaderRoute: typeof GuidesScoringBreadEarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guides/sourdough-crumb-troubleshooting': {
       id: '/guides/sourdough-crumb-troubleshooting'
       path: '/guides/sourdough-crumb-troubleshooting'
       fullPath: '/guides/sourdough-crumb-troubleshooting'
       preLoaderRoute: typeof GuidesSourdoughCrumbTroubleshootingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/sourdough-work-week-schedule': {
+      id: '/guides/sourdough-work-week-schedule'
+      path: '/guides/sourdough-work-week-schedule'
+      fullPath: '/guides/sourdough-work-week-schedule'
+      preLoaderRoute: typeof GuidesSourdoughWorkWeekScheduleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/starter-feeding-ratios-kinetics': {
@@ -246,9 +370,16 @@ const rootRouteChildren: RootRouteChildren = {
   EnginesSourdoughRoute: EnginesSourdoughRoute,
   FloursSlugRoute: FloursSlugRoute,
   GuidesAutolyseVsFermentolyseRoute: GuidesAutolyseVsFermentolyseRoute,
+  GuidesBagelDoughRoute: GuidesBagelDoughRoute,
+  GuidesEnrichedDoughsFermentationRoute: GuidesEnrichedDoughsFermentationRoute,
   GuidesFlourHydrationCeilingRoute: GuidesFlourHydrationCeilingRoute,
+  GuidesPizzaDoughHydrationRoute: GuidesPizzaDoughHydrationRoute,
+  GuidesPrefermentsPoolishBigaLevainRoute:
+    GuidesPrefermentsPoolishBigaLevainRoute,
+  GuidesScoringBreadEarRoute: GuidesScoringBreadEarRoute,
   GuidesSourdoughCrumbTroubleshootingRoute:
     GuidesSourdoughCrumbTroubleshootingRoute,
+  GuidesSourdoughWorkWeekScheduleRoute: GuidesSourdoughWorkWeekScheduleRoute,
   GuidesStarterFeedingRatiosKineticsRoute:
     GuidesStarterFeedingRatiosKineticsRoute,
   GuidesTemperatureFermentationMatrixRoute:

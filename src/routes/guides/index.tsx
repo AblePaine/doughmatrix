@@ -10,12 +10,12 @@ export const Route = createFileRoute("/guides/")({
     socialHead({
       title: "Guides — DoughMatrix",
       description:
-        "DoughMatrix guides: flour hydration ceilings, bulk by temperature and starter, starter feeding and peak timing, autolyse vs. fermentolyse, reading your sourdough crumb — plus pizza and bagel dough, enriched doughs, preferments, scoring, and work-week baking schedules.",
+        "DoughMatrix guides: flour hydration ceilings, bulk by temperature and starter, starter feeding and peak timing, autolyse vs. fermentolyse, reading your sourdough crumb — plus pizza and bagel doughs, enriched fermentation, preferments, scoring for an ear, and sourdough schedules that fit a work week.",
       path: "/guides",
       image: OG_IMAGES.home,
       cardTitle: "Field Guides",
       category: "FIELD GUIDE",
-      detail: "Hydration, fermentation, levain, mix, crumb, pizza, bagels, enriched, and more",
+      detail: "Hydration, fermentation, levain, mix, crumb — and more",
     }),
 });
 
@@ -31,7 +31,8 @@ function GuidesHub() {
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">
           Notes from the bench, behind the calculator. The water, the jar, the
-          rest, the clock, then the cut.
+          rest, the clock, then the cut — plus pizza, bagels, enriched doughs,
+          preferments, and schedules that survive a day job.
         </p>
         <ul className="mt-10 grid gap-4">
           {PUBLISHED_GUIDES.map((g) => (
