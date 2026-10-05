@@ -1,4 +1,4 @@
-import type { BakerInput, Maturity, MixMode } from "../../../src/lib/sourdough/types.ts";
+import type { BakerInput, Maturity, MixMode } from "../../src/lib/sourdough/types.ts";
 
 /**
  * Server-side copy of the UI's DEFAULT_INPUT + BOUNDS
