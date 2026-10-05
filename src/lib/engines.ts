@@ -1,22 +1,25 @@
-export const LIVE_ENGINE = {
-  id: "sourdough",
-  to: "/engines/sourdough" as const,
-  name: "Sourdough Calculator",
-  short: "Sourdough",
-  badge: "Live",
-  blurb:
-    "True hydration with the starter water counted, the water temp that lands your dough where you want it, and a bulk window for your kitchen — not someone else's.",
-} as const;
-
-export const UPCOMING_ENGINES = [
+export const LIVE_ENGINES = [
+  {
+    id: "sourdough",
+    to: "/engines/sourdough" as const,
+    name: "Sourdough Calculator",
+    short: "Sourdough",
+    badge: "Live",
+    blurb:
+      "True hydration with the starter water counted, the water temp that lands your dough where you want it, and a bulk window for your kitchen — not someone else's.",
+  },
   {
     id: "pizza",
+    to: "/engines/pizza" as const,
     name: "Pizza Calculator",
     short: "Pizza",
-    badge: "Coming soon",
+    badge: "New",
     blurb:
-      "Neapolitan, NY, Detroit, and pan pizza — cold-ferment timing and pan sizes worked out for you.",
+      "NY, Neapolitan, Detroit, and sheet-pan — yeast dosed from your fermentation schedule, dough sized from balls or pan, hydration matched to your oven's heat.",
   },
+] as const;
+
+export const UPCOMING_ENGINES = [
   {
     id: "bagel",
     name: "Bagels & Stiff Doughs",

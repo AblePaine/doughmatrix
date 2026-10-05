@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { BrandMark } from "@/components/brand-mark";
-import { LIVE_ENGINE, UPCOMING_ENGINES } from "@/lib/engines";
+import { LIVE_ENGINES, UPCOMING_ENGINES } from "@/lib/engines";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader({
@@ -65,30 +65,36 @@ function NavLink({
 
 function EnginesMenu() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const sourdoughActive = pathname.startsWith("/engines/sourdough");
+  const liveActive = pathname.startsWith("/engines/");
 
   return (
     <details className="relative">
       <summary
         className={cn(
           "inline-flex h-9 cursor-pointer list-none items-center gap-1 rounded-sm px-3 text-muted hover:bg-card hover:text-fg [&::-webkit-details-marker]:hidden",
-          sourdoughActive && "text-accent hover:text-accent",
+          liveActive && "text-accent hover:text-accent",
         )}
       >
         Calculators
         <ChevronDown className="size-3.5" />
       </summary>
       <div className="absolute top-full left-0 z-30 mt-1 min-w-56 rounded-md bg-card py-1 shadow-[0_0_0_1px_var(--color-border)]">
-        <Link
-          to={LIVE_ENGINE.to}
-          className={cn(
-            "flex items-center justify-between gap-3 px-3 py-2 text-sm hover:bg-inset",
-            sourdoughActive ? "text-accent" : "text-fg",
-          )}
-        >
-          {LIVE_ENGINE.short}
-          <span className="text-xs text-faint">{LIVE_ENGINE.badge}</span>
-        </Link>
+        {LIVE_ENGINES.map((engine) => {
+          const active = pathname.startsWith(engine.to);
+          return (
+            <Link
+              key={engine.id}
+              to={engine.to}
+              className={cn(
+                "flex items-center justify-between gap-3 px-3 py-2 text-sm hover:bg-inset",
+                active ? "text-accent" : "text-fg",
+              )}
+            >
+              {engine.short}
+              <span className="text-xs text-faint">{engine.badge}</span>
+            </Link>
+          );
+        })}
         {UPCOMING_ENGINES.map((engine) => (
           <p
             key={engine.id}
