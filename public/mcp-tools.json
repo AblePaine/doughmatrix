@@ -1,0 +1,164 @@
+{
+  "api_base": "https://doughmatrix.com/api/sourdough",
+  "description": "DoughMatrix sourdough formula engine as agent-callable tools. True-hydration math (counts water inside the starter), flour hydration ceilings, 4-factor DDT water temperature, temperature-calibrated bulk fermentation windows, and over-pour rescue. Free, no key.",
+  "homepage": "https://doughmatrix.com",
+  "name": "doughmatrix-sourdough",
+  "notes": [
+    "True hydration counts the starter's flour and water \u2014 most recipes quote baker's % which hides starter water. The API returns both.",
+    "Danger levels: safe / caution (within 4 points of the flour's ceiling) / danger (at or over ceiling).",
+    "GET /calculate accepts the same fields as URL query params for zero-friction calls.",
+    "No authentication, no rate limits published \u2014 be reasonable; this is a free pilot."
+  ],
+  "tools": [
+    {
+      "description": "Compute a complete sourdough formula: flour/water/starter/salt weights, true vs baker's hydration, flour-ceiling safety margin, DDT water temperature, bulk fermentation window with fold schedule, and a step-by-step timeline. All inputs optional \u2014 omitted fields use sensible defaults (500g bread flour, 72% true hydration, 20% inoculation, 24\u00b0C dough).",
+      "http": {
+        "example_body": {
+          "doughTempC": 24,
+          "flourId": "bread",
+          "flourWeight": 500,
+          "maturity": "peak",
+          "saltPercent": 2,
+          "starterHydration": 100,
+          "starterWeight": 100,
+          "targetTrueHydration": 75
+        },
+        "method": "POST",
+        "path": "/calculate"
+      },
+      "inputSchema": {
+        "properties": {
+          "blendId": {
+            "description": "Optional second flour blended in; set blendPercent > 0 to activate.",
+            "type": "string"
+          },
+          "blendPercent": {
+            "description": "Blend flour as % of flour weight (0-80). Default: 0.",
+            "type": "number"
+          },
+          "customCeiling": {
+            "description": "Hydration ceiling % for flourId 'custom'. Default: 76.",
+            "type": "number"
+          },
+          "customName": {
+            "description": "Name for flourId 'custom'. Default: 'Bag flour'.",
+            "type": "string"
+          },
+          "customProtein": {
+            "description": "Protein % for flourId 'custom'. Default: 12.2.",
+            "type": "number"
+          },
+          "doughTempC": {
+            "description": "Desired dough temperature \u00b0C \u2014 drives DDT water temp and bulk timing. Range 10-34. Default: 24.",
+            "type": "number"
+          },
+          "doughWeightTarget": {
+            "description": "Target dough weight in grams; only used when mixMode is 'dough'. Default: 900.",
+            "type": "number"
+          },
+          "flourId": {
+            "description": "Flour from the catalog \u2014 see sourdough_flours. Unknown IDs fall back to bread flour. Use 'custom' with customName/customProtein/customCeiling for your own mill. Default: bread.",
+            "type": "string"
+          },
+          "flourTempC": {
+            "description": "Flour temperature \u00b0C, for DDT calc. Default: 21.",
+            "type": "number"
+          },
+          "flourWeight": {
+            "description": "Flour weight in grams (50-10000). Default: 500.",
+            "type": "number"
+          },
+          "frictionC": {
+            "description": "Mixer friction factor \u00b0C (0 for hand mixing). Default: 1.",
+            "type": "number"
+          },
+          "loafCount": {
+            "description": "Number of loaves; splits dough weight per loaf. Default: 1.",
+            "type": "number"
+          },
+          "maturity": {
+            "description": "Starter maturity \u2014 young needs a longer bulk, late a shorter one. Default: peak.",
+            "enum": [
+              "young",
+              "peak",
+              "late"
+            ],
+            "type": "string"
+          },
+          "mixMode": {
+            "description": "Mix by flour weight or target dough weight. Default: flour.",
+            "enum": [
+              "flour",
+              "dough"
+            ],
+            "type": "string"
+          },
+          "roomTempC": {
+            "description": "Room temperature \u00b0C, for DDT calc. Default: 22.",
+            "type": "number"
+          },
+          "saltPercent": {
+            "description": "Salt as % of total flour. Range 0.5-4. Default: 2.",
+            "type": "number"
+          },
+          "starterHydration": {
+            "description": "Starter hydration % (100 = equal weights flour and water). Default: 100.",
+            "type": "number"
+          },
+          "starterTempC": {
+            "description": "Starter temperature \u00b0C, for DDT calc. Default: 23.",
+            "type": "number"
+          },
+          "starterWeight": {
+            "description": "Ripe starter/levain weight in grams. Default: 100.",
+            "type": "number"
+          },
+          "targetTrueHydration": {
+            "description": "Target TRUE hydration % \u2014 total water / total flour including the starter's flour and water. This is the headline number; baker's % is also returned. Range 50-110. Default: 72.",
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "name": "sourdough_calculate",
+      "outputDescription": "Returns the normalized input, the full formula (weights, trueHydration, bakerHydration, ceiling, danger level safe/caution/danger, margin to ceiling, DDT waterTempC, bulk window minH/targetH/maxH with fold schedule, autolyse/reserve water split), a timeline of mix/fold/shape/proof/bake events, and a plaintext summary."
+    },
+    {
+      "description": "List the flour catalog behind the engine: id, name, protein %, hydration sweet spot and ceiling %, family, and notes. Use an id as flourId/blendId in sourdough_calculate.",
+      "http": {
+        "method": "GET",
+        "path": "/flours"
+      },
+      "inputSchema": {
+        "properties": {},
+        "type": "object"
+      },
+      "name": "sourdough_flours",
+      "outputDescription": "Returns { flours: [{ id, name, short, protein, sweetSpot, ceiling, family, notes }] }."
+    },
+    {
+      "description": "Over-pour rescue: too much water went into the bowl. Given the same inputs as sourdough_calculate plus extraWater (grams), returns how much extra flour and salt restores the target true hydration, plus the new dough weight and true hydration.",
+      "http": {
+        "example_body": {
+          "extraWater": 40,
+          "flourWeight": 500,
+          "targetTrueHydration": 72
+        },
+        "method": "POST",
+        "path": "/rescue"
+      },
+      "inputSchema": {
+        "properties": {
+          "extraWater": {
+            "description": "Extra water accidentally added, in grams (0-2000). Required.",
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "name": "sourdough_rescue",
+      "outputDescription": "Returns the normalized input, the base formula, and rescue: { extraWater, extraFlour, extraSalt, newDoughWeight, newTrueHydration }."
+    }
+  ],
+  "version": "1.0.0"
+}

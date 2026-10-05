@@ -1,0 +1,33 @@
+# DoughMatrix
+
+> Baking science, minus the guesswork. Precision calculation engines for sourdough, pizza, bagels, and enriched doughs — plus plain-language guides.
+
+DoughMatrix (https://doughmatrix.com) is a free precision-baking toolkit. Its headline idea is **true hydration**: total water divided by total flour *including the flour and water inside your starter*. Most recipes quote baker's percentage, which hides starter water and misleads by several points. DoughMatrix shows both, and warns you when your true hydration approaches your flour's hydration ceiling.
+
+## Engines
+
+- **Sourdough engine** (`/engines/sourdough`): flour/water/starter/salt solver with true vs baker's hydration, a 14-flour catalog with per-flour hydration ceilings, blend support, 4-factor DDT (desired dough temperature) water calculation, temperature-calibrated bulk fermentation windows with fold schedules, and over-pour rescue (added too much water → how much flour fixes it).
+- **Pizza, bagel, enriched/pastry engines**: coming soon — notify-me signup on each card.
+
+## Guides
+
+Six voice-matched deep dives at `/guides`: flour hydration ceilings, autolyse vs fermentolyse, bagel dough, enriched dough fermentation, and more. Written for bakers who want the *why*, not just the formula.
+
+## For AI agents
+
+DoughMatrix exposes its sourdough engine as a free JSON API — no key required. This is the same math as the web engine.
+
+- `POST https://doughmatrix.com/api/sourdough/calculate` — full formula. Body is a partial JSON object; every field optional (defaults: 500g bread flour, 72% true hydration, 100g starter at 100% hydration, 2% salt, 24°C dough, peak maturity). Key fields: `flourWeight`, `targetTrueHydration`, `starterWeight`, `starterHydration`, `saltPercent`, `doughTempC`, `maturity` (young|peak|late), `flourId`, `mixMode` (flour|dough). Returns the normalized input, the complete formula (weights, trueHydration, bakerHydration, ceiling, danger level safe/caution/danger, margin to ceiling, DDT waterTempC, bulk window with fold schedule), a step timeline, and a plaintext summary.
+- `GET https://doughmatrix.com/api/sourdough/calculate?flourWeight=500&targetTrueHydration=75` — same engine via query params.
+- `GET https://doughmatrix.com/api/sourdough/flours` — the flour catalog (id, protein, sweet spot, ceiling). Use an `id` as `flourId` in calculate calls.
+- `POST https://doughmatrix.com/api/sourdough/rescue` — over-pour rescue. Same fields as calculate plus `extraWater` (grams). Returns how much extra flour and salt restores target true hydration.
+- `GET https://doughmatrix.com/mcp-tools.json` — machine-readable tool manifest (MCP-style input schemas + HTTP bindings) for the three endpoints above.
+
+Example:
+```
+curl -X POST https://doughmatrix.com/api/sourdough/calculate \
+  -H 'content-type: application/json' \
+  -d '{"flourWeight":500,"targetTrueHydration":75,"flourId":"bread","doughTempC":24}'
+```
+
+Contact: hello@doughmatrix.com
