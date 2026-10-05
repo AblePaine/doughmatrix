@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FloursRouteImport } from './routes/flours'
+import { Route as EnginesPizzaRouteImport } from './routes/engines/pizza'
 import { Route as EnginesSourdoughRouteImport } from './routes/engines/sourdough'
 import { Route as FloursSlugRouteImport } from './routes/flours_.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
@@ -34,6 +35,11 @@ const IndexRoute = IndexRouteImport.update({
 const FloursRoute = FloursRouteImport.update({
   id: '/flours',
   path: '/flours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnginesPizzaRoute = EnginesPizzaRouteImport.update({
+  id: '/engines/pizza',
+  path: '/engines/pizza',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnginesSourdoughRoute = EnginesSourdoughRouteImport.update({
@@ -119,6 +125,7 @@ const GuidesTemperatureFermentationMatrixRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
+  '/engines/pizza': typeof EnginesPizzaRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
   '/flours/$slug': typeof FloursSlugRoute
   '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
@@ -137,6 +144,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
+  '/engines/pizza': typeof EnginesPizzaRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
   '/flours/$slug': typeof FloursSlugRoute
   '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
@@ -156,6 +164,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
+  '/engines/pizza': typeof EnginesPizzaRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
   '/flours_/$slug': typeof FloursSlugRoute
   '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
@@ -176,6 +185,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/flours'
+    | '/engines/pizza'
     | '/engines/sourdough'
     | '/flours/$slug'
     | '/guides/autolyse-vs-fermentolyse'
@@ -194,6 +204,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/flours'
+    | '/engines/pizza'
     | '/engines/sourdough'
     | '/flours/$slug'
     | '/guides/autolyse-vs-fermentolyse'
@@ -212,6 +223,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/flours'
+    | '/engines/pizza'
     | '/engines/sourdough'
     | '/flours_/$slug'
     | '/guides/autolyse-vs-fermentolyse'
@@ -231,6 +243,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FloursRoute: typeof FloursRoute
+  EnginesPizzaRoute: typeof EnginesPizzaRoute
   EnginesSourdoughRoute: typeof EnginesSourdoughRoute
   FloursSlugRoute: typeof FloursSlugRoute
   GuidesAutolyseVsFermentolyseRoute: typeof GuidesAutolyseVsFermentolyseRoute
@@ -261,6 +274,13 @@ declare module '@tanstack/react-router' {
       path: '/flours'
       fullPath: '/flours'
       preLoaderRoute: typeof FloursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/engines/pizza': {
+      id: '/engines/pizza'
+      path: '/engines/pizza'
+      fullPath: '/engines/pizza'
+      preLoaderRoute: typeof EnginesPizzaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/engines/sourdough': {
@@ -367,6 +387,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FloursRoute: FloursRoute,
+  EnginesPizzaRoute: EnginesPizzaRoute,
   EnginesSourdoughRoute: EnginesSourdoughRoute,
   FloursSlugRoute: FloursSlugRoute,
   GuidesAutolyseVsFermentolyseRoute: GuidesAutolyseVsFermentolyseRoute,
