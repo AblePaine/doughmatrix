@@ -87,4 +87,52 @@ export const PUBLISHED_GUIDES = [
     blurb:
       "Three timed schedules so fermentation happens while you're at work. The fridge is the pause button; room temp is not.",
   },
+  {
+    to: "/guides/desired-dough-temperature" as const,
+    kicker: "Temperature",
+    title: "Desired Dough Temperature Calculator",
+    short: "Water temp from DDT",
+    blurb:
+      "Room temperature is not dough temperature. The water-temp formula — from flour, room, starter, and friction.",
+  },
+  {
+    to: "/guides/cold-retard-timing" as const,
+    kicker: "Cold Proof",
+    title: "Cold Proof Sourdough How Long",
+    short: "Retard timing",
+    blurb:
+      "The fridge is the pause button, not a stop. 12h vs 24h vs 36h — flavor against structure.",
+  },
+  {
+    to: "/guides/bakers-percentage" as const,
+    kicker: "Formula",
+    title: "Baker's Percentage Chart",
+    short: "Baker's math",
+    blurb:
+      "Flour is 100%. Everything else hangs off it. True hydration vs. bowl hydration, worked by hand.",
+  },
+  {
+    to: "/guides/focaccia-high-hydration" as const,
+    kicker: "Focaccia",
+    title: "Focaccia Hydration Percentage",
+    short: "Wet dough, dimpled",
+    blurb:
+      "80% hydration feels impossible until the pan does the structural work. Dimple without degassing.",
+  },
+  {
+    to: "/guides/bulk-fermentation-by-hand" as const,
+    kicker: "Bulk",
+    title: "How to Tell When Bulk Fermentation Is Done",
+    short: "Read the dough",
+    blurb:
+      "The clock is a window. The dough is the decision. Jiggle, dome, edge bubbles, aliquot jar.",
+  },
+  {
+    to: "/guides/sourdough-discard-uses" as const,
+    kicker: "Discard",
+    title: "What to Do with Sourdough Discard",
+    short: "Discard, honestly",
+    blurb:
+      "Discard is your starter, unfed — flavor and tenderness, not a workforce. Three good uses, one to stop.",
+  },
 ];

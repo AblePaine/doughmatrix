@@ -130,12 +130,13 @@ function WorkWeekGuide() {
               <strong className="font-medium text-fg">
                 Tuesday 6:15 p.m.
               </strong>{" "}
-              Feed the starter 1:10:10 (10 g starter / 100 g flour / 100 g
-              water). At normal room temp it peaks in about 24 hours — right
-              when you mix on Wednesday. In a warm kitchen it runs faster, so
-              feed closer to bedtime if yours sits above 76°F. A 1:2:2 feed
-              peaks in 4–6 hours and would be long past peak by Wednesday
-              evening — too acidic for this schedule.
+              Feed the starter 1:5:5 (20 g starter / 100 g flour / 100 g
+              water) Tuesday evening. At 22°C it peaks in about 14 hours —
+              mid-morning Wednesday. Refrigerate it at peak; the cold holds
+              the culture until the evening mix. In a warm kitchen it runs
+              faster, so feed closer to bedtime if yours sits above 76°F. A
+              1:2:2 feed peaks in 4–6 hours and would be long past peak by
+              Wednesday evening — too acidic for this schedule.
             </p>
             <p>
               <strong className="font-medium text-fg">

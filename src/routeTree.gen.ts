@@ -17,12 +17,18 @@ import { Route as FloursSlugRouteImport } from './routes/flours_.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as GuidesAutolyseVsFermentolyseRouteImport } from './routes/guides/autolyse-vs-fermentolyse'
 import { Route as GuidesBagelDoughRouteImport } from './routes/guides/bagel-dough'
+import { Route as GuidesBakersPercentageRouteImport } from './routes/guides/bakers-percentage'
+import { Route as GuidesBulkFermentationByHandRouteImport } from './routes/guides/bulk-fermentation-by-hand'
+import { Route as GuidesColdRetardTimingRouteImport } from './routes/guides/cold-retard-timing'
+import { Route as GuidesDesiredDoughTemperatureRouteImport } from './routes/guides/desired-dough-temperature'
 import { Route as GuidesEnrichedDoughsFermentationRouteImport } from './routes/guides/enriched-doughs-fermentation'
 import { Route as GuidesFlourHydrationCeilingRouteImport } from './routes/guides/flour-hydration-ceiling'
+import { Route as GuidesFocacciaHighHydrationRouteImport } from './routes/guides/focaccia-high-hydration'
 import { Route as GuidesPizzaDoughHydrationRouteImport } from './routes/guides/pizza-dough-hydration'
 import { Route as GuidesPrefermentsPoolishBigaLevainRouteImport } from './routes/guides/preferments-poolish-biga-levain'
 import { Route as GuidesScoringBreadEarRouteImport } from './routes/guides/scoring-bread-ear'
 import { Route as GuidesSourdoughCrumbTroubleshootingRouteImport } from './routes/guides/sourdough-crumb-troubleshooting'
+import { Route as GuidesSourdoughDiscardUsesRouteImport } from './routes/guides/sourdough-discard-uses'
 import { Route as GuidesSourdoughWorkWeekScheduleRouteImport } from './routes/guides/sourdough-work-week-schedule'
 import { Route as GuidesStarterFeedingRatiosKineticsRouteImport } from './routes/guides/starter-feeding-ratios-kinetics'
 import { Route as GuidesTemperatureFermentationMatrixRouteImport } from './routes/guides/temperature-fermentation-matrix'
@@ -68,6 +74,28 @@ const GuidesBagelDoughRoute = GuidesBagelDoughRouteImport.update({
   path: '/guides/bagel-dough',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesBakersPercentageRoute = GuidesBakersPercentageRouteImport.update({
+  id: '/guides/bakers-percentage',
+  path: '/guides/bakers-percentage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesBulkFermentationByHandRoute =
+  GuidesBulkFermentationByHandRouteImport.update({
+    id: '/guides/bulk-fermentation-by-hand',
+    path: '/guides/bulk-fermentation-by-hand',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GuidesColdRetardTimingRoute = GuidesColdRetardTimingRouteImport.update({
+  id: '/guides/cold-retard-timing',
+  path: '/guides/cold-retard-timing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesDesiredDoughTemperatureRoute =
+  GuidesDesiredDoughTemperatureRouteImport.update({
+    id: '/guides/desired-dough-temperature',
+    path: '/guides/desired-dough-temperature',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GuidesEnrichedDoughsFermentationRoute =
   GuidesEnrichedDoughsFermentationRouteImport.update({
     id: '/guides/enriched-doughs-fermentation',
@@ -78,6 +106,12 @@ const GuidesFlourHydrationCeilingRoute =
   GuidesFlourHydrationCeilingRouteImport.update({
     id: '/guides/flour-hydration-ceiling',
     path: '/guides/flour-hydration-ceiling',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GuidesFocacciaHighHydrationRoute =
+  GuidesFocacciaHighHydrationRouteImport.update({
+    id: '/guides/focaccia-high-hydration',
+    path: '/guides/focaccia-high-hydration',
     getParentRoute: () => rootRouteImport,
   } as any)
 const GuidesPizzaDoughHydrationRoute =
@@ -101,6 +135,12 @@ const GuidesSourdoughCrumbTroubleshootingRoute =
   GuidesSourdoughCrumbTroubleshootingRouteImport.update({
     id: '/guides/sourdough-crumb-troubleshooting',
     path: '/guides/sourdough-crumb-troubleshooting',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GuidesSourdoughDiscardUsesRoute =
+  GuidesSourdoughDiscardUsesRouteImport.update({
+    id: '/guides/sourdough-discard-uses',
+    path: '/guides/sourdough-discard-uses',
     getParentRoute: () => rootRouteImport,
   } as any)
 const GuidesSourdoughWorkWeekScheduleRoute =
@@ -130,12 +170,18 @@ export interface FileRoutesByFullPath {
   '/flours/$slug': typeof FloursSlugRoute
   '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
   '/guides/bagel-dough': typeof GuidesBagelDoughRoute
+  '/guides/bakers-percentage': typeof GuidesBakersPercentageRoute
+  '/guides/bulk-fermentation-by-hand': typeof GuidesBulkFermentationByHandRoute
+  '/guides/cold-retard-timing': typeof GuidesColdRetardTimingRoute
+  '/guides/desired-dough-temperature': typeof GuidesDesiredDoughTemperatureRoute
   '/guides/enriched-doughs-fermentation': typeof GuidesEnrichedDoughsFermentationRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
+  '/guides/focaccia-high-hydration': typeof GuidesFocacciaHighHydrationRoute
   '/guides/pizza-dough-hydration': typeof GuidesPizzaDoughHydrationRoute
   '/guides/preferments-poolish-biga-levain': typeof GuidesPrefermentsPoolishBigaLevainRoute
   '/guides/scoring-bread-ear': typeof GuidesScoringBreadEarRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
+  '/guides/sourdough-discard-uses': typeof GuidesSourdoughDiscardUsesRoute
   '/guides/sourdough-work-week-schedule': typeof GuidesSourdoughWorkWeekScheduleRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
@@ -149,12 +195,18 @@ export interface FileRoutesByTo {
   '/flours/$slug': typeof FloursSlugRoute
   '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
   '/guides/bagel-dough': typeof GuidesBagelDoughRoute
+  '/guides/bakers-percentage': typeof GuidesBakersPercentageRoute
+  '/guides/bulk-fermentation-by-hand': typeof GuidesBulkFermentationByHandRoute
+  '/guides/cold-retard-timing': typeof GuidesColdRetardTimingRoute
+  '/guides/desired-dough-temperature': typeof GuidesDesiredDoughTemperatureRoute
   '/guides/enriched-doughs-fermentation': typeof GuidesEnrichedDoughsFermentationRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
+  '/guides/focaccia-high-hydration': typeof GuidesFocacciaHighHydrationRoute
   '/guides/pizza-dough-hydration': typeof GuidesPizzaDoughHydrationRoute
   '/guides/preferments-poolish-biga-levain': typeof GuidesPrefermentsPoolishBigaLevainRoute
   '/guides/scoring-bread-ear': typeof GuidesScoringBreadEarRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
+  '/guides/sourdough-discard-uses': typeof GuidesSourdoughDiscardUsesRoute
   '/guides/sourdough-work-week-schedule': typeof GuidesSourdoughWorkWeekScheduleRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
@@ -169,12 +221,18 @@ export interface FileRoutesById {
   '/flours_/$slug': typeof FloursSlugRoute
   '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
   '/guides/bagel-dough': typeof GuidesBagelDoughRoute
+  '/guides/bakers-percentage': typeof GuidesBakersPercentageRoute
+  '/guides/bulk-fermentation-by-hand': typeof GuidesBulkFermentationByHandRoute
+  '/guides/cold-retard-timing': typeof GuidesColdRetardTimingRoute
+  '/guides/desired-dough-temperature': typeof GuidesDesiredDoughTemperatureRoute
   '/guides/enriched-doughs-fermentation': typeof GuidesEnrichedDoughsFermentationRoute
   '/guides/flour-hydration-ceiling': typeof GuidesFlourHydrationCeilingRoute
+  '/guides/focaccia-high-hydration': typeof GuidesFocacciaHighHydrationRoute
   '/guides/pizza-dough-hydration': typeof GuidesPizzaDoughHydrationRoute
   '/guides/preferments-poolish-biga-levain': typeof GuidesPrefermentsPoolishBigaLevainRoute
   '/guides/scoring-bread-ear': typeof GuidesScoringBreadEarRoute
   '/guides/sourdough-crumb-troubleshooting': typeof GuidesSourdoughCrumbTroubleshootingRoute
+  '/guides/sourdough-discard-uses': typeof GuidesSourdoughDiscardUsesRoute
   '/guides/sourdough-work-week-schedule': typeof GuidesSourdoughWorkWeekScheduleRoute
   '/guides/starter-feeding-ratios-kinetics': typeof GuidesStarterFeedingRatiosKineticsRoute
   '/guides/temperature-fermentation-matrix': typeof GuidesTemperatureFermentationMatrixRoute
@@ -190,12 +248,18 @@ export interface FileRouteTypes {
     | '/flours/$slug'
     | '/guides/autolyse-vs-fermentolyse'
     | '/guides/bagel-dough'
+    | '/guides/bakers-percentage'
+    | '/guides/bulk-fermentation-by-hand'
+    | '/guides/cold-retard-timing'
+    | '/guides/desired-dough-temperature'
     | '/guides/enriched-doughs-fermentation'
     | '/guides/flour-hydration-ceiling'
+    | '/guides/focaccia-high-hydration'
     | '/guides/pizza-dough-hydration'
     | '/guides/preferments-poolish-biga-levain'
     | '/guides/scoring-bread-ear'
     | '/guides/sourdough-crumb-troubleshooting'
+    | '/guides/sourdough-discard-uses'
     | '/guides/sourdough-work-week-schedule'
     | '/guides/starter-feeding-ratios-kinetics'
     | '/guides/temperature-fermentation-matrix'
@@ -209,12 +273,18 @@ export interface FileRouteTypes {
     | '/flours/$slug'
     | '/guides/autolyse-vs-fermentolyse'
     | '/guides/bagel-dough'
+    | '/guides/bakers-percentage'
+    | '/guides/bulk-fermentation-by-hand'
+    | '/guides/cold-retard-timing'
+    | '/guides/desired-dough-temperature'
     | '/guides/enriched-doughs-fermentation'
     | '/guides/flour-hydration-ceiling'
+    | '/guides/focaccia-high-hydration'
     | '/guides/pizza-dough-hydration'
     | '/guides/preferments-poolish-biga-levain'
     | '/guides/scoring-bread-ear'
     | '/guides/sourdough-crumb-troubleshooting'
+    | '/guides/sourdough-discard-uses'
     | '/guides/sourdough-work-week-schedule'
     | '/guides/starter-feeding-ratios-kinetics'
     | '/guides/temperature-fermentation-matrix'
@@ -228,12 +298,18 @@ export interface FileRouteTypes {
     | '/flours_/$slug'
     | '/guides/autolyse-vs-fermentolyse'
     | '/guides/bagel-dough'
+    | '/guides/bakers-percentage'
+    | '/guides/bulk-fermentation-by-hand'
+    | '/guides/cold-retard-timing'
+    | '/guides/desired-dough-temperature'
     | '/guides/enriched-doughs-fermentation'
     | '/guides/flour-hydration-ceiling'
+    | '/guides/focaccia-high-hydration'
     | '/guides/pizza-dough-hydration'
     | '/guides/preferments-poolish-biga-levain'
     | '/guides/scoring-bread-ear'
     | '/guides/sourdough-crumb-troubleshooting'
+    | '/guides/sourdough-discard-uses'
     | '/guides/sourdough-work-week-schedule'
     | '/guides/starter-feeding-ratios-kinetics'
     | '/guides/temperature-fermentation-matrix'
@@ -248,12 +324,18 @@ export interface RootRouteChildren {
   FloursSlugRoute: typeof FloursSlugRoute
   GuidesAutolyseVsFermentolyseRoute: typeof GuidesAutolyseVsFermentolyseRoute
   GuidesBagelDoughRoute: typeof GuidesBagelDoughRoute
+  GuidesBakersPercentageRoute: typeof GuidesBakersPercentageRoute
+  GuidesBulkFermentationByHandRoute: typeof GuidesBulkFermentationByHandRoute
+  GuidesColdRetardTimingRoute: typeof GuidesColdRetardTimingRoute
+  GuidesDesiredDoughTemperatureRoute: typeof GuidesDesiredDoughTemperatureRoute
   GuidesEnrichedDoughsFermentationRoute: typeof GuidesEnrichedDoughsFermentationRoute
   GuidesFlourHydrationCeilingRoute: typeof GuidesFlourHydrationCeilingRoute
+  GuidesFocacciaHighHydrationRoute: typeof GuidesFocacciaHighHydrationRoute
   GuidesPizzaDoughHydrationRoute: typeof GuidesPizzaDoughHydrationRoute
   GuidesPrefermentsPoolishBigaLevainRoute: typeof GuidesPrefermentsPoolishBigaLevainRoute
   GuidesScoringBreadEarRoute: typeof GuidesScoringBreadEarRoute
   GuidesSourdoughCrumbTroubleshootingRoute: typeof GuidesSourdoughCrumbTroubleshootingRoute
+  GuidesSourdoughDiscardUsesRoute: typeof GuidesSourdoughDiscardUsesRoute
   GuidesSourdoughWorkWeekScheduleRoute: typeof GuidesSourdoughWorkWeekScheduleRoute
   GuidesStarterFeedingRatiosKineticsRoute: typeof GuidesStarterFeedingRatiosKineticsRoute
   GuidesTemperatureFermentationMatrixRoute: typeof GuidesTemperatureFermentationMatrixRoute
@@ -318,6 +400,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesBagelDoughRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/bakers-percentage': {
+      id: '/guides/bakers-percentage'
+      path: '/guides/bakers-percentage'
+      fullPath: '/guides/bakers-percentage'
+      preLoaderRoute: typeof GuidesBakersPercentageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/bulk-fermentation-by-hand': {
+      id: '/guides/bulk-fermentation-by-hand'
+      path: '/guides/bulk-fermentation-by-hand'
+      fullPath: '/guides/bulk-fermentation-by-hand'
+      preLoaderRoute: typeof GuidesBulkFermentationByHandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/cold-retard-timing': {
+      id: '/guides/cold-retard-timing'
+      path: '/guides/cold-retard-timing'
+      fullPath: '/guides/cold-retard-timing'
+      preLoaderRoute: typeof GuidesColdRetardTimingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/desired-dough-temperature': {
+      id: '/guides/desired-dough-temperature'
+      path: '/guides/desired-dough-temperature'
+      fullPath: '/guides/desired-dough-temperature'
+      preLoaderRoute: typeof GuidesDesiredDoughTemperatureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guides/enriched-doughs-fermentation': {
       id: '/guides/enriched-doughs-fermentation'
       path: '/guides/enriched-doughs-fermentation'
@@ -330,6 +440,13 @@ declare module '@tanstack/react-router' {
       path: '/guides/flour-hydration-ceiling'
       fullPath: '/guides/flour-hydration-ceiling'
       preLoaderRoute: typeof GuidesFlourHydrationCeilingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/focaccia-high-hydration': {
+      id: '/guides/focaccia-high-hydration'
+      path: '/guides/focaccia-high-hydration'
+      fullPath: '/guides/focaccia-high-hydration'
+      preLoaderRoute: typeof GuidesFocacciaHighHydrationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/pizza-dough-hydration': {
@@ -358,6 +475,13 @@ declare module '@tanstack/react-router' {
       path: '/guides/sourdough-crumb-troubleshooting'
       fullPath: '/guides/sourdough-crumb-troubleshooting'
       preLoaderRoute: typeof GuidesSourdoughCrumbTroubleshootingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/sourdough-discard-uses': {
+      id: '/guides/sourdough-discard-uses'
+      path: '/guides/sourdough-discard-uses'
+      fullPath: '/guides/sourdough-discard-uses'
+      preLoaderRoute: typeof GuidesSourdoughDiscardUsesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/sourdough-work-week-schedule': {
@@ -392,14 +516,20 @@ const rootRouteChildren: RootRouteChildren = {
   FloursSlugRoute: FloursSlugRoute,
   GuidesAutolyseVsFermentolyseRoute: GuidesAutolyseVsFermentolyseRoute,
   GuidesBagelDoughRoute: GuidesBagelDoughRoute,
+  GuidesBakersPercentageRoute: GuidesBakersPercentageRoute,
+  GuidesBulkFermentationByHandRoute: GuidesBulkFermentationByHandRoute,
+  GuidesColdRetardTimingRoute: GuidesColdRetardTimingRoute,
+  GuidesDesiredDoughTemperatureRoute: GuidesDesiredDoughTemperatureRoute,
   GuidesEnrichedDoughsFermentationRoute: GuidesEnrichedDoughsFermentationRoute,
   GuidesFlourHydrationCeilingRoute: GuidesFlourHydrationCeilingRoute,
+  GuidesFocacciaHighHydrationRoute: GuidesFocacciaHighHydrationRoute,
   GuidesPizzaDoughHydrationRoute: GuidesPizzaDoughHydrationRoute,
   GuidesPrefermentsPoolishBigaLevainRoute:
     GuidesPrefermentsPoolishBigaLevainRoute,
   GuidesScoringBreadEarRoute: GuidesScoringBreadEarRoute,
   GuidesSourdoughCrumbTroubleshootingRoute:
     GuidesSourdoughCrumbTroubleshootingRoute,
+  GuidesSourdoughDiscardUsesRoute: GuidesSourdoughDiscardUsesRoute,
   GuidesSourdoughWorkWeekScheduleRoute: GuidesSourdoughWorkWeekScheduleRoute,
   GuidesStarterFeedingRatiosKineticsRoute:
     GuidesStarterFeedingRatiosKineticsRoute,
