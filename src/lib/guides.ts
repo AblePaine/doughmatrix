@@ -135,4 +135,52 @@ export const PUBLISHED_GUIDES = [
     blurb:
       "Discard is your starter, unfed — flavor and tenderness, not a workforce. Three good uses, one to stop.",
   },
+  {
+    to: "/guides/detroit-pizza-dough" as const,
+    kicker: "Pizza",
+    title: "Detroit-Style Pizza Dough",
+    short: "Pan, sauce on top",
+    blurb:
+      "72% hydration the pan forgives. Pan weight, not ball weight — plus when to par-bake and why the sauce goes last.",
+  },
+  {
+    to: "/guides/dutch-oven-vs-open-bake" as const,
+    kicker: "Bake",
+    title: "Baking Sourdough Without a Dutch Oven",
+    short: "Steam, no pot",
+    blurb:
+      "Steam is the job, the pot is one way to do it. Lava rocks, spray, and roasters — and what each one costs you.",
+  },
+  {
+    to: "/guides/pizza-dough-ball-weights" as const,
+    kicker: "Pizza",
+    title: "Pizza Dough Ball Weight Chart",
+    short: "Grams per pie",
+    blurb:
+      "Ball weight is crust thickness. The 12-inch band, area-scaled rows, and why the scale beats the bench knife.",
+  },
+  {
+    to: "/guides/whole-wheat-sourdough" as const,
+    kicker: "Whole Grain",
+    title: "Whole Wheat Sourdough Adjustments",
+    short: "Bran changes everything",
+    blurb:
+      "Bran cuts gluten and drinks water. Higher hydration, a short rest, shorter bulk — and what stays the same.",
+  },
+  {
+    to: "/guides/same-day-sourdough" as const,
+    kicker: "Schedule",
+    title: "Same-Day Sourdough",
+    short: "One day, one loaf",
+    blurb:
+      "Compress the two-day loaf: warm dough, ripe starter, shorter bulk. What you trade, what you keep.",
+  },
+  {
+    to: "/guides/sourdough-starter-from-scratch" as const,
+    kicker: "Levain",
+    title: "Make a Sourdough Starter from Scratch",
+    short: "Day by day",
+    blurb:
+      "Flour, water, and time — including the day-3 false rise and the day-5 stall nobody warns about.",
+  },
 ];
