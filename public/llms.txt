@@ -7,7 +7,8 @@ DoughMatrix (https://doughmatrix.com) is a free precision-baking toolkit. Its he
 ## Engines
 
 - **Sourdough engine** (`/engines/sourdough`): flour/water/starter/salt solver with true vs baker's hydration, a 14-flour catalog with per-flour hydration ceilings, blend support, 4-factor DDT (desired dough temperature) water calculation, temperature-calibrated bulk fermentation windows with fold schedules, and over-pour rescue (added too much water → how much flour fixes it).
-- **Pizza, bagel, enriched/pastry engines**: coming soon — notify-me signup on each card.
+- **Pizza engine** (`/engines/pizza`): NY, Neapolitan, Detroit, and sheet-pan dough calculator. Yeast dosed from your fermentation schedule (room-temp or cold), pan sizing via thickness factor, hydration-vs-heat warnings, and a step timeline.
+- **Bagel, enriched/pastry engines**: coming soon — notify-me signup on each card.
 
 ## Guides
 
