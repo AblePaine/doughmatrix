@@ -10,6 +10,7 @@ import {
 } from "@/lib/sourdough/math";
 import { cn } from "@/lib/utils";
 import { GuideShell } from "@/components/guide-shell";
+import { articleJsonLd } from "@/lib/og/json-ld";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE =
@@ -31,6 +32,11 @@ export const Route = createFileRoute("/guides/temperature-fermentation-matrix")(
       image: OG_IMAGES.temp,
       cardTitle: TITLE,
       category: "FIELD GUIDE",
+      jsonLd: articleJsonLd({
+        headline: TITLE,
+        description: DESCRIPTION,
+        path: "/guides/temperature-fermentation-matrix",
+      }),
     }),
 });
 

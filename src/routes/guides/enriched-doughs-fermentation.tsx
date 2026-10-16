@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GuideShell } from "@/components/guide-shell";
+import { articleJsonLd } from "@/lib/og/json-ld";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE =
@@ -18,6 +19,11 @@ export const Route = createFileRoute("/guides/enriched-doughs-fermentation")({
       image: OG_IMAGES.temp,
       cardTitle: TITLE,
       category: "FIELD GUIDE",
+      jsonLd: articleJsonLd({
+        headline: TITLE,
+        description: DESCRIPTION,
+        path: "/guides/enriched-doughs-fermentation",
+      }),
     }),
 });
 

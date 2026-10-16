@@ -1,0 +1,8 @@
+# DoughMatrix — all crawlers welcome, including AI/agent crawlers.
+# Machine-readable tool index: https://doughmatrix.com/llms.txt
+# Tool manifest for agents:    https://doughmatrix.com/mcp-tools.json
+
+User-agent: *
+Allow: /
+
+Sitemap: https://doughmatrix.com/sitemap.xml

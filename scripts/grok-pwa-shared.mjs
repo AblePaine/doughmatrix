@@ -352,14 +352,21 @@ export function grokOgHeadTags({
   documentTitle = "",
   cwd = process.cwd(),
   imageOverride = "",
+  titleOverride = "",
+  descriptionOverride = "",
 } = {}) {
-  const title = resolveOgTitle(site, appName, host, documentTitle);
+  // Page-authored share title/description win over the site-wide defaults,
+  // mirroring the imageOverride seam: a route that emitted its own og:title /
+  // og:description keeps them; anything else falls back to site.json.
+  const pageTitle = String(titleOverride ?? "").trim();
+  const title = pageTitle || resolveOgTitle(site, appName, host, documentTitle);
   const publicHost = resolvePublicHost(host);
   const tags = [
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta property="og:title" content="${escapeHtml(title)}">`,
   ];
-  const description = String(site.description ?? "").trim();
+  const pageDescription = String(descriptionOverride ?? "").trim();
+  const description = pageDescription || String(site.description ?? "").trim();
   if (description) {
     tags.push(`<meta property="og:description" content="${escapeHtml(description)}">`);
   }
@@ -454,6 +461,13 @@ export function injectGrokPwaHead(html, ctx = {}) {
   );
   const pageImage =
     extractMetaContent(html, "og:image") || extractMetaContent(html, "twitter:image");
+  // Extract page-authored share text before the strip, like the image, so the
+  // injector can re-apply it over the site-wide defaults below.
+  const pageTitle =
+    extractMetaContent(html, "og:title") || extractMetaContent(html, "twitter:title");
+  const pageDescription =
+    extractMetaContent(html, "og:description") ||
+    extractMetaContent(html, "twitter:description");
   let next = stripShareMetaTags(html);
 
   const missing = grokPwaHeadTags(appName)
@@ -466,7 +480,16 @@ export function injectGrokPwaHead(html, ctx = {}) {
 
   next = insertAfterHeadOpen(
     next,
-    grokOgHeadTags({ host, appName, site, documentTitle, cwd, imageOverride: pageImage }).join(""),
+    grokOgHeadTags({
+      host,
+      appName,
+      site,
+      documentTitle,
+      cwd,
+      imageOverride: pageImage,
+      titleOverride: pageTitle,
+      descriptionOverride: pageDescription,
+    }).join(""),
   );
 
   if (!next.includes("/grok-app-builder/extensions.js")) {

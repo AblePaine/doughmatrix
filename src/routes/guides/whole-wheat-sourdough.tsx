@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { GuideShell } from "@/components/guide-shell";
+import { articleJsonLd } from "@/lib/og/json-ld";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE = "Whole Wheat Sourdough Hydration and the Adjustments That Matter";
@@ -18,6 +19,11 @@ export const Route = createFileRoute("/guides/whole-wheat-sourdough")({
       image: OG_IMAGES.hydration,
       cardTitle: TITLE,
       category: "FIELD GUIDE",
+      jsonLd: articleJsonLd({
+        headline: TITLE,
+        description: DESCRIPTION,
+        path: "/guides/whole-wheat-sourdough",
+      }),
     }),
 });
 

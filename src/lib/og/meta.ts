@@ -39,6 +39,8 @@ export function socialHead(opts: {
   cardTitle?: string;
   category?: string;
   detail?: string;
+  /** One JSON-LD object (or several) — emitted as ld+json head scripts. */
+  jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
 }) {
   const url = absUrl(opts.path);
   const image = opts.image
@@ -69,5 +71,16 @@ export function socialHead(opts: {
       { name: "twitter:image", content: image },
     ],
     links: [{ rel: "canonical", href: url }],
+    ...(opts.jsonLd
+      ? {
+          scripts: (Array.isArray(opts.jsonLd)
+            ? opts.jsonLd
+            : [opts.jsonLd]
+          ).map((data) => ({
+            type: "application/ld+json",
+            children: JSON.stringify(data),
+          })),
+        }
+      : {}),
   };
 }

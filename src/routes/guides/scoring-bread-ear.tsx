@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GuideShell } from "@/components/guide-shell";
+import { articleJsonLd } from "@/lib/og/json-ld";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE = "Scoring Bread: Blade Angle, Depth, and Timing for an Open Ear";
@@ -17,6 +18,11 @@ export const Route = createFileRoute("/guides/scoring-bread-ear")({
       image: OG_IMAGES.engine,
       cardTitle: TITLE,
       category: "FIELD GUIDE",
+      jsonLd: articleJsonLd({
+        headline: TITLE,
+        description: DESCRIPTION,
+        path: "/guides/scoring-bread-ear",
+      }),
     }),
 });
 

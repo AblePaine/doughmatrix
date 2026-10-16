@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { GuideShell } from "@/components/guide-shell";
+import { articleJsonLd } from "@/lib/og/json-ld";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE = "Same-Day Sourdough Recipe: One Day, and What You Trade";
@@ -18,6 +19,11 @@ export const Route = createFileRoute("/guides/same-day-sourdough")({
       image: OG_IMAGES.temp,
       cardTitle: TITLE,
       category: "FIELD GUIDE",
+      jsonLd: articleJsonLd({
+        headline: TITLE,
+        description: DESCRIPTION,
+        path: "/guides/same-day-sourdough",
+      }),
     }),
 });
 

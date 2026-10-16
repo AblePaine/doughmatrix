@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { GuideShell } from "@/components/guide-shell";
+import { articleJsonLd } from "@/lib/og/json-ld";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE = "Detroit-Style Pizza Dough Recipe: Hydration, Pan, and Sauce on Top";
@@ -18,6 +19,11 @@ export const Route = createFileRoute("/guides/detroit-pizza-dough")({
       image: OG_IMAGES.engine,
       cardTitle: TITLE,
       category: "FIELD GUIDE",
+      jsonLd: articleJsonLd({
+        headline: TITLE,
+        description: DESCRIPTION,
+        path: "/guides/detroit-pizza-dough",
+      }),
     }),
 });
 

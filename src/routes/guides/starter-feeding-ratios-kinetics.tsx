@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { BULK_T_REF_C, BULK_TAU_C, formatGrams, formatHours } from "@/lib/sourdough/math";
 import { cn } from "@/lib/utils";
 import { GuideShell } from "@/components/guide-shell";
+import { articleJsonLd } from "@/lib/og/json-ld";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE =
@@ -44,6 +45,11 @@ export const Route = createFileRoute("/guides/starter-feeding-ratios-kinetics")(
       image: OG_IMAGES.starter,
       cardTitle: TITLE,
       category: "FIELD GUIDE",
+      jsonLd: articleJsonLd({
+        headline: TITLE,
+        description: DESCRIPTION,
+        path: "/guides/starter-feeding-ratios-kinetics",
+      }),
     }),
 });
 

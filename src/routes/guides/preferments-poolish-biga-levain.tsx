@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GuideShell } from "@/components/guide-shell";
+import { articleJsonLd } from "@/lib/og/json-ld";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE = "Preferments Compared: Poolish, Biga, and Levain";
@@ -18,6 +19,11 @@ export const Route = createFileRoute("/guides/preferments-poolish-biga-levain")(
         image: OG_IMAGES.starter,
         cardTitle: TITLE,
         category: "FIELD GUIDE",
+        jsonLd: articleJsonLd({
+          headline: TITLE,
+          description: DESCRIPTION,
+          path: "/guides/preferments-poolish-biga-levain",
+        }),
       }),
   },
 );

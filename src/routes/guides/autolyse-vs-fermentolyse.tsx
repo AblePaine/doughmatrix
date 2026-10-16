@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { GuideShell } from "@/components/guide-shell";
+import { articleJsonLd } from "@/lib/og/json-ld";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const H1 =
@@ -60,6 +61,11 @@ export const Route = createFileRoute("/guides/autolyse-vs-fermentolyse")({
       image: OG_IMAGES.autolyse,
       cardTitle: H1,
       category: "FIELD GUIDE",
+      jsonLd: articleJsonLd({
+        headline: TITLE,
+        description: DESCRIPTION,
+        path: "/guides/autolyse-vs-fermentolyse",
+      }),
     }),
 });
 

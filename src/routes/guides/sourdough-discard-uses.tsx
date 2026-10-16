@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { GuideShell } from "@/components/guide-shell";
+import { articleJsonLd } from "@/lib/og/json-ld";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE = "What to Do with Sourdough Discard: What It Actually Is";
@@ -18,6 +19,11 @@ export const Route = createFileRoute("/guides/sourdough-discard-uses")({
       image: OG_IMAGES.starter,
       cardTitle: TITLE,
       category: "FIELD GUIDE",
+      jsonLd: articleJsonLd({
+        headline: TITLE,
+        description: DESCRIPTION,
+        path: "/guides/sourdough-discard-uses",
+      }),
     }),
 });
 

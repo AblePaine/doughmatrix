@@ -4,6 +4,7 @@ import { FLOURS } from "@/lib/sourdough/flours";
 import type { FlourFamily } from "@/lib/sourdough/types";
 import { cn } from "@/lib/utils";
 import { GuideShell } from "@/components/guide-shell";
+import { articleJsonLd } from "@/lib/og/json-ld";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 const TITLE =
@@ -22,6 +23,11 @@ export const Route = createFileRoute("/guides/flour-hydration-ceiling")({
       image: OG_IMAGES.hydration,
       cardTitle: TITLE,
       category: "FIELD GUIDE",
+      jsonLd: articleJsonLd({
+        headline: TITLE,
+        description: DESCRIPTION,
+        path: "/guides/flour-hydration-ceiling",
+      }),
     }),
 });
 

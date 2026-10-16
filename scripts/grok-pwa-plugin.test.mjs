@@ -102,17 +102,60 @@ test("does not duplicate x:creator tags", () => {
   assert.equal(twice.split('property="x:creator:id"').length - 1, 1);
 });
 
-test("platform chrome overwrites share-card metas and always sets og:title", () => {
+test("platform chrome keeps the page's own share-card title and description", () => {
   const html =
-    '<html><head><title>Hello World</title><meta property="og:title" content="Old"><meta name="twitter:card" content="summary"></head></html>';
+    '<html><head><title>Hello World</title><meta property="og:title" content="Page Title"><meta property="og:description" content="Page summary"><meta name="twitter:card" content="summary"></head></html>';
   const out = injectGrokPwaHead(html, { appName: "Wild Race" });
   assert.match(out, /name="twitter:card" content="summary_large_image"/);
-  assert.match(out, /property="og:title" content="Hello World"/);
-  assert.doesNotMatch(out, /content="Old"/);
+  assert.match(out, /property="og:title" content="Page Title"/);
+  assert.match(out, /property="og:description" content="Page summary"/);
   assert.doesNotMatch(out, /content="summary"/);
   assert.equal(out.split('name="twitter:card"').length - 1, 1);
   assert.equal(out.split('property="og:title"').length - 1, 1);
+  assert.equal(out.split('property="og:description"').length - 1, 1);
   assert.doesNotMatch(out, /property="og:image"/);
+});
+
+test("pages without their own share text fall back to the site-wide card", () => {
+  const out = injectGrokPwaHead("<html><head><title>Doc Title</title></head></html>", {
+    cwd: mkdtempSync(join(tmpdir(), "grok-og-fallback-")),
+    site: { title: "Site Title", description: "Site summary" },
+  });
+  assert.match(out, /property="og:title" content="Site Title"/);
+  assert.match(out, /property="og:description" content="Site summary"/);
+  assert.equal(out.split('property="og:title"').length - 1, 1);
+});
+
+test("a page og:title alone overrides the title but not the description", () => {
+  const out = injectGrokPwaHead(
+    '<html><head><meta property="og:title" content="Only Title"></head></html>',
+    {
+      cwd: mkdtempSync(join(tmpdir(), "grok-og-partial-")),
+      site: { title: "Site Title", description: "Site summary" },
+    },
+  );
+  assert.match(out, /property="og:title" content="Only Title"/);
+  assert.match(out, /property="og:description" content="Site summary"/);
+});
+
+test("twitter-only share text is promoted to the og: tags", () => {
+  const out = injectGrokPwaHead(
+    '<html><head><meta name="twitter:title" content="Tw Title"><meta name="twitter:description" content="Tw summary"></head></html>',
+    {
+      cwd: mkdtempSync(join(tmpdir(), "grok-og-twitter-")),
+      site: { title: "Site Title", description: "Site summary" },
+    },
+  );
+  assert.match(out, /property="og:title" content="Tw Title"/);
+  assert.match(out, /property="og:description" content="Tw summary"/);
+});
+
+test("page og:title entities are not double-escaped", () => {
+  const out = injectGrokPwaHead(
+    '<html><head><meta property="og:title" content="Cats &amp; Dogs"></head></html>',
+  );
+  assert.match(out, /property="og:title" content="Cats &amp; Dogs"/);
+  assert.doesNotMatch(out, /Cats &amp;amp; Dogs/);
 });
 
 test("preserves a page-authored og:image on a public host", () => {

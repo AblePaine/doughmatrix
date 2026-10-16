@@ -1,6 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { HubHome } from "@/components/hub-home";
 import { hasEngineQuery, parseEngineSearch } from "@/lib/engine-search";
+import { calculatorJsonLd, websiteJsonLd } from "@/lib/og/json-ld";
 import { OG_IMAGES, socialHead } from "@/lib/og/meta";
 
 export const Route = createFileRoute("/")({
@@ -24,5 +25,20 @@ export const Route = createFileRoute("/")({
       image: OG_IMAGES.home,
       cardTitle: "Baking science, minus the guesswork",
       category: "BAKING SUITE",
+      jsonLd: [
+        websiteJsonLd(),
+        calculatorJsonLd({
+          name: "DoughMatrix — Baking Calculators",
+          path: "/",
+          description:
+            "Free precision-baking toolkit: sourdough and pizza dough calculators with true hydration, per-flour absorption data, dough-temperature and fermentation timing.",
+          featureList: [
+            "Sourdough hydration & fermentation calculator",
+            "Pizza dough calculator (NY, Neapolitan, Detroit, sheet-pan)",
+            "Artisan flour absorption index (16 flours)",
+            "Desired dough temperature (DDT) water calculation",
+          ],
+        }),
+      ],
     }),
 });
