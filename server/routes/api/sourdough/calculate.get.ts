@@ -1,10 +1,5 @@
 import { defineEventHandler, getQuery, setHeader } from "h3";
-import {
-  buildTimeline,
-  computeFormula,
-  formulaPlaintext,
-} from "../../../../src/lib/sourdough/math.ts";
-import { normalizeInput } from "../../../utils/sourdough-input.ts";
+import { calculatePayload } from "../../../utils/sourdough-api.ts";
 
 /**
  * GET /api/sourdough/calculate
@@ -18,16 +13,7 @@ import { normalizeInput } from "../../../utils/sourdough-input.ts";
  */
 export default defineEventHandler((event) => {
   const query = getQuery(event) as Record<string, string | undefined>;
-  const input = normalizeInput(query);
-  const formula = computeFormula(input);
-  const timeline = buildTimeline(formula);
-
   setHeader(event, "content-type", "application/json; charset=utf-8");
   setHeader(event, "cache-control", "public, max-age=300, s-maxage=600");
-  return {
-    input,
-    formula,
-    timeline,
-    plaintext: formulaPlaintext(formula, input),
-  };
+  return calculatePayload(query);
 });

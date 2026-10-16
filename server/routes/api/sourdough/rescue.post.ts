@@ -1,9 +1,5 @@
 import { defineEventHandler, readBody, setHeader } from "h3";
-import {
-  computeFormula,
-  rescueOverPour,
-} from "../../../../src/lib/sourdough/math.ts";
-import { normalizeInput } from "../../../utils/sourdough-input.ts";
+import { rescuePayload } from "../../../utils/sourdough-api.ts";
 
 /**
  * POST /api/sourdough/rescue
@@ -14,29 +10,12 @@ import { normalizeInput } from "../../../utils/sourdough-input.ts";
  * Body: partial BakerInput (same as /calculate) + extraWater (grams).
  *   { "flourWeight": 500, "targetTrueHydration": 72, "extraWater": 40 }
  *
- * Response: { input, formula, rescue: { extraWater, extraFlour, extraSalt,
- *   newDoughWeight, newTrueHydration } }
+ * Response: { input, extraWater, formula, rescue: { extraWater, extraFlour,
+ *   extraSalt, newDoughWeight, newTrueHydration } }
  */
 export default defineEventHandler(async (event) => {
-  const body = (await readBody(event).catch(() => ({}))) as Record<
-    string,
-    unknown
-  >;
-  const input = normalizeInput(body);
-  const extraWater =
-    typeof body.extraWater === "number" && Number.isFinite(body.extraWater)
-      ? Math.max(0, Math.min(2000, body.extraWater))
-      : 0;
-
-  const formula = computeFormula(input);
-  const rescue = rescueOverPour(
-    formula,
-    extraWater,
-    input.saltPercent,
-    input.targetTrueHydration,
-  );
-
+  const body = await readBody(event).catch(() => ({}));
   setHeader(event, "content-type", "application/json; charset=utf-8");
   setHeader(event, "cache-control", "no-store");
-  return { input, extraWater, formula, rescue };
+  return rescuePayload(body);
 });

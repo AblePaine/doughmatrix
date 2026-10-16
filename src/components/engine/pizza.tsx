@@ -1,8 +1,9 @@
 import { useMemo, useState, type ReactNode } from "react";
-import { AlertTriangle, Copy, RotateCcw } from "lucide-react";
+import { AlertTriangle, Copy, Link2, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GuidesFooter } from "@/components/guides-footer";
 import { SiteHeader } from "@/components/site-header";
+import { pizzaShareParams } from "@/lib/engine-search";
 import { Stepper } from "@/components/engine/stepper";
 import {
   computePizza,
@@ -90,6 +91,7 @@ export function PizzaEngine() {
   const reset = usePizza((s) => s.reset);
   const result = useMemo(() => computePizza(input), [input]);
   const [copied, setCopied] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const copy = async () => {
     try {
@@ -97,6 +99,19 @@ export function PizzaEngine() {
       setCopied(true);
       track("copy_pizza_formula");
       window.setTimeout(() => setCopied(false), 1600);
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const shareLink = async () => {
+    try {
+      const qs = new URLSearchParams(pizzaShareParams(input)).toString();
+      const url = `${window.location.origin}/engines/pizza${qs ? `?${qs}` : ""}`;
+      await navigator.clipboard.writeText(url);
+      setLinkCopied(true);
+      track("share_link", { engine: "pizza" });
+      window.setTimeout(() => setLinkCopied(false), 1600);
     } catch {
       /* ignore */
     }
@@ -111,6 +126,15 @@ export function PizzaEngine() {
         <SiteHeader
           actions={
             <>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => void shareLink()}
+                aria-label="Copy link to this formula"
+              >
+                <Link2 className="size-4" />
+                <span className="sr-only">{linkCopied ? "Link copied" : "Copy link"}</span>
+              </Button>
               <Button
                 variant="ghost"
                 size="icon"

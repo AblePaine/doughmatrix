@@ -1,5 +1,5 @@
 import { defineEventHandler, setHeader } from "h3";
-import { FLOURS } from "../../../../src/lib/sourdough/flours.ts";
+import { floursPayload } from "../../../utils/sourdough-api.ts";
 
 /**
  * GET /api/sourdough/flours
@@ -12,5 +12,5 @@ import { FLOURS } from "../../../../src/lib/sourdough/flours.ts";
 export default defineEventHandler((event) => {
   setHeader(event, "content-type", "application/json; charset=utf-8");
   setHeader(event, "cache-control", "public, max-age=86400, s-maxage=604800");
-  return { flours: FLOURS };
+  return floursPayload();
 });

@@ -23,6 +23,8 @@ DoughMatrix exposes its sourdough engine as a free JSON API — no key required.
 - `GET https://doughmatrix.com/api/sourdough/flours` — the flour catalog (id, protein, sweet spot, ceiling). Use an `id` as `flourId` in calculate calls.
 - `POST https://doughmatrix.com/api/sourdough/rescue` — over-pour rescue. Same fields as calculate plus `extraWater` (grams). Returns how much extra flour and salt restores target true hydration.
 - `GET https://doughmatrix.com/mcp-tools.json` — machine-readable tool manifest (MCP-style input schemas + HTTP bindings) for the three endpoints above.
+- `POST https://doughmatrix.com/mcp` — live MCP endpoint (Model Context Protocol, streamable HTTP, JSON-RPC 2.0; no auth). Supports `initialize`, `ping`, `tools/list`, and `tools/call` for the same three tools as the manifest: `sourdough_calculate`, `sourdough_flours`, `sourdough_rescue`. Tool results carry the REST response payload as JSON text.
+- `GET https://doughmatrix.com/openapi.json` — OpenAPI 3.0 spec for the REST endpoints and the MCP endpoint, with full request/response schemas.
 
 Example:
 ```

@@ -3,6 +3,7 @@ import {
   ChefHat,
   Copy,
   Droplets,
+  Link2,
   RotateCcw,
   Scale,
   Thermometer,
@@ -24,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { GuidesFooter } from "@/components/guides-footer";
 import { SiteHeader } from "@/components/site-header";
 import { track } from "@/lib/analytics";
+import { sourdoughShareParams } from "@/lib/engine-search";
 import { cn } from "@/lib/utils";
 import { HydrationDial } from "./dial";
 import { KitchenMode } from "./kitchen";
@@ -37,6 +39,7 @@ export function Engine() {
   const [kitchen, setKitchen] = useState(false);
   const [rescue, setRescue] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const copy = async () => {
     try {
@@ -49,12 +52,29 @@ export function Engine() {
     }
   };
 
+  const shareLink = async () => {
+    try {
+      const qs = new URLSearchParams(sourdoughShareParams(input)).toString();
+      const url = `${window.location.origin}/engines/sourdough${qs ? `?${qs}` : ""}`;
+      await navigator.clipboard.writeText(url);
+      setLinkCopied(true);
+      track("share_link", { engine: "sourdough" });
+      window.setTimeout(() => setLinkCopied(false), 1600);
+    } catch {
+      /* ignore */
+    }
+  };
+
   return (
     <>
       <div className="min-h-dvh" {...(kitchen ? { inert: true, "aria-hidden": true } : {})}>
         <SiteHeader
           actions={
             <>
+              <Button variant="ghost" size="icon" onClick={() => void shareLink()} aria-label="Copy link to this formula">
+                <Link2 className="size-4" />
+                <span className="sr-only">{linkCopied ? "Link copied" : "Copy link"}</span>
+              </Button>
               <Button variant="ghost" size="icon" onClick={() => void copy()} aria-label="Copy formula">
                 <Copy className="size-4" />
                 <span className="sr-only">{copied ? "Copied" : "Copy"}</span>
