@@ -128,6 +128,119 @@ export const MCP_TOOLS: McpToolDef[] = [
     },
   },
   {
+    name: "pricing_calculate",
+    description:
+      "Price baked goods from true batch cost: ingredients + packaging + your labor + overhead, divided by the units that actually sell (yield minus waste). Returns per-product unit cost, the suggested price for a target margin after channel fees, the markup-frame price, profit/margin at the current price, per-variant prices (variants are per-batch cost deltas, not new recipes), and whole-order profit after the real card fee. All inputs optional — omitted fields use the sample products (chocolate chip cookies + a sourdough loaf) and defaults ($18/hr labor, 40% target margin).",
+    inputSchema: {
+      properties: {
+        defaults: {
+          description: "Business defaults applied to every product.",
+          properties: {
+            laborRate: {
+              description: "Your labor rate $/hr. Default: 18.",
+              type: "number",
+            },
+            markupPercent: {
+              description: "Markup % for the side-by-side markup price. Default: 100.",
+              type: "number",
+            },
+            orderFeePercent: {
+              description: "Order-level card fee %. Default: 2.9 (Square in-person).",
+              type: "number",
+            },
+            orderFlatFee: {
+              description: "Order-level card fee flat $. Default: 0.30.",
+              type: "number",
+            },
+            targetMarginPercent: {
+              description: "Target gross margin on price %, after channel fees. Default: 40.",
+              type: "number",
+            },
+          },
+          type: "object",
+        },
+        order: {
+          description:
+            "Order lines for the profit-per-order view. variantIndex is an index into the product's variants, or null for the base product.",
+          items: {
+            properties: {
+              productIndex: { type: "number" },
+              qty: { type: "number" },
+              variantIndex: { type: ["number", "null"] },
+            },
+            type: "object",
+          },
+          type: "array",
+        },
+        products: {
+          description: "Products to price. Each is costed per batch.",
+          items: {
+            properties: {
+              channelFeePercent: {
+                description: "Fee this product's sales channel takes from the price %. Default: 0.",
+                type: "number",
+              },
+              currentPrice: {
+                description: "Price currently charged $, for the profit/margin check. Default: 0.",
+                type: "number",
+              },
+              ingredients: {
+                description:
+                  "Ingredient rows. Row cost = amountUsed × purchasePrice ÷ purchaseQty; amountUsed and purchaseQty must share a unit (g/g, count/count).",
+                items: {
+                  properties: {
+                    amountUsed: { type: "number" },
+                    name: { type: "string" },
+                    purchasePrice: { type: "number" },
+                    purchaseQty: { type: "number" },
+                  },
+                  type: "object",
+                },
+                type: "array",
+              },
+              laborMinutes: {
+                description: "Hands-on minutes per batch. Default: 0.",
+                type: "number",
+              },
+              name: { type: "string" },
+              overheadPerBatch: {
+                description: "Overhead $ per batch (oven energy, booth share, utilities). Default: 0.",
+                type: "number",
+              },
+              packagingPerUnit: {
+                description: "Packaging $ per unit. Default: 0.",
+                type: "number",
+              },
+              variants: {
+                description: "Variants as per-batch cost deltas on the base product.",
+                items: {
+                  properties: {
+                    batchCostDelta: { type: "number" },
+                    name: { type: "string" },
+                    packagingDelta: { type: "number" },
+                  },
+                  type: "object",
+                },
+                type: "array",
+              },
+              wastePercent: {
+                description: "Waste / unsold % of the batch. Cost divides by sellable units only. Default: 0.",
+                type: "number",
+              },
+              yieldUnits: {
+                description: "Units per batch. Default: 1.",
+                type: "number",
+              },
+            },
+            type: "object",
+          },
+          type: "array",
+        },
+      },
+      type: "object",
+    },
+  },
+  {
     name: "sourdough_rescue",
     description:
       "Over-pour rescue: too much water went into the bowl. Given the same inputs as sourdough_calculate plus extraWater (grams), returns how much extra flour and salt restores the target true hydration, plus the new dough weight and true hydration.",

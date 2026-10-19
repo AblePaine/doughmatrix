@@ -112,6 +112,14 @@ export const PUBLISHED_GUIDES = [
       "Flour is 100%. Everything else hangs off it. True hydration vs. bowl hydration, worked by hand.",
   },
   {
+    to: "/guides/costing-is-not-pricing" as const,
+    kicker: "Pricing",
+    title: "Costing Is Not Pricing",
+    short: "Costing ≠ pricing",
+    blurb:
+      "Ingredients are the smallest slice of the cost. Labor, overhead, waste, packaging — then a price with the profit already in it.",
+  },
+  {
     to: "/guides/focaccia-high-hydration" as const,
     kicker: "Focaccia",
     title: "Focaccia Hydration Percentage",

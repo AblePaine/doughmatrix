@@ -17,6 +17,15 @@ export const LIVE_ENGINES = [
     blurb:
       "NY, Neapolitan, Detroit, and sheet-pan — yeast dosed from your fermentation schedule, dough sized from balls or pan, hydration matched to your oven's heat.",
   },
+  {
+    id: "pricing",
+    to: "/engines/pricing" as const,
+    name: "Pricing Calculator",
+    short: "Pricing",
+    badge: "New",
+    blurb:
+      "What to charge, not just how to bake: cost the batch honestly — ingredients, packaging, your labor, overhead, and the ones that don't sell — then price per item, per flavor, and per whole market order.",
+  },
 ] as const;
 
 export const UPCOMING_ENGINES = [

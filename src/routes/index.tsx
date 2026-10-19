@@ -35,6 +35,7 @@ export const Route = createFileRoute("/")({
           featureList: [
             "Sourdough hydration & fermentation calculator",
             "Pizza dough calculator (NY, Neapolitan, Detroit, sheet-pan)",
+            "Pricing calculator (true unit cost, margin & markup prices, order profit)",
             "Artisan flour absorption index (16 flours)",
             "Desired dough temperature (DDT) water calculation",
           ],

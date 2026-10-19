@@ -1,13 +1,14 @@
 {
-  "api_base": "https://doughmatrix.com/api/sourdough",
-  "description": "DoughMatrix sourdough formula engine as agent-callable tools. True-hydration math (counts water inside the starter), flour hydration ceilings, 4-factor DDT water temperature, temperature-calibrated bulk fermentation windows, and over-pour rescue. Free, no key.",
+  "api_base": "https://doughmatrix.com/api",
+  "description": "DoughMatrix engines as agent-callable tools. Sourdough: true-hydration math (counts water inside the starter), flour hydration ceilings, 4-factor DDT water temperature, temperature-calibrated bulk fermentation windows, and over-pour rescue. Pricing: true batch cost (ingredients + labor + overhead over sellable units) turned into margin/markup prices, variant deltas, and order profit. Free, no key.",
   "homepage": "https://doughmatrix.com",
   "name": "doughmatrix-sourdough",
   "notes": [
     "True hydration counts the starter's flour and water \u2014 most recipes quote baker's % which hides starter water. The API returns both.",
     "Danger levels: safe / caution (within 4 points of the flour's ceiling) / danger (at or over ceiling).",
     "GET /calculate accepts the same fields as URL query params for zero-friction calls.",
-    "No authentication, no rate limits published \u2014 be reasonable; this is a free pilot."
+    "No authentication, no rate limits published \u2014 be reasonable; this is a free pilot.",
+    "Pricing state is nested (products with ingredient/variant lists), so pricing_calculate takes the full state in the POST body; GET /api/pricing/calculate prices the sample products with overridable defaults."
   ],
   "tools": [
     {
@@ -24,7 +25,7 @@
           "targetTrueHydration": 75
         },
         "method": "POST",
-        "path": "/calculate"
+        "path": "/sourdough/calculate"
       },
       "inputSchema": {
         "properties": {
@@ -127,7 +128,7 @@
       "description": "List the flour catalog behind the engine: id, name, protein %, hydration sweet spot and ceiling %, family, and notes. Use an id as flourId/blendId in sourdough_calculate.",
       "http": {
         "method": "GET",
-        "path": "/flours"
+        "path": "/sourdough/flours"
       },
       "inputSchema": {
         "properties": {},
@@ -135,6 +136,159 @@
       },
       "name": "sourdough_flours",
       "outputDescription": "Returns { flours: [{ id, name, short, protein, sweetSpot, ceiling, family, notes }] }."
+    },
+    {
+      "description": "Price baked goods from true batch cost: ingredients + packaging + your labor + overhead, divided by the units that actually sell (yield minus waste). Returns per-product unit cost, the suggested price for a target margin after channel fees, the markup-frame price, profit/margin at the current price, per-variant prices (variants are per-batch cost deltas, not new recipes), and whole-order profit after the real card fee. All inputs optional \u2014 omitted fields use the sample products (chocolate chip cookies + a sourdough loaf) and defaults ($18/hr labor, 40% target margin).",
+      "http": {
+        "example_body": {
+          "defaults": {
+            "laborRate": 18,
+            "targetMarginPercent": 40
+          },
+          "products": [
+            {
+              "name": "Classic Chocolate Chip Cookies",
+              "wastePercent": 5,
+              "yieldUnits": 24
+            }
+          ]
+        },
+        "method": "POST",
+        "path": "/pricing/calculate"
+      },
+      "inputSchema": {
+        "properties": {
+          "defaults": {
+            "description": "Business defaults applied to every product.",
+            "properties": {
+              "laborRate": {
+                "description": "Your labor rate $/hr. Default: 18.",
+                "type": "number"
+              },
+              "markupPercent": {
+                "description": "Markup % for the side-by-side markup price. Default: 100.",
+                "type": "number"
+              },
+              "orderFeePercent": {
+                "description": "Order-level card fee %. Default: 2.9 (Square in-person).",
+                "type": "number"
+              },
+              "orderFlatFee": {
+                "description": "Order-level card fee flat $. Default: 0.30.",
+                "type": "number"
+              },
+              "targetMarginPercent": {
+                "description": "Target gross margin on price %, after channel fees. Default: 40.",
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "order": {
+            "description": "Order lines for the profit-per-order view. variantIndex is an index into the product's variants, or null for the base product.",
+            "items": {
+              "properties": {
+                "productIndex": {
+                  "type": "number"
+                },
+                "qty": {
+                  "type": "number"
+                },
+                "variantIndex": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "products": {
+            "description": "Products to price. Each is costed per batch.",
+            "items": {
+              "properties": {
+                "channelFeePercent": {
+                  "description": "Fee this product's sales channel takes from the price %. Default: 0.",
+                  "type": "number"
+                },
+                "currentPrice": {
+                  "description": "Price currently charged $, for the profit/margin check. Default: 0.",
+                  "type": "number"
+                },
+                "ingredients": {
+                  "description": "Ingredient rows. Row cost = amountUsed \u00d7 purchasePrice \u00f7 purchaseQty; amountUsed and purchaseQty must share a unit (g/g, count/count).",
+                  "items": {
+                    "properties": {
+                      "amountUsed": {
+                        "type": "number"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "purchasePrice": {
+                        "type": "number"
+                      },
+                      "purchaseQty": {
+                        "type": "number"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "laborMinutes": {
+                  "description": "Hands-on minutes per batch. Default: 0.",
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "overheadPerBatch": {
+                  "description": "Overhead $ per batch (oven energy, booth share, utilities). Default: 0.",
+                  "type": "number"
+                },
+                "packagingPerUnit": {
+                  "description": "Packaging $ per unit. Default: 0.",
+                  "type": "number"
+                },
+                "variants": {
+                  "description": "Variants as per-batch cost deltas on the base product.",
+                  "items": {
+                    "properties": {
+                      "batchCostDelta": {
+                        "type": "number"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "packagingDelta": {
+                        "type": "number"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "wastePercent": {
+                  "description": "Waste / unsold % of the batch. Cost divides by sellable units only. Default: 0.",
+                  "type": "number"
+                },
+                "yieldUnits": {
+                  "description": "Units per batch. Default: 1.",
+                  "type": "number"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "name": "pricing_calculate",
+      "outputDescription": "Returns the normalized input state, per-product results (batch/unit math, suggested margin price, markup price, profit/margin at the current price, variant table), whole-order profit after card fees, and a plaintext summary."
     },
     {
       "description": "Over-pour rescue: too much water went into the bowl. Given the same inputs as sourdough_calculate plus extraWater (grams), returns how much extra flour and salt restores the target true hydration, plus the new dough weight and true hydration.",
@@ -145,7 +299,7 @@
           "targetTrueHydration": 72
         },
         "method": "POST",
-        "path": "/rescue"
+        "path": "/sourdough/rescue"
       },
       "inputSchema": {
         "properties": {

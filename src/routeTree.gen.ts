@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FloursRouteImport } from './routes/flours'
 import { Route as EnginesPizzaRouteImport } from './routes/engines/pizza'
+import { Route as EnginesPricingRouteImport } from './routes/engines/pricing'
 import { Route as EnginesSourdoughRouteImport } from './routes/engines/sourdough'
 import { Route as FloursSlugRouteImport } from './routes/flours_.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
@@ -20,6 +21,7 @@ import { Route as GuidesBagelDoughRouteImport } from './routes/guides/bagel-doug
 import { Route as GuidesBakersPercentageRouteImport } from './routes/guides/bakers-percentage'
 import { Route as GuidesBulkFermentationByHandRouteImport } from './routes/guides/bulk-fermentation-by-hand'
 import { Route as GuidesColdRetardTimingRouteImport } from './routes/guides/cold-retard-timing'
+import { Route as GuidesCostingIsNotPricingRouteImport } from './routes/guides/costing-is-not-pricing'
 import { Route as GuidesDesiredDoughTemperatureRouteImport } from './routes/guides/desired-dough-temperature'
 import { Route as GuidesDetroitPizzaDoughRouteImport } from './routes/guides/detroit-pizza-dough'
 import { Route as GuidesDutchOvenVsOpenBakeRouteImport } from './routes/guides/dutch-oven-vs-open-bake'
@@ -52,6 +54,11 @@ const FloursRoute = FloursRouteImport.update({
 const EnginesPizzaRoute = EnginesPizzaRouteImport.update({
   id: '/engines/pizza',
   path: '/engines/pizza',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnginesPricingRoute = EnginesPricingRouteImport.update({
+  id: '/engines/pricing',
+  path: '/engines/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnginesSourdoughRoute = EnginesSourdoughRouteImport.update({
@@ -96,6 +103,12 @@ const GuidesColdRetardTimingRoute = GuidesColdRetardTimingRouteImport.update({
   path: '/guides/cold-retard-timing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesCostingIsNotPricingRoute =
+  GuidesCostingIsNotPricingRouteImport.update({
+    id: '/guides/costing-is-not-pricing',
+    path: '/guides/costing-is-not-pricing',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GuidesDesiredDoughTemperatureRoute =
   GuidesDesiredDoughTemperatureRouteImport.update({
     id: '/guides/desired-dough-temperature',
@@ -206,6 +219,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
   '/engines/pizza': typeof EnginesPizzaRoute
+  '/engines/pricing': typeof EnginesPricingRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
   '/flours/$slug': typeof FloursSlugRoute
   '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
@@ -213,6 +227,7 @@ export interface FileRoutesByFullPath {
   '/guides/bakers-percentage': typeof GuidesBakersPercentageRoute
   '/guides/bulk-fermentation-by-hand': typeof GuidesBulkFermentationByHandRoute
   '/guides/cold-retard-timing': typeof GuidesColdRetardTimingRoute
+  '/guides/costing-is-not-pricing': typeof GuidesCostingIsNotPricingRoute
   '/guides/desired-dough-temperature': typeof GuidesDesiredDoughTemperatureRoute
   '/guides/detroit-pizza-dough': typeof GuidesDetroitPizzaDoughRoute
   '/guides/dutch-oven-vs-open-bake': typeof GuidesDutchOvenVsOpenBakeRoute
@@ -237,6 +252,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
   '/engines/pizza': typeof EnginesPizzaRoute
+  '/engines/pricing': typeof EnginesPricingRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
   '/flours/$slug': typeof FloursSlugRoute
   '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
@@ -244,6 +260,7 @@ export interface FileRoutesByTo {
   '/guides/bakers-percentage': typeof GuidesBakersPercentageRoute
   '/guides/bulk-fermentation-by-hand': typeof GuidesBulkFermentationByHandRoute
   '/guides/cold-retard-timing': typeof GuidesColdRetardTimingRoute
+  '/guides/costing-is-not-pricing': typeof GuidesCostingIsNotPricingRoute
   '/guides/desired-dough-temperature': typeof GuidesDesiredDoughTemperatureRoute
   '/guides/detroit-pizza-dough': typeof GuidesDetroitPizzaDoughRoute
   '/guides/dutch-oven-vs-open-bake': typeof GuidesDutchOvenVsOpenBakeRoute
@@ -269,6 +286,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
   '/engines/pizza': typeof EnginesPizzaRoute
+  '/engines/pricing': typeof EnginesPricingRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
   '/flours_/$slug': typeof FloursSlugRoute
   '/guides/autolyse-vs-fermentolyse': typeof GuidesAutolyseVsFermentolyseRoute
@@ -276,6 +294,7 @@ export interface FileRoutesById {
   '/guides/bakers-percentage': typeof GuidesBakersPercentageRoute
   '/guides/bulk-fermentation-by-hand': typeof GuidesBulkFermentationByHandRoute
   '/guides/cold-retard-timing': typeof GuidesColdRetardTimingRoute
+  '/guides/costing-is-not-pricing': typeof GuidesCostingIsNotPricingRoute
   '/guides/desired-dough-temperature': typeof GuidesDesiredDoughTemperatureRoute
   '/guides/detroit-pizza-dough': typeof GuidesDetroitPizzaDoughRoute
   '/guides/dutch-oven-vs-open-bake': typeof GuidesDutchOvenVsOpenBakeRoute
@@ -302,6 +321,7 @@ export interface FileRouteTypes {
     | '/'
     | '/flours'
     | '/engines/pizza'
+    | '/engines/pricing'
     | '/engines/sourdough'
     | '/flours/$slug'
     | '/guides/autolyse-vs-fermentolyse'
@@ -309,6 +329,7 @@ export interface FileRouteTypes {
     | '/guides/bakers-percentage'
     | '/guides/bulk-fermentation-by-hand'
     | '/guides/cold-retard-timing'
+    | '/guides/costing-is-not-pricing'
     | '/guides/desired-dough-temperature'
     | '/guides/detroit-pizza-dough'
     | '/guides/dutch-oven-vs-open-bake'
@@ -333,6 +354,7 @@ export interface FileRouteTypes {
     | '/'
     | '/flours'
     | '/engines/pizza'
+    | '/engines/pricing'
     | '/engines/sourdough'
     | '/flours/$slug'
     | '/guides/autolyse-vs-fermentolyse'
@@ -340,6 +362,7 @@ export interface FileRouteTypes {
     | '/guides/bakers-percentage'
     | '/guides/bulk-fermentation-by-hand'
     | '/guides/cold-retard-timing'
+    | '/guides/costing-is-not-pricing'
     | '/guides/desired-dough-temperature'
     | '/guides/detroit-pizza-dough'
     | '/guides/dutch-oven-vs-open-bake'
@@ -364,6 +387,7 @@ export interface FileRouteTypes {
     | '/'
     | '/flours'
     | '/engines/pizza'
+    | '/engines/pricing'
     | '/engines/sourdough'
     | '/flours_/$slug'
     | '/guides/autolyse-vs-fermentolyse'
@@ -371,6 +395,7 @@ export interface FileRouteTypes {
     | '/guides/bakers-percentage'
     | '/guides/bulk-fermentation-by-hand'
     | '/guides/cold-retard-timing'
+    | '/guides/costing-is-not-pricing'
     | '/guides/desired-dough-temperature'
     | '/guides/detroit-pizza-dough'
     | '/guides/dutch-oven-vs-open-bake'
@@ -396,6 +421,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FloursRoute: typeof FloursRoute
   EnginesPizzaRoute: typeof EnginesPizzaRoute
+  EnginesPricingRoute: typeof EnginesPricingRoute
   EnginesSourdoughRoute: typeof EnginesSourdoughRoute
   FloursSlugRoute: typeof FloursSlugRoute
   GuidesAutolyseVsFermentolyseRoute: typeof GuidesAutolyseVsFermentolyseRoute
@@ -403,6 +429,7 @@ export interface RootRouteChildren {
   GuidesBakersPercentageRoute: typeof GuidesBakersPercentageRoute
   GuidesBulkFermentationByHandRoute: typeof GuidesBulkFermentationByHandRoute
   GuidesColdRetardTimingRoute: typeof GuidesColdRetardTimingRoute
+  GuidesCostingIsNotPricingRoute: typeof GuidesCostingIsNotPricingRoute
   GuidesDesiredDoughTemperatureRoute: typeof GuidesDesiredDoughTemperatureRoute
   GuidesDetroitPizzaDoughRoute: typeof GuidesDetroitPizzaDoughRoute
   GuidesDutchOvenVsOpenBakeRoute: typeof GuidesDutchOvenVsOpenBakeRoute
@@ -445,6 +472,13 @@ declare module '@tanstack/react-router' {
       path: '/engines/pizza'
       fullPath: '/engines/pizza'
       preLoaderRoute: typeof EnginesPizzaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/engines/pricing': {
+      id: '/engines/pricing'
+      path: '/engines/pricing'
+      fullPath: '/engines/pricing'
+      preLoaderRoute: typeof EnginesPricingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/engines/sourdough': {
@@ -501,6 +535,13 @@ declare module '@tanstack/react-router' {
       path: '/guides/cold-retard-timing'
       fullPath: '/guides/cold-retard-timing'
       preLoaderRoute: typeof GuidesColdRetardTimingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/costing-is-not-pricing': {
+      id: '/guides/costing-is-not-pricing'
+      path: '/guides/costing-is-not-pricing'
+      fullPath: '/guides/costing-is-not-pricing'
+      preLoaderRoute: typeof GuidesCostingIsNotPricingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/desired-dough-temperature': {
@@ -636,6 +677,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FloursRoute: FloursRoute,
   EnginesPizzaRoute: EnginesPizzaRoute,
+  EnginesPricingRoute: EnginesPricingRoute,
   EnginesSourdoughRoute: EnginesSourdoughRoute,
   FloursSlugRoute: FloursSlugRoute,
   GuidesAutolyseVsFermentolyseRoute: GuidesAutolyseVsFermentolyseRoute,
@@ -643,6 +685,7 @@ const rootRouteChildren: RootRouteChildren = {
   GuidesBakersPercentageRoute: GuidesBakersPercentageRoute,
   GuidesBulkFermentationByHandRoute: GuidesBulkFermentationByHandRoute,
   GuidesColdRetardTimingRoute: GuidesColdRetardTimingRoute,
+  GuidesCostingIsNotPricingRoute: GuidesCostingIsNotPricingRoute,
   GuidesDesiredDoughTemperatureRoute: GuidesDesiredDoughTemperatureRoute,
   GuidesDetroitPizzaDoughRoute: GuidesDetroitPizzaDoughRoute,
   GuidesDutchOvenVsOpenBakeRoute: GuidesDutchOvenVsOpenBakeRoute,

@@ -1,4 +1,5 @@
 import { MCP_SERVER_NAME, MCP_SERVER_VERSION, MCP_TOOLS } from "./mcp-tools.ts";
+import { pricingCalculatePayload } from "./pricing-api.ts";
 import {
   calculatePayload,
   floursPayload,
@@ -9,7 +10,7 @@ import {
  * Minimal stateless MCP (Model Context Protocol) server over streamable
  * HTTP, hand-rolled JSON-RPC 2.0 — the repo carries no MCP SDK, and the
  * surface is tiny: initialize, ping, tools/list, tools/call for the three
- * sourdough tools. Tools dispatch to the same payload builders as the REST
+ * sourdough tools plus the pricing tool. Tools dispatch to the same payload builders as the REST
  * API (server/utils/sourdough-api.ts), so numbers can never diverge.
  *
  * Stateless by design: no session id, no server-initiated messages. A POST
@@ -59,6 +60,8 @@ function callTool(name: string, args: Record<string, unknown>) {
       return floursPayload();
     case "sourdough_rescue":
       return rescuePayload(args);
+    case "pricing_calculate":
+      return pricingCalculatePayload(args);
     default:
       return null;
   }
@@ -89,7 +92,7 @@ function handleRequest(req: JsonRpcRequest): unknown | null {
         capabilities: { tools: { listChanged: false } },
         serverInfo: { name: MCP_SERVER_NAME, version: MCP_SERVER_VERSION },
         instructions:
-          "DoughMatrix sourdough engine. sourdough_calculate computes a full formula with true hydration; sourdough_flours lists the flour catalog; sourdough_rescue fixes an over-pour. Same math as the free REST API at https://doughmatrix.com/api/sourdough.",
+          "DoughMatrix engines. sourdough_calculate computes a full formula with true hydration; sourdough_flours lists the flour catalog; sourdough_rescue fixes an over-pour; pricing_calculate prices baked goods from true batch cost (ingredients + labor + overhead over sellable units) with margin/markup prices, variant deltas, and order profit. Same math as the free REST API at https://doughmatrix.com/api.",
       });
     }
     case "ping":

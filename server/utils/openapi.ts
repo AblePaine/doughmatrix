@@ -11,6 +11,13 @@ import { MCP_TOOLS } from "./mcp-tools.ts";
 
 type JsonSchema = Record<string, unknown>;
 
+function pricingInputSchema(): JsonSchema {
+  const tool = MCP_TOOLS.find((t) => t.name === "pricing_calculate");
+  return structuredClone(
+    tool?.inputSchema ?? { type: "object", properties: {} },
+  ) as JsonSchema;
+}
+
 function bakerInputSchema(): JsonSchema {
   const tool = MCP_TOOLS.find((t) => t.name === "sourdough_calculate");
   const schema = structuredClone(tool?.inputSchema ?? { type: "object", properties: {} }) as {
@@ -123,10 +130,10 @@ export function buildOpenApiSpec() {
   return {
     openapi: "3.0.3",
     info: {
-      title: "DoughMatrix Sourdough API",
+      title: "DoughMatrix API",
       version: "1.0.0",
       description:
-        "Free, no-key access to the DoughMatrix sourdough formula engine — the same math as the web calculator. True hydration (counts the starter's flour and water), per-flour hydration ceilings, 4-factor DDT water temperature, bulk fermentation windows, and over-pour rescue. Also available as MCP tools at POST /mcp (see the /mcp path and /mcp-tools.json).",
+        "Free, no-key access to the DoughMatrix engines — the same math as the web calculators. Sourdough: true hydration (counts the starter's flour and water), per-flour hydration ceilings, 4-factor DDT water temperature, bulk fermentation windows, and over-pour rescue. Pricing: true batch cost (ingredients + labor + overhead over sellable units) turned into margin/markup prices, variant deltas, and order profit. Also available as MCP tools at POST /mcp (see the /mcp path and /mcp-tools.json).",
       contact: { email: "hello@doughmatrix.com" },
     },
     servers: [{ url: "https://doughmatrix.com" }],
@@ -225,12 +232,85 @@ export function buildOpenApiSpec() {
           },
         },
       },
+      "/api/pricing/calculate": {
+        get: {
+          operationId: "pricingCalculateGet",
+          summary: "Price the sample products (query params)",
+          description:
+            "The nested pricing state can't ride flat query params, so GET prices the engine's sample products (chocolate chip cookies + a sourdough loaf). The business defaults — laborRate, targetMarginPercent, markupPercent, orderFeePercent, orderFlatFee — can be overridden by query param. Use POST for your own products.",
+          parameters: [
+            "laborRate",
+            "targetMarginPercent",
+            "markupPercent",
+            "orderFeePercent",
+            "orderFlatFee",
+          ].map((name) => ({
+            name,
+            in: "query",
+            required: false,
+            schema: { type: "number" },
+          })),
+          responses: {
+            "200": {
+              description: "Per-product pricing results plus order profit.",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/PricingResponse" },
+                },
+              },
+            },
+          },
+        },
+        post: {
+          operationId: "pricingCalculatePost",
+          summary: "Price baked goods from true batch cost (JSON body)",
+          description:
+            "Body is a partial pricing state — every field optional, merged over the sample products and clamped to the engine's bounds. Returns unit cost, suggested margin price, markup price, profit at the current price, variant prices, and whole-order profit after card fees.",
+          requestBody: {
+            required: false,
+            content: {
+              "application/json": {
+                schema: { $ref: "#/components/schemas/PricingState" },
+                example: {
+                  defaults: { laborRate: 18, targetMarginPercent: 40 },
+                  products: [
+                    {
+                      name: "Classic Chocolate Chip Cookies",
+                      yieldUnits: 24,
+                      wastePercent: 5,
+                      laborMinutes: 45,
+                      overheadPerBatch: 6,
+                      packagingPerUnit: 0.35,
+                      channelFeePercent: 5,
+                      currentPrice: 3,
+                      ingredients: [
+                        { name: "Flour", amountUsed: 500, purchaseQty: 5000, purchasePrice: 10 },
+                        { name: "Butter", amountUsed: 250, purchaseQty: 1000, purchasePrice: 12 },
+                      ],
+                    },
+                  ],
+                },
+              },
+            },
+          },
+          responses: {
+            "200": {
+              description: "Per-product pricing results plus order profit.",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/PricingResponse" },
+                },
+              },
+            },
+          },
+        },
+      },
       "/mcp": {
         post: {
           operationId: "mcpEndpoint",
           summary: "MCP endpoint (JSON-RPC 2.0, streamable HTTP)",
           description:
-            "Stateless Model Context Protocol endpoint exposing the same three operations as tools: sourdough_calculate, sourdough_flours, sourdough_rescue. Supports initialize, ping, tools/list, and tools/call. Tool results carry the REST response payload as JSON text content. The tool definitions also live in the static manifest at /mcp-tools.json. POST only — GET returns 405 (no server stream). No auth.",
+            "Stateless Model Context Protocol endpoint exposing the same operations as tools: sourdough_calculate, sourdough_flours, sourdough_rescue, pricing_calculate. Supports initialize, ping, tools/list, and tools/call. Tool results carry the REST response payload as JSON text content. The tool definitions also live in the static manifest at /mcp-tools.json. POST only — GET returns 405 (no server stream). No auth.",
           requestBody: {
             required: true,
             content: {
@@ -264,6 +344,82 @@ export function buildOpenApiSpec() {
     components: {
       schemas: {
         BakerInput: bakerInput,
+        PricingState: pricingInputSchema(),
+        PricingResponse: {
+          type: "object",
+          properties: {
+            input: {
+              type: "object",
+              description: "The normalized pricing state that was priced.",
+            },
+            products: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  product: { type: "object" },
+                  math: {
+                    type: "object",
+                    properties: {
+                      ingredientCost: { type: "number" },
+                      laborCost: { type: "number" },
+                      batchCost: { type: "number" },
+                      sellableUnits: { type: "number" },
+                      unitCost: { type: "number" },
+                      ingredientUnit: { type: "number" },
+                      laborUnit: { type: "number" },
+                      overheadUnit: { type: "number" },
+                      packagingUnit: { type: "number" },
+                    },
+                  },
+                  suggestedPrice: {
+                    type: ["number", "null"],
+                    description:
+                      "Price hitting the target margin after channel fees; null when margin + fees leave no viable price.",
+                  },
+                  markupPrice: { type: "number" },
+                  atCurrentPrice: {
+                    type: "object",
+                    properties: {
+                      profit: { type: "number" },
+                      marginPercent: { type: "number" },
+                      band: { type: "string", enum: ["safe", "caution", "danger"] },
+                    },
+                  },
+                  variants: {
+                    type: "array",
+                    items: {
+                      type: "object",
+                      properties: {
+                        variant: { type: "object" },
+                        unitCost: { type: "number" },
+                        suggestedPrice: { type: ["number", "null"] },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            order: {
+              allOf: [
+                {
+                  type: "object",
+                  properties: {
+                    revenue: { type: "number" },
+                    cost: { type: "number" },
+                    fees: { type: "number" },
+                    profit: { type: "number" },
+                    marginPercent: { type: "number" },
+                    band: { type: "string", enum: ["safe", "caution", "danger"] },
+                  },
+                },
+              ],
+              nullable: true,
+            },
+            plaintext: { type: "string", description: "Human-readable pricing summary" },
+          },
+          required: ["input", "products", "order", "plaintext"],
+        },
         Flour: FLOUR_SCHEMA,
         BulkWindow: BULK_WINDOW_SCHEMA,
         Formula: FORMULA_SCHEMA,

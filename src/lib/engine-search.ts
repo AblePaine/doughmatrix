@@ -8,6 +8,8 @@ import type {
   SizeMode,
   YeastType,
 } from "./pizza/types";
+import { decodePricingState, encodePricingState } from "./pricing/share";
+import type { PricingState } from "./pricing/types";
 
 export type EngineSearch = {
   flour?: string;
@@ -275,4 +277,31 @@ export function pizzaShareParams(input: PizzaInput): Record<string, string> {
     params.yeast = input.yeastType;
   }
   return params;
+}
+
+/* ------------------------------- pricing ------------------------------- */
+
+/**
+ * Pricing state is nested (products → ingredients/variants, plus an
+ * order), so it shares as one flat `s` param carrying the encoded state —
+ * see src/lib/pricing/share.ts. The parsed search stays a flat primitive,
+ * like the other engines, so the shared URL is already canonical.
+ */
+export type PricingSearch = {
+  s?: string;
+};
+
+export function parsePricingSearch(raw: Record<string, unknown>): PricingSearch {
+  const s = strParam(raw.s);
+  return s ? { s } : {};
+}
+
+/** The PricingState a parsed pricing search describes, if it decodes. */
+export function pricingStateFromSearch(search: PricingSearch): PricingState | null {
+  return search.s ? decodePricingState(search.s) : null;
+}
+
+/** The share params for a pricing state — the whole state, one param. */
+export function pricingShareParams(state: PricingState): Record<string, string> {
+  return { s: encodePricingState(state) };
 }
