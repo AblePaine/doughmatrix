@@ -5,7 +5,4 @@
 User-agent: *
 Allow: /
 
-User-agent: Meta-ExternalAgent
-Disallow: /
-
 Sitemap: https://doughmatrix.com/sitemap.xml
