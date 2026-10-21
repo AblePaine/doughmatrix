@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { GuidesFooter } from "@/components/guides-footer";
 import { NotifyForm } from "@/components/notify-form";
+import { NewsletterSignup } from "@/components/newsletter-signup";
 import { LIVE_ENGINES, UPCOMING_ENGINES } from "@/lib/engines";
 import { PUBLISHED_GUIDES } from "@/lib/guides";
 
@@ -157,6 +158,8 @@ export function HubHome() {
             ))}
           </ul>
         </section>
+
+        <NewsletterSignup />
       </main>
       <div className="mx-auto max-w-6xl px-4 pb-16">
         <GuidesFooter />

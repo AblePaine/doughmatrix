@@ -2,6 +2,7 @@ import { useMemo, useState, type ReactNode } from "react";
 import { Copy, Link2, Plus, RotateCcw, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GuidesFooter } from "@/components/guides-footer";
+import { NewsletterSignup } from "@/components/newsletter-signup";
 import { SiteHeader } from "@/components/site-header";
 import { pricingShareParams } from "@/lib/engine-search";
 import {
@@ -730,6 +731,8 @@ export function PricingEngine() {
             </div>
           </Section>
         </div>
+
+        <NewsletterSignup />
       </main>
       <div className="mx-auto max-w-6xl px-4 pb-16">
         <GuidesFooter />
