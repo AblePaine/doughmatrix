@@ -77,18 +77,18 @@ export const AFFILIATE_SLOTS = [
     id: "bench-scale",
     label: "A 0.1 g bench scale",
     blurb: "Costing by grams starts with a scale that reads them.",
-    href: "#",
+    href: "https://www.amazon.com/dp/B002SVNEWA?tag=doughmatrix-20",
   },
   {
     id: "packaging",
     label: "Bags, boxes & labels",
     blurb: "Packaging is a real per-unit cost — buy it like one.",
-    href: "#",
+    href: "https://www.amazon.com/dp/B09NN3LD12?tag=doughmatrix-20",
   },
   {
     id: "proofing",
     label: "Proofing & bake gear",
     blurb: "The gear the sourdough and pizza engines assume you own.",
-    href: "#",
+    href: "https://www.amazon.com/dp/B0CKTJX16P?tag=doughmatrix-20",
   },
 ] as const;

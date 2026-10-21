@@ -595,7 +595,7 @@ export function PricingEngine() {
 
             <Section
               title="Gear that pays for itself"
-              blurb="The short list behind honest costing. Links activate when the affiliate accounts go live."
+              blurb="The short list behind honest costing."
             >
               <ul className="flex flex-col gap-2">
                 {AFFILIATE_SLOTS.map((slot) => (
@@ -614,6 +614,13 @@ export function PricingEngine() {
                   </li>
                 ))}
               </ul>
+              <p className="mt-3 text-xs leading-relaxed text-faint">
+                <span className="font-medium">Affiliate disclosure:</span> Some links on
+                this page are affiliate links. If you buy through them, DoughMatrix may
+                earn a small commission at no extra cost to you.
+                <br />
+                As an Amazon Associate I earn from qualifying purchases.
+              </p>
             </Section>
           </div>
         </div>
