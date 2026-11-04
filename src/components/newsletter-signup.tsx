@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Check, Loader2, Mail } from "lucide-react";
 import { umbrellaActionUrl } from "@/lib/newsletter";
+import { track } from "@/lib/analytics";
 
 type Status = "idle" | "submitting" | "done" | "error";
 
@@ -11,7 +12,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // while the umbrella form ID is still empty in NEWSLETTER_FORMS the
 // section shows the plain "Coming soon" line, exactly like an un-wired
 // engine card.
-export function NewsletterSignup() {
+export function NewsletterSignup({ source = "footer" }: { source?: string }) {
   const actionUrl = umbrellaActionUrl();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
@@ -34,6 +35,7 @@ export function NewsletterSignup() {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({ email_address: address }).toString(),
       });
+      track("newsletter_signup", { form: "umbrella", source });
       setStatus("done");
     } catch {
       setStatus("error");
@@ -62,11 +64,11 @@ export function NewsletterSignup() {
       ) : (
         <form onSubmit={onSubmit} className="mt-5">
           <div className="flex max-w-xl gap-2">
-            <label className="sr-only" htmlFor="newsletter-umbrella">
+            <label className="sr-only" htmlFor={`newsletter-umbrella-${source}`}>
               Email address
             </label>
             <input
-              id="newsletter-umbrella"
+              id={`newsletter-umbrella-${source}`}
               type="email"
               autoComplete="email"
               value={email}

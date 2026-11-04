@@ -623,6 +623,8 @@ export function PricingEngine() {
                 As an Amazon Associate I earn from qualifying purchases.
               </p>
             </Section>
+
+            <NewsletterSignup source="pricing-results" />
           </div>
         </div>
 

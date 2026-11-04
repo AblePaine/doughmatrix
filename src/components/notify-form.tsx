@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { BellRing, Check, Loader2 } from "lucide-react";
 import { newsletterActionUrl } from "@/lib/newsletter";
+import { track } from "@/lib/analytics";
 
 type Status = "idle" | "submitting" | "done" | "error";
 
@@ -34,6 +35,7 @@ export function NotifyForm({ engineId }: { engineId: string }) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({ email_address: address }).toString(),
       });
+      track("newsletter_signup", { form: engineId, source: "engine-card" });
       setStatus("done");
     } catch {
       setStatus("error");
