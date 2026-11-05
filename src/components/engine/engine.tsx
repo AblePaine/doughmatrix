@@ -23,6 +23,7 @@ import { useBaker, useBakerInput } from "@/lib/sourdough/store";
 import type { FormulaResult, Maturity, MixMode } from "@/lib/sourdough/types";
 import { Button } from "@/components/ui/button";
 import { GuidesFooter } from "@/components/guides-footer";
+import { NextStep } from "@/components/next-step";
 import { SiteHeader } from "@/components/site-header";
 import { track } from "@/lib/analytics";
 import { sourdoughShareParams } from "@/lib/engine-search";
@@ -144,6 +145,11 @@ export function Engine() {
               <TimelineCard formula={formula} />
             </div>
           </div>
+          <NextStep
+            to="/engines/pricing"
+            label="Cost this formula"
+            blurb="Hydration is dialed and the formula is scaled to your batch — the pricing engine costs it honestly: ingredients, labor, packaging, and the loaves that don't sell."
+          />
           <GuidesFooter className="pt-4" />
         </main>
       </div>

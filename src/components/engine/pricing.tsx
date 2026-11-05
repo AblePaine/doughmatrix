@@ -1,6 +1,7 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { Copy, Link2, Plus, RotateCcw, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { EmailResults } from "@/components/email-results";
 import { GuidesFooter } from "@/components/guides-footer";
 import { NewsletterSignup } from "@/components/newsletter-signup";
 import { SiteHeader } from "@/components/site-header";
@@ -623,6 +624,22 @@ export function PricingEngine() {
                 As an Amazon Associate I earn from qualifying purchases.
               </p>
             </Section>
+
+            <EmailResults
+              surface="pricing"
+              snapshot={{
+                product: product.name,
+                batchCost: math.batchCost,
+                ingredientCost: math.ingredientCost,
+                laborCost: math.laborCost,
+                sellableUnits: math.sellableUnits,
+                unitCost: math.unitCost,
+                suggestedPrice: sugg,
+                currentPrice: product.currentPrice,
+                currentMarginPercent: current.marginPercent,
+                currentBand: current.band,
+              }}
+            />
 
             <NewsletterSignup source="pricing-results" />
           </div>

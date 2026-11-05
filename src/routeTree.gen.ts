@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FloursRouteImport } from './routes/flours'
+import { Route as ApiResultsEmailRouteImport } from './routes/api/results-email'
 import { Route as EnginesPizzaRouteImport } from './routes/engines/pizza'
 import { Route as EnginesPricingRouteImport } from './routes/engines/pricing'
 import { Route as EnginesSourdoughRouteImport } from './routes/engines/sourdough'
@@ -49,6 +50,11 @@ const IndexRoute = IndexRouteImport.update({
 const FloursRoute = FloursRouteImport.update({
   id: '/flours',
   path: '/flours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiResultsEmailRoute = ApiResultsEmailRouteImport.update({
+  id: '/api/results-email',
+  path: '/api/results-email',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnginesPizzaRoute = EnginesPizzaRouteImport.update({
@@ -218,6 +224,7 @@ const GuidesWholeWheatSourdoughRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
+  '/api/results-email': typeof ApiResultsEmailRoute
   '/engines/pizza': typeof EnginesPizzaRoute
   '/engines/pricing': typeof EnginesPricingRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
@@ -251,6 +258,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
+  '/api/results-email': typeof ApiResultsEmailRoute
   '/engines/pizza': typeof EnginesPizzaRoute
   '/engines/pricing': typeof EnginesPricingRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
@@ -285,6 +293,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
+  '/api/results-email': typeof ApiResultsEmailRoute
   '/engines/pizza': typeof EnginesPizzaRoute
   '/engines/pricing': typeof EnginesPricingRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
@@ -320,6 +329,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/flours'
+    | '/api/results-email'
     | '/engines/pizza'
     | '/engines/pricing'
     | '/engines/sourdough'
@@ -353,6 +363,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/flours'
+    | '/api/results-email'
     | '/engines/pizza'
     | '/engines/pricing'
     | '/engines/sourdough'
@@ -386,6 +397,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/flours'
+    | '/api/results-email'
     | '/engines/pizza'
     | '/engines/pricing'
     | '/engines/sourdough'
@@ -420,6 +432,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FloursRoute: typeof FloursRoute
+  ApiResultsEmailRoute: typeof ApiResultsEmailRoute
   EnginesPizzaRoute: typeof EnginesPizzaRoute
   EnginesPricingRoute: typeof EnginesPricingRoute
   EnginesSourdoughRoute: typeof EnginesSourdoughRoute
@@ -465,6 +478,13 @@ declare module '@tanstack/react-router' {
       path: '/flours'
       fullPath: '/flours'
       preLoaderRoute: typeof FloursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/results-email': {
+      id: '/api/results-email'
+      path: '/api/results-email'
+      fullPath: '/api/results-email'
+      preLoaderRoute: typeof ApiResultsEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/engines/pizza': {
@@ -676,6 +696,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FloursRoute: FloursRoute,
+  ApiResultsEmailRoute: ApiResultsEmailRoute,
   EnginesPizzaRoute: EnginesPizzaRoute,
   EnginesPricingRoute: EnginesPricingRoute,
   EnginesSourdoughRoute: EnginesSourdoughRoute,

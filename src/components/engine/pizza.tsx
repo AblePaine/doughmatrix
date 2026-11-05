@@ -2,6 +2,7 @@ import { useMemo, useState, type ReactNode } from "react";
 import { AlertTriangle, Copy, Link2, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GuidesFooter } from "@/components/guides-footer";
+import { NextStep } from "@/components/next-step";
 import { SiteHeader } from "@/components/site-header";
 import { pizzaShareParams } from "@/lib/engine-search";
 import { Stepper } from "@/components/engine/stepper";
@@ -534,6 +535,13 @@ export function PizzaEngine() {
             </div>
           </div>
         </main>
+        <div className="mx-auto max-w-6xl px-4 pt-5">
+          <NextStep
+            to="/engines/pricing"
+            label="Price the pies"
+            blurb="The dough is sized and the schedule is set — the pricing engine turns the batch into a per-pie price with the real costs in: ingredients, labor, packaging, and the pies that don't sell."
+          />
+        </div>
         <div className="mx-auto max-w-6xl px-4 pb-16">
           <GuidesFooter />
         </div>
