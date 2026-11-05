@@ -58,7 +58,7 @@
             "type": "number"
           },
           "flourId": {
-            "description": "Flour from the catalog \u2014 see sourdough_flours. Unknown IDs fall back to bread flour. Use 'custom' with customName/customProtein/customCeiling for your own mill. Default: bread.",
+            "description": "Flour from the catalog \u2014 see sourdough_flours. Unknown IDs are rejected with an error. Use 'custom' with customName/customProtein/customCeiling for your own mill. Default: bread.",
             "type": "string"
           },
           "flourTempC": {

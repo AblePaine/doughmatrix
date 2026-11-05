@@ -19,6 +19,8 @@ Six voice-matched deep dives at `/guides`: flour hydration ceilings, autolyse vs
 
 DoughMatrix exposes its engines as a free JSON API — no key required. This is the same math as the web engines.
 
+Validation: numeric fields are clamped to the engine's bounds, never rejected. The flour catalog is closed, though — an unknown `flourId` or `blendId` returns HTTP 400 with a JSON error body (`{"error": "invalid_input", "message": ..., "details": [...]}`) instead of silently substituting another flour; on the MCP endpoint the same failure comes back as an `isError` tool result. Valid ids are listed by the flours endpoint.
+
 - `POST https://doughmatrix.com/api/sourdough/calculate` — full formula. Body is a partial JSON object; every field optional (defaults: 500g bread flour, 72% true hydration, 100g starter at 100% hydration, 2% salt, 24°C dough, peak maturity). Key fields: `flourWeight`, `targetTrueHydration`, `starterWeight`, `starterHydration`, `saltPercent`, `doughTempC`, `maturity` (young|peak|late), `flourId`, `mixMode` (flour|dough). Returns the normalized input, the complete formula (weights, trueHydration, bakerHydration, ceiling, danger level safe/caution/danger, margin to ceiling, DDT waterTempC, bulk window with fold schedule), a step timeline, and a plaintext summary.
 - `GET https://doughmatrix.com/api/sourdough/calculate?flourWeight=500&targetTrueHydration=75` — same engine via query params.
 - `GET https://doughmatrix.com/api/sourdough/flours` — the flour catalog (id, protein, sweet spot, ceiling). Use an `id` as `flourId` in calculate calls.

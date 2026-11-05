@@ -58,7 +58,7 @@ export const MCP_TOOLS: McpToolDef[] = [
         },
         flourId: {
           description:
-            "Flour from the catalog — see sourdough_flours. Unknown IDs fall back to bread flour. Use 'custom' with customName/customProtein/customCeiling for your own mill. Default: bread.",
+            "Flour from the catalog — see sourdough_flours. Unknown IDs are rejected with an error. Use 'custom' with customName/customProtein/customCeiling for your own mill. Default: bread.",
           type: "string",
         },
         flourTempC: {

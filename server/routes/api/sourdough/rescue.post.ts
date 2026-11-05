@@ -1,5 +1,13 @@
-import { defineEventHandler, readBody, setHeader } from "h3";
-import { rescuePayload } from "../../../utils/sourdough-api.ts";
+import {
+  defineEventHandler,
+  readBody,
+  setHeader,
+  setResponseStatus,
+} from "h3";
+import {
+  ApiInputError,
+  rescuePayload,
+} from "../../../utils/sourdough-api.ts";
 
 /**
  * POST /api/sourdough/rescue
@@ -12,10 +20,20 @@ import { rescuePayload } from "../../../utils/sourdough-api.ts";
  *
  * Response: { input, extraWater, formula, rescue: { extraWater, extraFlour,
  *   extraSalt, newDoughWeight, newTrueHydration } }
+ * Unknown flourId/blendId → 400 { error, message, details } (same as
+ * /calculate — the flour catalog is closed).
  */
 export default defineEventHandler(async (event) => {
   const body = await readBody(event).catch(() => ({}));
   setHeader(event, "content-type", "application/json; charset=utf-8");
   setHeader(event, "cache-control", "no-store");
-  return rescuePayload(body);
+  try {
+    return rescuePayload(body);
+  } catch (err) {
+    if (err instanceof ApiInputError) {
+      setResponseStatus(event, err.status);
+      return err.body();
+    }
+    throw err;
+  }
 });

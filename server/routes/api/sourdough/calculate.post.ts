@@ -1,5 +1,13 @@
-import { defineEventHandler, readBody, setHeader } from "h3";
-import { calculatePayload } from "../../../utils/sourdough-api.ts";
+import {
+  defineEventHandler,
+  readBody,
+  setHeader,
+  setResponseStatus,
+} from "h3";
+import {
+  ApiInputError,
+  calculatePayload,
+} from "../../../utils/sourdough-api.ts";
 
 /**
  * POST /api/sourdough/calculate
@@ -13,10 +21,22 @@ import { calculatePayload } from "../../../utils/sourdough-api.ts";
  *     "doughTempC": 24, "maturity": "peak" }
  *
  * Response: { input, formula, timeline, plaintext }
+ * Unknown flourId/blendId → 400 { error, message, details } — the flour
+ * catalog is closed, so a bad id is rejected rather than substituted.
  */
 export default defineEventHandler(async (event) => {
   const body = await readBody(event).catch(() => ({}));
   setHeader(event, "content-type", "application/json; charset=utf-8");
-  setHeader(event, "cache-control", "public, max-age=300, s-maxage=600");
-  return calculatePayload(body);
+  try {
+    const payload = calculatePayload(body);
+    setHeader(event, "cache-control", "public, max-age=300, s-maxage=600");
+    return payload;
+  } catch (err) {
+    if (err instanceof ApiInputError) {
+      setResponseStatus(event, err.status);
+      setHeader(event, "cache-control", "no-store");
+      return err.body();
+    }
+    throw err;
+  }
 });

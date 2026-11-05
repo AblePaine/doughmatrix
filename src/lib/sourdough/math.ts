@@ -1,4 +1,4 @@
-import { resolveFlour } from "./flours";
+import { resolveFlour } from "./flours.ts";
 import type {
   BakerInput,
   BulkWindow,

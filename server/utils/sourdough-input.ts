@@ -1,3 +1,4 @@
+import { FLOURS } from "../../src/lib/sourdough/flours.ts";
 import type { BakerInput, Maturity, MixMode } from "../../src/lib/sourdough/types.ts";
 
 /**
@@ -97,4 +98,34 @@ export function normalizeInput(raw: unknown): BakerInput {
   input.loafCount = Math.max(1, Math.round(input.loafCount));
 
   return input;
+}
+
+/** Every id an agent may pass as flourId/blendId (the catalog, incl. `custom`). */
+export const VALID_FLOUR_IDS: string[] = FLOURS.map((f) => f.id);
+
+/**
+ * Semantic validation that clamping can't express. The flour catalog is
+ * closed — the UI offers a fixed list plus the `custom` pseudo-entry — so
+ * an unknown flourId/blendId is a caller error, not a value to clamp or
+ * silently substitute (resolveFlour would otherwise fall back to bread
+ * flour and return plausible numbers for a flour the caller never asked
+ * for). Returns one message per problem; an empty array means valid.
+ */
+export function validateSourdoughInput(raw: unknown): string[] {
+  if (!raw || typeof raw !== "object") return [];
+  const r = raw as Record<string, unknown>;
+  const errors: string[] = [];
+  for (const key of ["flourId", "blendId"] as const) {
+    const v = r[key];
+    if (
+      typeof v === "string" &&
+      v.trim() !== "" &&
+      !VALID_FLOUR_IDS.includes(v.trim())
+    ) {
+      errors.push(
+        `Unknown ${key} "${v.trim()}". Valid ids: ${VALID_FLOUR_IDS.join(", ")}.`,
+      );
+    }
+  }
+  return errors;
 }

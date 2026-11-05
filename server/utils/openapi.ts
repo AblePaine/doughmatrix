@@ -143,7 +143,7 @@ export function buildOpenApiSpec() {
           operationId: "sourdoughCalculateGet",
           summary: "Compute a sourdough formula (query params)",
           description:
-            "Same engine as POST, via query params. Every field optional; omitted fields use the documented defaults and all values are clamped to the engine's bounds.",
+            "Same engine as POST, via query params. Every field optional; omitted fields use the documented defaults and all numeric values are clamped to the engine's bounds. An unknown flourId or blendId is rejected with a 400.",
           parameters: queryParameters,
           responses: {
             "200": {
@@ -154,13 +154,22 @@ export function buildOpenApiSpec() {
                 },
               },
             },
+            "400": {
+              description:
+                "Invalid input — unknown flourId or blendId (the flour catalog is closed).",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
+                },
+              },
+            },
           },
         },
         post: {
           operationId: "sourdoughCalculatePost",
           summary: "Compute a sourdough formula (JSON body)",
           description:
-            "Body is a partial BakerInput — every field optional, merged over the defaults and clamped to the engine's bounds.",
+            "Body is a partial BakerInput — every field optional, merged over the defaults and clamped to the engine's bounds. An unknown flourId or blendId is rejected with a 400.",
           requestBody: {
             required: false,
             content: {
@@ -181,6 +190,15 @@ export function buildOpenApiSpec() {
               content: {
                 "application/json": {
                   schema: { $ref: "#/components/schemas/CalculateResponse" },
+                },
+              },
+            },
+            "400": {
+              description:
+                "Invalid input — unknown flourId or blendId (the flour catalog is closed).",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
                 },
               },
             },
@@ -226,6 +244,15 @@ export function buildOpenApiSpec() {
               content: {
                 "application/json": {
                   schema: { $ref: "#/components/schemas/RescueResponse" },
+                },
+              },
+            },
+            "400": {
+              description:
+                "Invalid input — unknown flourId or blendId (the flour catalog is closed).",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
                 },
               },
             },
@@ -344,6 +371,20 @@ export function buildOpenApiSpec() {
     components: {
       schemas: {
         BakerInput: bakerInput,
+        ErrorResponse: {
+          type: "object",
+          description:
+            "Caller-error body (HTTP 400). Numeric fields are clamped to the engine's bounds, never rejected; the 400 case is a semantically invalid value — currently an unknown flourId or blendId (the flour catalog is closed).",
+          properties: {
+            error: { type: "string", example: "invalid_input" },
+            message: { type: "string" },
+            details: {
+              type: "array",
+              items: { type: "string" },
+            },
+          },
+          required: ["error", "message", "details"],
+        },
         PricingState: pricingInputSchema(),
         PricingResponse: {
           type: "object",

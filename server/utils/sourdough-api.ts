@@ -5,7 +5,10 @@ import {
   formulaPlaintext,
   rescueOverPour,
 } from "../../src/lib/sourdough/math.ts";
-import { normalizeInput } from "./sourdough-input.ts";
+import {
+  normalizeInput,
+  validateSourdoughInput,
+} from "./sourdough-input.ts";
 
 /**
  * Shared payload builders for the sourdough engine's public surfaces.
@@ -16,8 +19,36 @@ import { normalizeInput } from "./sourdough-input.ts";
  * wires the engine (src/lib/sourdough/math.ts) to transport-shaped inputs.
  */
 
+/**
+ * Caller-error validation failure. The REST routes map it to HTTP 400
+ * with `body()` as the response; the MCP layer already surfaces a thrown
+ * error's message as an `isError` tool result, so one throw serves both
+ * transports honestly.
+ */
+export class ApiInputError extends Error {
+  readonly status = 400;
+  readonly code = "invalid_input";
+  readonly details: string[];
+
+  constructor(details: string[]) {
+    super(details.join(" "));
+    this.name = "ApiInputError";
+    this.details = details;
+  }
+
+  body() {
+    return { error: this.code, message: this.message, details: this.details };
+  }
+}
+
+function assertValidInput(raw: unknown) {
+  const errors = validateSourdoughInput(raw);
+  if (errors.length > 0) throw new ApiInputError(errors);
+}
+
 /** POST/GET /api/sourdough/calculate and the sourdough_calculate MCP tool. */
 export function calculatePayload(raw: unknown) {
+  assertValidInput(raw);
   const input = normalizeInput(raw);
   const formula = computeFormula(input);
   return {
@@ -35,6 +66,7 @@ export function floursPayload() {
 
 /** POST /api/sourdough/rescue and the sourdough_rescue MCP tool. */
 export function rescuePayload(raw: unknown) {
+  assertValidInput(raw);
   const body = (
     raw && typeof raw === "object" ? raw : {}
   ) as Record<string, unknown>;
