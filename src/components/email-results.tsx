@@ -8,10 +8,9 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
  * "Email me these results" — stores a results-email request via
- * /api/results-email (first-party storage, migration 0001). There is
- * no mail send leg yet, and the copy says so: the request is saved
- * now and the results go out when delivery switches on. Nothing here
- * claims an email was sent.
+ * /api/results-email (first-party storage, migration 0001); the drain
+ * job (send leg, live 2026-11-06) emails the results via Resend
+ * within a few minutes. The copy says exactly that.
  */
 export function EmailResults({
   surface,
@@ -54,13 +53,13 @@ export function EmailResults({
         Email me these results
       </h2>
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
-        We&apos;ll store your request now and email this pricing as soon as
-        delivery switches on — no email goes out yet.
+        We&apos;ll email this pricing to you — it goes out within a few
+        minutes.
       </p>
       {status === "done" ? (
         <p className="mt-5 inline-flex items-center gap-2 text-sm text-accent">
           <Check className="size-4" />
-          Request saved — this pricing is on the list to be emailed.
+          Request saved — this pricing is on its way to your inbox.
         </p>
       ) : (
         <form onSubmit={onSubmit} className="mt-5">
