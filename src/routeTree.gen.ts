@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FloursRouteImport } from './routes/flours'
 import { Route as ApiResultsEmailRouteImport } from './routes/api/results-email'
+import { Route as ApiResultsEmailDrainRouteImport } from './routes/api/results-email-drain'
 import { Route as EnginesPizzaRouteImport } from './routes/engines/pizza'
 import { Route as EnginesPricingRouteImport } from './routes/engines/pricing'
 import { Route as EnginesSourdoughRouteImport } from './routes/engines/sourdough'
@@ -55,6 +56,11 @@ const FloursRoute = FloursRouteImport.update({
 const ApiResultsEmailRoute = ApiResultsEmailRouteImport.update({
   id: '/api/results-email',
   path: '/api/results-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiResultsEmailDrainRoute = ApiResultsEmailDrainRouteImport.update({
+  id: '/api/results-email-drain',
+  path: '/api/results-email-drain',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnginesPizzaRoute = EnginesPizzaRouteImport.update({
@@ -225,6 +231,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
   '/api/results-email': typeof ApiResultsEmailRoute
+  '/api/results-email-drain': typeof ApiResultsEmailDrainRoute
   '/engines/pizza': typeof EnginesPizzaRoute
   '/engines/pricing': typeof EnginesPricingRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
@@ -259,6 +266,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
   '/api/results-email': typeof ApiResultsEmailRoute
+  '/api/results-email-drain': typeof ApiResultsEmailDrainRoute
   '/engines/pizza': typeof EnginesPizzaRoute
   '/engines/pricing': typeof EnginesPricingRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
@@ -294,6 +302,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/flours': typeof FloursRoute
   '/api/results-email': typeof ApiResultsEmailRoute
+  '/api/results-email-drain': typeof ApiResultsEmailDrainRoute
   '/engines/pizza': typeof EnginesPizzaRoute
   '/engines/pricing': typeof EnginesPricingRoute
   '/engines/sourdough': typeof EnginesSourdoughRoute
@@ -330,6 +339,7 @@ export interface FileRouteTypes {
     | '/'
     | '/flours'
     | '/api/results-email'
+    | '/api/results-email-drain'
     | '/engines/pizza'
     | '/engines/pricing'
     | '/engines/sourdough'
@@ -364,6 +374,7 @@ export interface FileRouteTypes {
     | '/'
     | '/flours'
     | '/api/results-email'
+    | '/api/results-email-drain'
     | '/engines/pizza'
     | '/engines/pricing'
     | '/engines/sourdough'
@@ -398,6 +409,7 @@ export interface FileRouteTypes {
     | '/'
     | '/flours'
     | '/api/results-email'
+    | '/api/results-email-drain'
     | '/engines/pizza'
     | '/engines/pricing'
     | '/engines/sourdough'
@@ -433,6 +445,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FloursRoute: typeof FloursRoute
   ApiResultsEmailRoute: typeof ApiResultsEmailRoute
+  ApiResultsEmailDrainRoute: typeof ApiResultsEmailDrainRoute
   EnginesPizzaRoute: typeof EnginesPizzaRoute
   EnginesPricingRoute: typeof EnginesPricingRoute
   EnginesSourdoughRoute: typeof EnginesSourdoughRoute
@@ -485,6 +498,13 @@ declare module '@tanstack/react-router' {
       path: '/api/results-email'
       fullPath: '/api/results-email'
       preLoaderRoute: typeof ApiResultsEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/results-email-drain': {
+      id: '/api/results-email-drain'
+      path: '/api/results-email-drain'
+      fullPath: '/api/results-email-drain'
+      preLoaderRoute: typeof ApiResultsEmailDrainRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/engines/pizza': {
@@ -697,6 +717,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FloursRoute: FloursRoute,
   ApiResultsEmailRoute: ApiResultsEmailRoute,
+  ApiResultsEmailDrainRoute: ApiResultsEmailDrainRoute,
   EnginesPizzaRoute: EnginesPizzaRoute,
   EnginesPricingRoute: EnginesPricingRoute,
   EnginesSourdoughRoute: EnginesSourdoughRoute,
